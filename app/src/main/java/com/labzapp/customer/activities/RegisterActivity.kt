@@ -11,5 +11,11 @@ class RegisterActivity : AppCompatActivity() {
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        binding.getOtp.setOnClickListener {
+            val mobile = binding.mobileNumber
+            val fullname = binding.fullName
+            val pincode = binding.pincode
+        }
     }
 }

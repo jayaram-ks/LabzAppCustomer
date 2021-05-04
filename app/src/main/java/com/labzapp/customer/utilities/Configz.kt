@@ -1,4 +1,4 @@
 package com.labzapp.customer.utilities
 
-class configz {
+class Configz {
 }

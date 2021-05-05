@@ -1,5 +1,6 @@
 package com.labzapp.customer.activities
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.labzapp.customer.databinding.ActivityRegisterBinding
@@ -38,6 +39,10 @@ class RegisterActivity : AppCompatActivity() {
                     val resp = response.body()
                     if (resp?.code == 200) {
                         toastz(this@RegisterActivity,resp?.message.toString())
+
+                        val intent = Intent(this@RegisterActivity, OtpVerifyActivity::class.java)
+                        startActivity(intent)
+
                     } else {
                         toastz(this@RegisterActivity,resp?.message.toString())
                     }

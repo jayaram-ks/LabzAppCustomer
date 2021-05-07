@@ -38,9 +38,9 @@ class RegisterActivity : AppCompatActivity() {
                 override fun onResponse(call: Call<RegisterResponse>, response: Response<RegisterResponse>) {
                     val resp = response.body()
                     if (resp?.code == 200) {
-                        toastz(this@RegisterActivity,resp?.message.toString())
 
                         val intent = Intent(this@RegisterActivity, OtpVerifyActivity::class.java)
+                        intent.putExtra("otp_message",resp?.message.toString())
                         startActivity(intent)
 
                     } else {

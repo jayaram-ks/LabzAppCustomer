@@ -11,5 +11,9 @@ class OtpVerifyActivity : AppCompatActivity() {
         binding = ActivityOtpVerifyBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+        val otpmessage:String = intent.getStringExtra("otp_message").toString()
+        binding.otpMessg.text = otpmessage
+
+
     }
 }

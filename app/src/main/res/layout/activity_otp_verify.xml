@@ -12,8 +12,9 @@
         android:layout_height="wrap_content"
         android:layout_margin="3dp"
         app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="40dp"
-        app:cardElevation="10dp">
+        app:cardCornerRadius="20dp"
+        android:layout_marginTop="2dp"
+        app:cardElevation="7dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -22,15 +23,29 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/otp_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginRight="5dp"
+                android:text="OTP Verification"
                 android:gravity="center"
-                android:text="OTP has been sent to your mobile number 9595635655 Please enter OTP below . OTP expires in 5 minutes."
-                android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:textColor="@color/title_black"
+                android:fontFamily="@font/lato_black"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/otp_messg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginRight="5dp"
+                android:gravity="left"
+                android:textColor="@color/textBlack"
+                android:textSize="15sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"

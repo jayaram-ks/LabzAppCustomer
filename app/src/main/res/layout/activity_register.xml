@@ -22,6 +22,8 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:hint="Mobile number"
+        app:counterEnabled="true"
+        app:counterMaxLength="10"
         android:layout_marginBottom="10dp"
         android:layout_gravity="center_horizontal"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -36,6 +38,8 @@
         android:id="@+id/full_name"
         android:layout_height="50dp"
         android:hint="Full Name"
+        app:counterEnabled="true"
+        app:counterMaxLength="50"
         android:layout_marginBottom="10dp"
         android:layout_gravity="center_horizontal"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -50,6 +54,8 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:hint="Pincode"
+        app:counterEnabled="true"
+        app:counterMaxLength="6"
         android:layout_marginBottom="10dp"
         android:layout_gravity="center_horizontal"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">

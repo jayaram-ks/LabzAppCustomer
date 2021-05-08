@@ -30,7 +30,6 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun getOTP(mobile: String, fullname: String, pincode: String) {
-
             val apiService = ServiceBuilder.buildService(ApiService::class.java)
             val requestCall = apiService.registerUser(mobile, fullname, pincode)
             requestCall.enqueue(object : Callback<RegisterResponse> {
@@ -41,6 +40,7 @@ class RegisterActivity : AppCompatActivity() {
 
                         val intent = Intent(this@RegisterActivity, OtpVerifyActivity::class.java)
                         intent.putExtra("otp_message",resp?.message.toString())
+                        intent.putExtra("customermobile",mobile)
                         startActivity(intent)
 
                     } else {

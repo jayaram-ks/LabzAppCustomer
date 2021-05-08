@@ -53,84 +53,22 @@
                 android:orientation="horizontal">
 
 
-                <EditText
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_margin="3dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/round_button_white"
-                    android:elevation="5dp"
-                    android:gravity="center"
-                    android:hint="0"
-                    android:inputType="number"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp" />
-
-
-                <EditText
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_margin="3dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/round_button_white"
-                    android:elevation="5dp"
-                    android:gravity="center"
-                    android:hint="0"
-                    android:inputType="number"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp" />
-
-                <EditText
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_margin="3dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/round_button_white"
-                    android:elevation="5dp"
-                    android:gravity="center"
-                    android:hint="0"
-                    android:inputType="number"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp" />
-
-                <EditText
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_margin="3dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/round_button_white"
-                    android:elevation="5dp"
-                    android:gravity="center"
-                    android:hint="0"
-                    android:inputType="number"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp" />
-
-                <EditText
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_margin="3dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/round_button_white"
-                    android:elevation="5dp"
-                    android:gravity="center"
-                    android:hint="0"
-                    android:inputType="number"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp" />
-
-                <EditText
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_margin="3dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/round_button_white"
-                    android:elevation="5dp"
-                    android:gravity="center"
-                    android:hint="0"
-                    android:inputType="number"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp" />
+                <com.poovam.pinedittextfield.SquarePinField
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textSelectHandle="@drawable/text_handle"
+                    android:fontFamily="@font/lato_bold"
+                    app:noOfFields="6"
+                    app:distanceInBetween="10dp"
+                    app:fieldBgColor="@color/light_grey"
+                    app:fieldColor="@color/medium_grey"
+                    app:highlightColor="@color/dark_grey"
+                    app:highlightType="currentField"
+                    android:hint="******"
+                    android:id="@+id/squareField1"
+                    app:cornerRadius="6dp"
+                    android:layout_marginTop="15dp"/>
 
             </LinearLayout>
 

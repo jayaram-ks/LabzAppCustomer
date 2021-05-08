@@ -31,9 +31,13 @@ class OtpVerifyActivity : AppCompatActivity() {
                 verifyOtp(custmobile,enteredText)
                 return@onTextComplete true
             }
-
         }
         squareField.onTextCompleteListener = listener
+        binding.cancelOtp.setOnClickListener(){
+            val intent = Intent(this, RegisterActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+        }
     }
 
     private fun verifyOtp(cmobile: String,otp: String){
@@ -49,7 +53,7 @@ class OtpVerifyActivity : AppCompatActivity() {
                     val api_tokn = resp.api_token.toString()
                     val auth_ky  = resp.auth_key.toString()
                     SharedPrefManager.getInstance(applicationContext).saveCredentials(api_tokn,auth_ky)
-                    val intent = Intent(applicationContext, ProfileUpdateActivity::class.java)
+                    val intent = Intent(this@OtpVerifyActivity, ProfileUpdateActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(intent)
 
@@ -61,6 +65,7 @@ class OtpVerifyActivity : AppCompatActivity() {
             override fun onFailure(call: Call<OtpResponse>, t: Throwable) {
                 toastz(this@OtpVerifyActivity,t.message.toString())
             }
+
         })
     }
 }

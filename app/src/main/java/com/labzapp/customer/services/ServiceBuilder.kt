@@ -38,7 +38,7 @@ object ServiceBuilder {
 
     // Create OkHttp Client
     private val okHttp = OkHttpClient.Builder()
-            .callTimeout(5, TimeUnit.SECONDS)
+            .callTimeout(10, TimeUnit.SECONDS)
             .addInterceptor(headerInterceptor)
             .addInterceptor(logger)
 

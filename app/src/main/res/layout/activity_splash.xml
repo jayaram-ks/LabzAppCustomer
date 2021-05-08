@@ -9,7 +9,6 @@
     tools:context=".activities.SplashActivity">
 
     <ImageView
-        android:id="@+id/SplashScreenImage"
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:src="@drawable/squarelogo"

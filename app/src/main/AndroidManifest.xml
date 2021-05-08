@@ -12,7 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LabzApp"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.OtpVerifyActivity"></activity>
+        <activity android:name=".activities.ProfileUpdateActivity"></activity>
+        <activity android:name=".activities.HomeActivity" />
+        <activity android:name=".activities.OtpVerifyActivity" />
         <activity
             android:name=".activities.SplashActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">

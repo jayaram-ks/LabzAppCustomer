@@ -2,14 +2,13 @@ package com.labzapp.customer.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.labzapp.customer.R
 import com.labzapp.customer.databinding.ActivityOtpVerifyBinding
 import com.labzapp.customer.models.OtpResponse
-import com.labzapp.customer.models.RegisterResponse
 import com.labzapp.customer.services.ApiService
 import com.labzapp.customer.services.ServiceBuilder
+import com.labzapp.customer.storage.SharedPrefManager
 import com.labzapp.customer.utilities.toastz
 import com.poovam.pinedittextfield.PinField
 import retrofit2.Call
@@ -45,7 +44,15 @@ class OtpVerifyActivity : AppCompatActivity() {
             override fun onResponse(call: Call<OtpResponse>, response: Response<OtpResponse>) {
                 val resp = response.body()
                 if (resp?.code == 200) {
+
                     toastz(this@OtpVerifyActivity,resp?.message.toString())
+                    val api_tokn = resp.api_token.toString()
+                    val auth_ky  = resp.auth_key.toString()
+                    SharedPrefManager.getInstance(applicationContext).saveCredentials(api_tokn,auth_ky)
+                    val intent = Intent(applicationContext, ProfileUpdateActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)
+
                 } else {
                     toastz(this@OtpVerifyActivity,resp?.message.toString())
                 }

@@ -23,7 +23,6 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/otp_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
@@ -36,10 +35,10 @@
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/otp_messg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
+                android:id="@+id/otp_messg"
                 android:layout_marginTop="15dp"
                 android:layout_marginBottom="15dp"
                 android:layout_marginRight="5dp"
@@ -65,7 +64,7 @@
                     app:fieldColor="@color/medium_grey"
                     app:highlightColor="@color/dark_grey"
                     app:highlightType="currentField"
-                    android:hint="******"
+                    android:hint="000000"
                     android:id="@+id/squareField1"
                     app:cornerRadius="6dp"
                     android:layout_marginTop="15dp"/>

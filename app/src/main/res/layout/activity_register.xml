@@ -18,8 +18,8 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/mobile_number"
         android:layout_width="300dp"
+        android:id="@+id/mobile_number"
         android:layout_height="50dp"
         android:hint="Mobile number"
         app:counterEnabled="true"
@@ -50,8 +50,8 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/pincode"
         android:layout_width="300dp"
+        android:id="@+id/pincode"
         android:layout_height="50dp"
         android:hint="Pincode"
         app:counterEnabled="true"

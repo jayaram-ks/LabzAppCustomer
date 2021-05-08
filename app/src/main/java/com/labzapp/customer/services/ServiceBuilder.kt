@@ -21,9 +21,7 @@ object ServiceBuilder {
 
     // Create a Custom Interceptor to apply Headers application wide
     val headerInterceptor = object: Interceptor {
-
         override fun intercept(chain: Interceptor.Chain): Response {
-
             var request = chain.request()
 
             request = request.newBuilder()

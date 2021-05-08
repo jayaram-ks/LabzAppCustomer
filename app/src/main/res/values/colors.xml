@@ -16,5 +16,8 @@
     <color name="title_black">#BB222222</color>
     <color name="orange">#FFFF6600</color>
     <color name="green">#FF3CBFB8</color>
+    <color name="gray5">#FF555555</color>
+    <color name="gray">#FFDAD8D8</color>
+    <color name="violet">#FF000E88</color>
 
 </resources>

@@ -1,7 +1,10 @@
 package com.labzapp.customer.activities
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MotionEvent
+import android.view.inputmethod.InputMethodManager
 import com.labzapp.customer.databinding.ActivityProfileUpdateBinding
 
 class ProfileUpdateActivity : AppCompatActivity() {
@@ -12,4 +15,5 @@ class ProfileUpdateActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
     }
+
 }

@@ -10,6 +10,7 @@ import com.labzapp.customer.databinding.ActivityRegisterBinding
 import com.labzapp.customer.models.RegisterResponse
 import com.labzapp.customer.services.ApiService
 import com.labzapp.customer.services.ServiceBuilder
+import com.labzapp.customer.storage.SharedPrefManager
 import com.labzapp.customer.utilities.toastz
 import retrofit2.Call
 import retrofit2.Callback
@@ -64,5 +65,15 @@ class RegisterActivity : AppCompatActivity() {
             imm.hideSoftInputFromWindow(currentFocus!!.windowToken, 0)
         }
         return super.dispatchTouchEvent(ev)
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        if(SharedPrefManager.getInstance(this).isLoggedIn){
+            val intent = Intent(applicationContext, ProfileUpdateActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+        }
     }
 }

@@ -27,25 +27,48 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingTop="20dp"
+            android:paddingTop="0dp"
             android:paddingBottom="20dp">
 
-            <RelativeLayout
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
 
+
+                <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:id="@+id/layoutmp"
+                    android:padding="2dp">
+
+                    <fragment
+                        android:id="@+id/map"
+                        class="com.google.android.gms.maps.SupportMapFragment"
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp" />
+                </FrameLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp">
+
                 <TextView
                     android:id="@+id/textVwLocation"
-                    android:layout_width="wrap_content"
+                    android:layout_width="130dp"
                     android:layout_height="50dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="80dp"
+                    android:layout_margin="10dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:fontFamily="@font/lato_light"
                     android:background="@drawable/round_button_white"
                     android:elevation="5dp"
                     android:gravity="center"
-                    android:paddingStart="40dp"
-                    android:paddingEnd="40dp"
+                    android:layout_weight="4"
                     android:text="@string/use_current_location"
                     android:textColor="@color/textBlack" />
 
@@ -53,44 +76,31 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginEnd="30dp"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:gravity="center"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp"
                     android:text="@string/or"
+                    android:layout_weight="1"
+                    android:gravity="clip_vertical"
+                   android:layout_marginTop="15dp"
                     android:textColor="@color/textBlack"
-                    android:textSize="20sp" />
+                    android:textSize="10sp" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="130dp"
                     android:layout_height="50dp"
-                    android:layout_below="@+id/textVwLocation"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="20dp"
+                    android:layout_margin="10dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
                     android:background="@drawable/round_button_white"
                     android:elevation="5dp"
                     android:gravity="center"
-                    android:paddingStart="20dp"
-                    android:paddingEnd="20dp"
+                    android:layout_weight="4"
+                    android:fontFamily="@font/lato_light"
                     android:text="@string/select_location_from_map"
                     android:textColor="@color/textBlack" />
 
+                </LinearLayout>
 
-                <ImageView
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:background="?android:attr/selectableItemBackground"
-                    android:paddingStart="20dp"
-                    android:paddingTop="20dp"
-                    android:paddingEnd="20dp"
-                    android:src="@drawable/no_image" />
 
-            </RelativeLayout>
+            </LinearLayout>
 
 
             <EditText
@@ -133,26 +143,28 @@
 
                 <RadioButton
                     android:id="@+id/radio0"
-                    android:layout_width="120dp"
+                    android:layout_width="115dp"
                     android:layout_height="40dp"
                     android:layout_marginBottom="20dp"
                     android:background="@drawable/radio_flat_selector"
                     android:button="@android:color/transparent"
                     android:checked="true"
-                    android:elevation="5dp"
+                    android:elevation="3dp"
                     android:gravity="center"
                     android:text="@string/male"
+                    android:layout_weight="1"
                     android:textColor="@drawable/radio_flat_text_selector" />
 
                 <RadioButton
                     android:id="@+id/radio1"
-                    android:layout_width="120dp"
+                    android:layout_width="115dp"
                     android:layout_height="40dp"
                     android:layout_marginStart="20dp"
                     android:layout_marginBottom="20dp"
                     android:background="@drawable/radio_flat_selector"
                     android:button="@android:color/transparent"
                     android:elevation="5dp"
+                    android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/female"
                     android:textColor="@drawable/radio_flat_text_selector" />
@@ -223,6 +235,47 @@
                 android:textAllCaps="false" />
 
         </LinearLayout>
+
+
+
     </ScrollView>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        tools:context=".MainActivity">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="Current Location in Latitude and Longitude:"
+            android:textAlignment="center"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+            android:textIsSelectable="true"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/latitudeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+            android:textIsSelectable="true"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/longitudeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+            android:textIsSelectable="true"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+    </LinearLayout>
 
 </LinearLayout>

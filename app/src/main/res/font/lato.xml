@@ -24,4 +24,5 @@
         android:fontStyle="italic"
         android:fontWeight="300"
         android:font="@font/lato_light_italic" />
+
 </font-family>

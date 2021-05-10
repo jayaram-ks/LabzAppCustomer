@@ -3,6 +3,7 @@ package com.labzapp.customer.activities
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
 import android.util.Log
@@ -58,6 +59,10 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
         googleMap.setOnMyLocationButtonClickListener(this)
         googleMap.setOnMyLocationClickListener(this)
         enableMyLocation()
+        with(map.uiSettings) {
+            isZoomControlsEnabled = true
+            isMyLocationButtonEnabled = false
+        }
         //getDeviceLocation()
 
     }
@@ -81,7 +86,7 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
     }
 
     override fun onMyLocationButtonClick(): Boolean {
-        Toast.makeText(this, "-----MyLocation button clicked----", Toast.LENGTH_SHORT).show()
+       // Toast.makeText(this, "-----MyLocation button clicked----", Toast.LENGTH_SHORT).show()
         // Return false so that we don't consume the event and the default behavior still occurs
         // (the camera animates to the user's current position).
         //CameraUpdateFactory.newLatLngZoom(DEF_LOCATION, ZOOM_LEVEL)
@@ -91,7 +96,7 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
     }
 
     override fun onMyLocationClick(location: Location) {
-        Toast.makeText(this, "Current location:\n$location", Toast.LENGTH_LONG).show()
+        //Toast.makeText(this, "Current location:\n$location", Toast.LENGTH_LONG).show()
     }
 
     // [START maps_check_location_permission_result]
@@ -144,6 +149,23 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
                     if (task.isSuccessful) {
                         // Set the map's camera position to the current location of the device.
                         lastKnownLocation = task.result
+                        //Log.d("-----Last Location-----", task.result?.latitude.toString()+", "+task.result?.longitude.toString())
+                        if(task.result != null) {
+                            val geocoder = Geocoder(this)
+                            val list = geocoder.getFromLocation(
+                                task.result.latitude,
+                                task.result.longitude,
+                                1
+                            )
+                            val fullAddress = list[0].getAddressLine(0)
+                            // Log.d("-----FULL ADDRESS-----", fullAddress)
+                            binding.locationAddress.text = fullAddress
+                        }
+                        else
+                        {
+                            binding.locationAddress.text = "Location not available."
+                        }
+
                         if (lastKnownLocation != null) {
                             map?.animateCamera(CameraUpdateFactory.newLatLngZoom(
                                 LatLng(lastKnownLocation!!.latitude,
@@ -163,6 +185,9 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
             Log.e("Exception: %s", e.message, e)
         }
     }
+
+
+
 
 
 

@@ -16,8 +16,6 @@
         android:src="@drawable/squarelogo"
         />
 
-
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,7 +23,7 @@
         android:gravity="center"
         android:text="Welcome"
         android:textColor="@color/black"
-        android:textSize="22sp" />
+        android:textSize="22sp"/>
 
 
     <com.google.android.material.textfield.TextInputLayout

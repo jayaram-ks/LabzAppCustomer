@@ -7,22 +7,21 @@ import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.android.gms.location.FusedLocationProviderClient
-import com.labzapp.customer.utilities.maps.PermissionUtils.PermissionDeniedDialog.Companion.newInstance
-import com.labzapp.customer.utilities.maps.PermissionUtils.isPermissionGranted
-import com.labzapp.customer.utilities.maps.PermissionUtils.requestPermission
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.location.LocationServices
 import com.labzapp.customer.R
 import com.labzapp.customer.databinding.ActivityProfileUpdateBinding
+import com.labzapp.customer.utilities.maps.PermissionUtils.PermissionDeniedDialog.Companion.newInstance
+import com.labzapp.customer.utilities.maps.PermissionUtils.isPermissionGranted
+import com.labzapp.customer.utilities.maps.PermissionUtils.requestPermission
 
 class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonClickListener,
     GoogleMap.OnMyLocationClickListener, OnMapReadyCallback,
@@ -48,8 +47,15 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
         mapFragment?.getMapAsync(this)
         // Construct a FusedLocationProviderClient.
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
+
         binding.textVwLocation.setOnClickListener(){
             getDeviceLocation()
+        }
+
+        binding.locSearchMap.setOnClickListener(){
+
+            //MapDialog().show(supportFragmentManager, "MapWindow")
+
         }
 
     }
@@ -58,12 +64,13 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
         map = googleMap ?: return
         googleMap.setOnMyLocationButtonClickListener(this)
         googleMap.setOnMyLocationClickListener(this)
+        map.mapType = GoogleMap.MAP_TYPE_HYBRID
         enableMyLocation()
         with(map.uiSettings) {
             isZoomControlsEnabled = true
             isMyLocationButtonEnabled = false
         }
-        //getDeviceLocation()
+        getDeviceLocation()
 
     }
 

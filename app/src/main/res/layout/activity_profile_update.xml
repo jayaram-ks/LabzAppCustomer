@@ -194,8 +194,6 @@
                 android:layout_marginEnd="30dp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/round_button_white"
-
-
                 android:elevation="5dp"
                 android:hint="@string/age"
                 android:inputType="number"
@@ -279,15 +277,11 @@
                 android:paddingStart="15dp"
                 android:paddingEnd="10dp">
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:text="@string/district" />
-
                 <Spinner
-                    android:layout_width="wrap_content"
+                    android:id="@+id/cdistrict"
+                    android:dropDownWidth="wrap_content"
+                    android:spinnerMode="dropdown"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent" />
 
             </LinearLayout>

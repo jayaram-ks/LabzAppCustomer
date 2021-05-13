@@ -7,6 +7,10 @@ import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -23,14 +27,16 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.labzapp.customer.R
 import com.labzapp.customer.databinding.ActivityProfileUpdateBinding
+import com.labzapp.customer.utilities.districtz
 import com.labzapp.customer.utilities.maps.PermissionUtils.PermissionDeniedDialog.Companion.newInstance
 import com.labzapp.customer.utilities.maps.PermissionUtils.isPermissionGranted
 import com.labzapp.customer.utilities.maps.PermissionUtils.requestPermission
+import com.labzapp.customer.utilities.toastz
 
 
 class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonClickListener,
     GoogleMap.OnMyLocationClickListener, OnMapReadyCallback,
-    ActivityCompat.OnRequestPermissionsResultCallback{
+    ActivityCompat.OnRequestPermissionsResultCallback,AdapterView.OnItemSelectedListener{
     private  lateinit var  binding:ActivityProfileUpdateBinding
 
     private var permissionDenied = false
@@ -76,9 +82,32 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
                     Manifest.permission.ACCESS_FINE_LOCATION, true
                 )
             }
-
         }
 
+
+        val values: ArrayList<String> = ArrayList(districtz.values)
+
+        val adapter = ArrayAdapter(this, R.layout.spinner_item, values)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
+
+        val spinner = findViewById<View>(R.id.cdistrict) as Spinner
+        spinner.adapter = adapter
+        spinner.onItemSelectedListener = this
+
+    }
+
+    override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
+        // An item was selected. You can retrieve the selected item using
+       //  parent.getItemAtPosition(pos)
+        val keysz: ArrayList<Int> = ArrayList(districtz.keys)
+        val districtid =  keysz[pos]
+        toastz(this,districtid.toString())
+
+    }
+
+    override fun onNothingSelected(parent: AdapterView<*>) {
+        // Another interface callback
     }
 
     override fun onMapReady(googleMap: GoogleMap?) {
@@ -162,7 +191,6 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
         newInstance(true).show(supportFragmentManager, "dialog")
     }
 
-
     /**
      * Gets the current location of the device, and positions the map's camera.
      */
@@ -199,16 +227,10 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
                             setMarkerDragListener(map)
                         }
 
-
-
-
                     } else {
                         Log.d("Dloc", "Current location is null. Using defaults.")
                         Log.e("Dloc", "Exception: %s", task.exception)
                         map?.animateCamera(CameraUpdateFactory.newLatLngZoom(DEF_LOCATION, ZOOM_LEVEL))
-
-
-
                     }
                 }
             }
@@ -216,7 +238,6 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
             Log.e("Exception: %s", e.message, e)
         }
     }
-
 
     private fun setMarkerDragListener(map: GoogleMap) {
         map.setOnMarkerDragListener(object : OnMarkerDragListener {
@@ -239,10 +260,6 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
             }
         })
     }
-
-
-
-
 
     companion object {
         /**

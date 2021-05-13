@@ -14,27 +14,29 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.GoogleMap.OnMarkerDragListener
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
+import com.google.android.gms.maps.model.MarkerOptions
 import com.labzapp.customer.R
 import com.labzapp.customer.databinding.ActivityProfileUpdateBinding
 import com.labzapp.customer.utilities.maps.PermissionUtils.PermissionDeniedDialog.Companion.newInstance
 import com.labzapp.customer.utilities.maps.PermissionUtils.isPermissionGranted
 import com.labzapp.customer.utilities.maps.PermissionUtils.requestPermission
 
+
 class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonClickListener,
     GoogleMap.OnMyLocationClickListener, OnMapReadyCallback,
-    ActivityCompat.OnRequestPermissionsResultCallback {
+    ActivityCompat.OnRequestPermissionsResultCallback{
     private  lateinit var  binding:ActivityProfileUpdateBinding
 
     private var permissionDenied = false
     private var lastKnownLocation: Location? = null
-
     private lateinit var map: GoogleMap
-    // The entry point to the Fused Location Provider.
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
-
     val DEF_LOCATION = LatLng(9.9312, 76.2673)
     val ZOOM_LEVEL = 16f
 
@@ -45,16 +47,35 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
         setContentView(view)
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(this)
-        // Construct a FusedLocationProviderClient.
+
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
 
         binding.textVwLocation.setOnClickListener(){
+            map.clear()
+            enableMyLocation()
             getDeviceLocation()
         }
 
         binding.locSearchMap.setOnClickListener(){
 
-            //MapDialog().show(supportFragmentManager, "MapWindow")
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+                map.isMyLocationEnabled = false
+                map.clear();
+                if (lastKnownLocation != null) {
+                    map.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(lastKnownLocation!!.latitude, lastKnownLocation!!.longitude), ZOOM_LEVEL))
+                    map.addMarker(MarkerOptions().draggable(true).position( LatLng(lastKnownLocation!!.latitude,
+                    lastKnownLocation!!.longitude)))
+                    setMarkerDragListener(map)
+                }
+               
+
+            } else {
+                // Permission to access the location is missing. Show rationale and request permission
+                requestPermission(this, LOCATION_PERMISSION_REQUEST_CODE,
+                    Manifest.permission.ACCESS_FINE_LOCATION, true
+                )
+            }
 
         }
 
@@ -64,13 +85,14 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
         map = googleMap ?: return
         googleMap.setOnMyLocationButtonClickListener(this)
         googleMap.setOnMyLocationClickListener(this)
+
         map.mapType = GoogleMap.MAP_TYPE_HYBRID
         enableMyLocation()
         with(map.uiSettings) {
             isZoomControlsEnabled = true
             isMyLocationButtonEnabled = false
         }
-        getDeviceLocation()
+        //getDeviceLocation()
 
     }
 
@@ -156,35 +178,37 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
                     if (task.isSuccessful) {
                         // Set the map's camera position to the current location of the device.
                         lastKnownLocation = task.result
-                        //Log.d("-----Last Location-----", task.result?.latitude.toString()+", "+task.result?.longitude.toString())
                         if(task.result != null) {
+
                             val geocoder = Geocoder(this)
-                            val list = geocoder.getFromLocation(
-                                task.result.latitude,
-                                task.result.longitude,
-                                1
-                            )
+                            val list = geocoder.getFromLocation(lastKnownLocation!!.latitude, lastKnownLocation!!.longitude, 1)
                             val fullAddress = list[0].getAddressLine(0)
-                            // Log.d("-----FULL ADDRESS-----", fullAddress)
+                            binding.usrLat.text = lastKnownLocation!!.latitude.toString()
+                            binding.usrLong.text = lastKnownLocation!!.longitude.toString()
                             binding.locationAddress.text = fullAddress
                         }
-                        else
-                        {
+                        else {
                             binding.locationAddress.text = "Location not available."
                         }
-
                         if (lastKnownLocation != null) {
-                            map?.animateCamera(CameraUpdateFactory.newLatLngZoom(
-                                LatLng(lastKnownLocation!!.latitude,
-                                    lastKnownLocation!!.longitude), ZOOM_LEVEL
-                            ))
+                            map?.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(lastKnownLocation!!.latitude,
+                                lastKnownLocation!!.longitude), ZOOM_LEVEL))
+
+                            map.addMarker(MarkerOptions().draggable(true).position( LatLng(lastKnownLocation!!.latitude,
+                                lastKnownLocation!!.longitude)).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)))
+                            setMarkerDragListener(map)
                         }
+
+
+
+
                     } else {
                         Log.d("Dloc", "Current location is null. Using defaults.")
                         Log.e("Dloc", "Exception: %s", task.exception)
-                        map?.animateCamera(CameraUpdateFactory
-                            .newLatLngZoom(DEF_LOCATION, ZOOM_LEVEL))
-                        map?.uiSettings?.isMyLocationButtonEnabled = false
+                        map?.animateCamera(CameraUpdateFactory.newLatLngZoom(DEF_LOCATION, ZOOM_LEVEL))
+
+
+
                     }
                 }
             }
@@ -194,7 +218,27 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
     }
 
 
+    private fun setMarkerDragListener(map: GoogleMap) {
+        map.setOnMarkerDragListener(object : OnMarkerDragListener {
+            override fun onMarkerDragStart(marker: Marker) {
+            }
 
+            override fun onMarkerDrag(marker: Marker) {
+                val p = marker.position
+            }
+
+            override fun onMarkerDragEnd(marker: Marker) {
+                val actualLatLng: LatLng = marker.position
+                map?.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(actualLatLng!!.latitude, actualLatLng!!.longitude), ZOOM_LEVEL))
+                val geocoder = Geocoder(this@ProfileUpdateActivity)
+                val list = geocoder.getFromLocation(actualLatLng!!.latitude, actualLatLng!!.longitude, 1)
+                val fullAddress = list[0].getAddressLine(0)
+                binding.usrLat.text = actualLatLng!!.latitude.toString()
+                binding.usrLong.text = actualLatLng!!.longitude.toString()
+                binding.locationAddress.text = fullAddress
+            }
+        })
+    }
 
 
 

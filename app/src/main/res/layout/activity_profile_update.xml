@@ -8,20 +8,17 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="?android:attr/actionBarSize"
+        android:layout_height="30dp"
         android:background="@color/orange"
         android:gravity="center|start"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
         android:text="@string/user_details"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:textStyle="bold" />
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fillViewport="true">
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -35,7 +32,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -44,71 +40,132 @@
                         android:id="@+id/map"
                         class="com.google.android.gms.maps.SupportMapFragment"
                         android:layout_width="match_parent"
-                        android:layout_height="350dp" />
+                        android:layout_height="180dp" />
             </FrameLayout>
-
-
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:orientation="horizontal"
+                   android:gravity="center_horizontal">
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:paddingStart="8dp"
+                   android:text="Latitude : "
+                   android:textColor="@color/textBlack"
+                   android:textSize="13sp"
+                   android:fontFamily="@font/roboto_condensed_regular"/>
                 <TextView
-                    android:id="@+id/location_address"
+                    android:id="@+id/usr_lat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=""
-                    android:fontFamily="@font/roboto_condensed_light"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="5dp"
-                    android:textColor="@color/textBlack"
-                    android:paddingStart="8dp"
+                    android:paddingStart="1dp"
                     android:paddingEnd="8dp"
-                    android:textSize="13sp" />
+                    android:text=""
+                    android:textColor="@color/textBlack"
+                    android:textSize="13sp"
+                    android:fontFamily="@font/roboto_condensed_regular"/>
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="Longitude : "
+                   android:textColor="@color/textBlack"
+                   android:textSize="13sp"
+                   android:fontFamily="@font/roboto_condensed_regular"/>
+                <TextView
+                    android:id="@+id/usr_long"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="1dp"
+                    android:paddingEnd="8dp"
+                    android:text=""
+                    android:textColor="@color/textBlack"
+                    android:textSize="13sp"
+                    android:fontFamily="@font/roboto_condensed_regular"/>
+            </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="2dp"
+                        android:background="@drawable/ic_placeholder"
+
+                       />
+                    <TextView
+                        android:id="@+id/location_address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Please select your Location"
+                        android:fontFamily="@font/roboto_condensed_regular"
+                        android:layout_gravity="left"
+                        android:layout_marginTop="0dp"
+                        android:textColor="@color/textBlack"
+
+
+                        android:paddingStart="5dp"
+                        android:paddingEnd="8dp"
+                        android:textSize="14sp" />
+                </LinearLayout>
 
                 <LinearLayout
                     android:orientation="horizontal"
-                    android:paddingStart="20dp"
-                    android:paddingEnd="20dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp">
-
-                <TextView
-                    android:id="@+id/textVwLocation"
-                    android:layout_width="130dp"
-                    android:layout_height="50dp"
-                    android:layout_margin="10dp"
                     android:paddingStart="10dp"
                     android:paddingEnd="10dp"
-                    android:fontFamily="@font/lato_regular"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp">
+
+                <TextView
+                    app:backgroundTint="@color/green"
+                    android:id="@+id/textVwLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_margin="10dp"
+                    android:paddingStart="3dp"
+                    android:paddingEnd="3dp"
+                    android:fontFamily="@font/roboto_condensed_regular"
+                    android:textSize="14sp"
                     android:background="@drawable/round_button_white"
                     android:elevation="5dp"
                     android:gravity="center"
-                    android:layout_weight="4"
+                    android:layout_weight="5"
                     android:text="@string/use_current_location"
-                    android:textColor="@color/textBlack" />
+                    android:textColor="@color/white" />
 
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="50dp"
+                    android:layout_height="20dp"
                     android:text="@string/or"
                     android:layout_weight="1"
                     android:gravity="clip_vertical"
-                   android:layout_marginTop="15dp"
+                    android:layout_marginTop="10dp"
                     android:textColor="@color/textBlack"
+                    android:fontFamily="@font/roboto_condensed_regular"
                     android:textSize="10sp" />
 
                 <TextView
-                   android:id="@+id/loc_search_map"
-                    android:layout_width="130dp"
-                    android:layout_height="50dp"
+                    app:backgroundTint="@color/green"
+                    android:id="@+id/loc_search_map"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
                     android:layout_margin="10dp"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp"
+                    android:paddingStart="3dp"
+                    android:paddingEnd="3dp"
                     android:background="@drawable/round_button_white"
                     android:elevation="5dp"
                     android:gravity="center"
-                    android:layout_weight="4"
-                    android:fontFamily="@font/lato_regular"
+                    android:layout_weight="5"
+                    android:fontFamily="@font/roboto_condensed_regular"
+                    android:textSize="14sp"
                     android:text="@string/select_location_from_map"
-                    android:textColor="@color/textBlack" />
+                    android:textColor="@color/white" />
 
                 </LinearLayout>
 
@@ -118,10 +175,10 @@
 
             <EditText
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="30dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="10dp"
                 android:background="@drawable/round_button_white"
                 android:elevation="5dp"
                 android:hint="@string/name"
@@ -132,10 +189,10 @@
 
             <EditText
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="30dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="10dp"
                 android:background="@drawable/round_button_white"
 
 
@@ -157,8 +214,8 @@
                 <RadioButton
                     android:id="@+id/radio0"
                     android:layout_width="115dp"
-                    android:layout_height="40dp"
-                    android:layout_marginBottom="20dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="10dp"
                     android:background="@drawable/radio_flat_selector"
                     android:button="@android:color/transparent"
                     android:checked="true"
@@ -171,9 +228,9 @@
                 <RadioButton
                     android:id="@+id/radio1"
                     android:layout_width="115dp"
-                    android:layout_height="40dp"
+                    android:layout_height="30dp"
                     android:layout_marginStart="20dp"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginBottom="10dp"
                     android:background="@drawable/radio_flat_selector"
                     android:button="@android:color/transparent"
                     android:elevation="5dp"
@@ -186,10 +243,10 @@
 
             <EditText
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="30dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="10dp"
                 android:background="@drawable/round_button_white"
                 android:elevation="5dp"
                 android:hint="@string/address"
@@ -199,10 +256,10 @@
 
             <EditText
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="30dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="10dp"
                 android:background="@drawable/round_button_white"
                 android:elevation="5dp"
                 android:hint="@string/mobile_number"
@@ -212,10 +269,10 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="30dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="10dp"
                 android:background="@drawable/round_button_white"
                 android:elevation="5dp"
                 android:orientation="horizontal"
@@ -237,7 +294,7 @@
 
             <Button
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:layout_marginStart="100dp"
                 android:layout_marginEnd="100dp"
                 android:layout_marginBottom="20dp"
@@ -251,7 +308,7 @@
 
 
 
-    </ScrollView>
+
 
 
 </LinearLayout>

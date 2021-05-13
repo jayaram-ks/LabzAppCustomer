@@ -12,9 +12,9 @@
     <string name="cancel">cancel</string>
     <string name="proceed">Proceed</string>
     <string name="user_details">Update Location and Profile</string>
-    <string name="use_current_location">Use current\n Location</string>
+    <string name="use_current_location">Use current Location</string>
     <string name="or">OR</string>
-    <string name="select_location_from_map">Select location\nfrom map</string>
+    <string name="select_location_from_map">Select location from map</string>
     <string name="age">Age</string>
     <string name="male">Male</string>
     <string name="female">Female</string>
@@ -107,7 +107,7 @@
     <string name="other">Other</string>
 
     <string name="permission_rationale_location">Access to the location service is required to demonstrate the \'my location\' feature, which shows your current location on the map.</string>
-    <string name="location_permission_denied">This sample requires location permission to enable the \'my location\' layer. Please try again and grant access to use the location.\nIf the permission has been permanently denied, it can be enabled from the System Settings &gt; Apps &gt; \'Google Maps API Demos\'.</string>
-    <string name="permission_required_toast">Location permission is required for this demo.</string>
+    <string name="location_permission_denied">This App requires location permission to enable the \'my location\' layer. Please try again and grant access to use the location.\nIf the permission has been permanently denied, it can be enabled from the System Settings &gt; Apps &gt; \'Google Maps API Demos\'.</string>
+    <string name="permission_required_toast">Location permission is required for this App.</string>
 
 </resources>

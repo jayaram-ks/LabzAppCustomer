@@ -41,6 +41,7 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
 
     private var permissionDenied = false
     private var lastKnownLocation: Location? = null
+    private var districtid = 0
     private lateinit var map: GoogleMap
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     val DEF_LOCATION = LatLng(9.9312, 76.2673)
@@ -56,22 +57,28 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
 
-        binding.textVwLocation.setOnClickListener(){
+        binding.textVwLocation.setOnClickListener {
             map.clear()
             enableMyLocation()
             getDeviceLocation()
         }
 
-        binding.locSearchMap.setOnClickListener(){
+        binding.locSearchMap.setOnClickListener {
 
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
                 map.isMyLocationEnabled = false
-                map.clear();
+                map.clear()
                 if (lastKnownLocation != null) {
                     map.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(lastKnownLocation!!.latitude, lastKnownLocation!!.longitude), ZOOM_LEVEL))
                     map.addMarker(MarkerOptions().draggable(true).position( LatLng(lastKnownLocation!!.latitude,
                     lastKnownLocation!!.longitude)))
+                    setMarkerDragListener(map)
+                }
+                else
+                {
+                    map.animateCamera(CameraUpdateFactory.newLatLngZoom(DEF_LOCATION, ZOOM_LEVEL))
+                    map.addMarker(MarkerOptions().draggable(true).position(DEF_LOCATION))
                     setMarkerDragListener(map)
                 }
                
@@ -86,14 +93,29 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
 
 
         val values: ArrayList<String> = ArrayList(districtz.values)
-
         val adapter = ArrayAdapter(this, R.layout.spinner_item, values)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-
-
         val spinner = findViewById<View>(R.id.cdistrict) as Spinner
         spinner.adapter = adapter
         spinner.onItemSelectedListener = this
+
+        binding.updateProfile.setOnClickListener{
+            val cust_latitude = binding.usrLat.text
+            val cust_longitude = binding.usrLong.text
+            val cust_name = binding.custName.text
+            val cust_age = binding.custAge.text
+            val cust_addrs = binding.custAddress.text
+            val cust_gender = binding.custGender.check()
+            val cust_district = districtid
+
+            toastz(this,cust_latitude.toString()+"\n" +
+                    cust_longitude.toString()+"\n" +
+                    cust_name.toString()+"\n" +
+                    cust_age.toString()+"\n" +
+                    cust_addrs.toString()+"\n" +
+                    cust_gender.toString()+"\n" +
+                    cust_district.toString()+"\n" )
+        }
 
     }
 
@@ -101,7 +123,7 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
         // An item was selected. You can retrieve the selected item using
        //  parent.getItemAtPosition(pos)
         val keysz: ArrayList<Int> = ArrayList(districtz.keys)
-        val districtid =  keysz[pos]
+        districtid =  keysz[pos]
         toastz(this,districtid.toString())
 
     }
@@ -121,8 +143,7 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
             isZoomControlsEnabled = true
             isMyLocationButtonEnabled = false
         }
-        //getDeviceLocation()
-
+        getDeviceLocation()
     }
 
     /**
@@ -131,8 +152,7 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
     private fun enableMyLocation() {
         if (!::map.isInitialized) return
         // [START maps_check_location_permission]
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-            == PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             map.isMyLocationEnabled = true
         } else {
             // Permission to access the location is missing. Show rationale and request permission
@@ -219,7 +239,7 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
                             binding.locationAddress.text = "Location not available."
                         }
                         if (lastKnownLocation != null) {
-                            map?.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(lastKnownLocation!!.latitude,
+                            map.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(lastKnownLocation!!.latitude,
                                 lastKnownLocation!!.longitude), ZOOM_LEVEL))
 
                             map.addMarker(MarkerOptions().draggable(true).position( LatLng(lastKnownLocation!!.latitude,
@@ -245,7 +265,7 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
             }
 
             override fun onMarkerDrag(marker: Marker) {
-                val p = marker.position
+                //val p = marker.position
             }
 
             override fun onMarkerDragEnd(marker: Marker) {
@@ -269,8 +289,6 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
          */
         private const val LOCATION_PERMISSION_REQUEST_CODE = 1
     }
-
-
 
 
 }

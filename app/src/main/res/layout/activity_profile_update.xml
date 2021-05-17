@@ -25,12 +25,57 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingTop="0dp"
-            android:paddingBottom="20dp">
+            android:paddingBottom="1dp">
 
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@color/red"
+                    android:gravity="left"
+                    android:paddingLeft="3dp"
+                    android:paddingTop="1dp"
+                    android:paddingBottom="2dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="8dp"
+                        android:text="Latitude : "
+                        android:textColor="@color/white"
+                        android:textSize="13sp"
+                        android:fontFamily="@font/roboto_condensed_regular"/>
+                    <TextView
+                        android:id="@+id/usr_lat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="1dp"
+                        android:paddingEnd="8dp"
+                        android:text=""
+                        android:textColor="@color/white"
+                        android:textSize="13sp"
+                        android:fontFamily="@font/roboto_condensed_regular"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Longitude : "
+                        android:textColor="@color/white"
+                        android:textSize="13sp"
+                        android:fontFamily="@font/roboto_condensed_regular"/>
+                    <TextView
+                        android:id="@+id/usr_long"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="1dp"
+                        android:paddingEnd="8dp"
+                        android:text=""
+                        android:textColor="@color/white"
+                        android:textSize="13sp"
+                        android:fontFamily="@font/roboto_condensed_regular"/>
+                </LinearLayout>
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -42,61 +87,24 @@
                         android:layout_width="match_parent"
                         android:layout_height="180dp" />
             </FrameLayout>
-               <LinearLayout
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:orientation="horizontal"
-                   android:gravity="center_horizontal">
-               <TextView
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:paddingStart="8dp"
-                   android:text="Latitude : "
-                   android:textColor="@color/textBlack"
-                   android:textSize="13sp"
-                   android:fontFamily="@font/roboto_condensed_regular"/>
-                <TextView
-                    android:id="@+id/usr_lat"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="1dp"
-                    android:paddingEnd="8dp"
-                    android:text=""
-                    android:textColor="@color/textBlack"
-                    android:textSize="13sp"
-                    android:fontFamily="@font/roboto_condensed_regular"/>
-               <TextView
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:text="Longitude : "
-                   android:textColor="@color/textBlack"
-                   android:textSize="13sp"
-                   android:fontFamily="@font/roboto_condensed_regular"/>
-                <TextView
-                    android:id="@+id/usr_long"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingStart="1dp"
-                    android:paddingEnd="8dp"
-                    android:text=""
-                    android:textColor="@color/textBlack"
-                    android:textSize="13sp"
-                    android:fontFamily="@font/roboto_condensed_regular"/>
-            </LinearLayout>
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:background="@color/red"
+                    android:paddingBottom="2dp"
+                    >
+
                     <TextView
                         android:layout_width="15dp"
                         android:layout_height="15dp"
-
                         android:layout_marginLeft="8dp"
-                        android:layout_marginTop="2dp"
-                        android:background="@drawable/ic_placeholder"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/ic_pin_map"
 
-                       />
+                        />
                     <TextView
                         android:id="@+id/location_address"
                         android:layout_width="wrap_content"
@@ -104,8 +112,8 @@
                         android:text="Please select your Location"
                         android:fontFamily="@font/roboto_condensed_regular"
                         android:layout_gravity="left"
-                        android:layout_marginTop="0dp"
-                        android:textColor="@color/textBlack"
+
+                        android:textColor="@color/white"
 
 
                         android:paddingStart="5dp"
@@ -119,14 +127,17 @@
                     android:paddingEnd="10dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="55dp">
+                    android:layout_height="46dp">
 
                 <TextView
                     app:backgroundTint="@color/green"
                     android:id="@+id/textVwLocation"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:layout_margin="10dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="6dp"
                     android:paddingStart="3dp"
                     android:paddingEnd="3dp"
                     android:fontFamily="@font/roboto_condensed_regular"
@@ -144,8 +155,8 @@
                     android:layout_height="20dp"
                     android:text="@string/or"
                     android:layout_weight="1"
-                    android:gravity="clip_vertical"
-                    android:layout_marginTop="10dp"
+                    android:gravity="center_horizontal"
+                    android:layout_marginTop="5dp"
                     android:textColor="@color/textBlack"
                     android:fontFamily="@font/roboto_condensed_regular"
                     android:textSize="10sp" />
@@ -155,7 +166,10 @@
                     android:id="@+id/loc_search_map"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
-                    android:layout_margin="10dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="6dp"
                     android:paddingStart="3dp"
                     android:paddingEnd="3dp"
                     android:background="@drawable/round_button_white"
@@ -174,10 +188,11 @@
 
 
             <EditText
+                android:id="@+id/cust_name"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginStart="30dp"
-                android:layout_marginEnd="30dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/round_button_white"
                 android:elevation="5dp"
@@ -188,10 +203,11 @@
 
 
             <EditText
+                android:id="@+id/cust_age"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginStart="30dp"
-                android:layout_marginEnd="30dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/round_button_white"
                 android:elevation="5dp"
@@ -202,12 +218,12 @@
 
 
             <RadioGroup
-                android:id="@+id/daily_weekly_button_view"
+                android:id="@+id/cust_gender"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:paddingStart="30dp"
-                android:paddingEnd="30dp">
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp">
 
                 <RadioButton
                     android:id="@+id/radio0"
@@ -240,10 +256,11 @@
             </RadioGroup>
 
             <EditText
+                android:id="@+id/cust_address"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginStart="30dp"
-                android:layout_marginEnd="30dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/round_button_white"
                 android:elevation="5dp"
@@ -252,24 +269,13 @@
                 android:paddingStart="15dp"
                 android:paddingEnd="10dp" />
 
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginStart="30dp"
-                android:layout_marginEnd="30dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/round_button_white"
-                android:elevation="5dp"
-                android:hint="@string/mobile_number"
-                android:inputType="phone"
-                android:paddingStart="15dp"
-                android:paddingEnd="10dp" />
+
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginStart="30dp"
-                android:layout_marginEnd="30dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/round_button_white"
                 android:elevation="5dp"
@@ -287,11 +293,12 @@
             </LinearLayout>
 
             <Button
+                android:id="@+id/update_profile"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="35dp"
                 android:layout_marginStart="100dp"
                 android:layout_marginEnd="100dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="5dp"
                 app:backgroundTint="@color/green"
                 android:background="@drawable/round_button_white"
                 android:elevation="5dp"

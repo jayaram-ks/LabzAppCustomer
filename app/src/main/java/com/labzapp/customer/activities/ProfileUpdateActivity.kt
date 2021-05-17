@@ -2,14 +2,19 @@ package com.labzapp.customer.activities
 
 
 import android.Manifest
+import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Geocoder
 import android.location.Location
+import android.location.LocationManager
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.RadioButton
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -27,17 +32,30 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.labzapp.customer.R
 import com.labzapp.customer.databinding.ActivityProfileUpdateBinding
+import com.labzapp.customer.models.ProfileResponse
+import com.labzapp.customer.models.SaveCustomerResponse
+import com.labzapp.customer.services.ApiService
+import com.labzapp.customer.services.ServiceBuilder
+import com.labzapp.customer.storage.SharedPrefManager
 import com.labzapp.customer.utilities.districtz
 import com.labzapp.customer.utilities.maps.PermissionUtils.PermissionDeniedDialog.Companion.newInstance
 import com.labzapp.customer.utilities.maps.PermissionUtils.isPermissionGranted
 import com.labzapp.customer.utilities.maps.PermissionUtils.requestPermission
 import com.labzapp.customer.utilities.toastz
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonClickListener,
     GoogleMap.OnMyLocationClickListener, OnMapReadyCallback,
     ActivityCompat.OnRequestPermissionsResultCallback,AdapterView.OnItemSelectedListener{
     private  lateinit var  binding:ActivityProfileUpdateBinding
+
+    private lateinit var locationManager: LocationManager
+    var gpsStatus = false
+    private lateinit var context: Context
+    var intentgps: Intent? = null
 
     private var permissionDenied = false
     private var lastKnownLocation: Location? = null
@@ -47,23 +65,37 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
     val DEF_LOCATION = LatLng(9.9312, 76.2673)
     val ZOOM_LEVEL = 16f
 
+
+
+    private var custGender: Int = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityProfileUpdateBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        context = applicationContext
+        checkGpsStatus()
+
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(this)
+
+        lastKnownLocation?.latitude  = DEF_LOCATION.latitude
+        lastKnownLocation?.longitude = DEF_LOCATION.longitude
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
 
         binding.textVwLocation.setOnClickListener {
+            checkGpsStatus()
             map.clear()
             enableMyLocation()
             getDeviceLocation()
         }
 
         binding.locSearchMap.setOnClickListener {
+
+            checkGpsStatus()
 
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
@@ -75,12 +107,12 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
                     lastKnownLocation!!.longitude)))
                     setMarkerDragListener(map)
                 }
-                else
-                {
-                    map.animateCamera(CameraUpdateFactory.newLatLngZoom(DEF_LOCATION, ZOOM_LEVEL))
-                    map.addMarker(MarkerOptions().draggable(true).position(DEF_LOCATION))
-                    setMarkerDragListener(map)
-                }
+                //else
+               // {
+                //    map.animateCamera(CameraUpdateFactory.newLatLngZoom(DEF_LOCATION, ZOOM_LEVEL))
+                //    map.addMarker(MarkerOptions().draggable(true).position(DEF_LOCATION))
+                //    setMarkerDragListener(map)
+               // }
                
 
             } else {
@@ -99,24 +131,91 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
         spinner.adapter = adapter
         spinner.onItemSelectedListener = this
 
-        binding.updateProfile.setOnClickListener{
-            val cust_latitude = binding.usrLat.text
-            val cust_longitude = binding.usrLong.text
-            val cust_name = binding.custName.text
-            val cust_age = binding.custAge.text
-            val cust_addrs = binding.custAddress.text
-            val cust_gender = binding.custGender.check()
-            val cust_district = districtid
+        val authTokn: String? = "Bearer "+SharedPrefManager.getInstance(this).authKey
+        val apiTokn: String? = SharedPrefManager.getInstance(this).apiToken
 
-            toastz(this,cust_latitude.toString()+"\n" +
-                    cust_longitude.toString()+"\n" +
-                    cust_name.toString()+"\n" +
-                    cust_age.toString()+"\n" +
-                    cust_addrs.toString()+"\n" +
-                    cust_gender.toString()+"\n" +
-                    cust_district.toString()+"\n" )
+        val apiService = ServiceBuilder.buildService(ApiService::class.java)
+        val requestCall = apiService.getProfile(authTokn, apiTokn)
+        requestCall.enqueue(object : Callback<ProfileResponse> {
+
+            override fun onResponse(call: Call<ProfileResponse>, response: Response<ProfileResponse>) {
+                val resp = response.body()
+                if (resp?.code == 200) {
+                    resp.let {
+                        val cname = it.customer.name
+                        val cmobile = it.customer.phone
+                        val cpincode = it.customer.pincode
+                        val titleTxt = "$cname($cmobile), Pin:$cpincode"
+                        binding.custTitle.text = titleTxt
+                   }
+
+                } else {
+                    toastz(this@ProfileUpdateActivity,resp?.message.toString())
+                }
+            }
+
+            override fun onFailure(call: Call<ProfileResponse>, t: Throwable) {
+                toastz(this@ProfileUpdateActivity,t.message.toString())
+            }
+        })
+
+
+
+
+        binding.updateProfile.setOnClickListener{
+            val custLatitude = binding.usrLat.text.toString()
+            val custLongitude = binding.usrLong.text.toString()
+            val custAge = binding.custAge.text.toString()
+            val custAddrs = binding.custAddress.text.toString()
+            val custDistrict = districtid.toString()
+
+            val authTokn: String? = "Bearer "+SharedPrefManager.getInstance(this).authKey
+            val apiTokn: String? = SharedPrefManager.getInstance(this).apiToken
+
+            val apiService = ServiceBuilder.buildService(ApiService::class.java)
+            val requestCall = apiService.saveCustomer(authTokn, apiTokn,custLatitude,custLongitude,custAge,custGender.toString(),custAddrs,custDistrict)
+            requestCall.enqueue(object : Callback<SaveCustomerResponse> {
+
+                override fun onResponse(call: Call<SaveCustomerResponse>, response: Response<SaveCustomerResponse>) {
+                    val resp = response.body()
+                    if (resp?.code == 200) {
+                        val intent = Intent(this@ProfileUpdateActivity, HomeActivity::class.java)
+                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        startActivity(intent)
+                    } else {
+                        toastz(this@ProfileUpdateActivity,resp?.message.toString())
+                    }
+                }
+
+                override fun onFailure(call: Call<SaveCustomerResponse>, t: Throwable) {
+                    toastz(this@ProfileUpdateActivity,t.message.toString())
+                }
+            })
+
+
+
+
         }
 
+    }
+
+    fun onRadioButtonClicked(view: View) {
+        if (view is RadioButton) {
+            // Is the button now checked?
+            val checked = view.isChecked
+
+            // Check which radio button was clicked
+            when (view.getId()) {
+                R.id.radio1 ->
+                    if (checked) {
+                       custGender = 1
+                    }
+                R.id.radio2 ->
+                    if (checked) {
+                        custGender = 2
+                    }
+            }
+        }
     }
 
     override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
@@ -124,7 +223,7 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
        //  parent.getItemAtPosition(pos)
         val keysz: ArrayList<Int> = ArrayList(districtz.keys)
         districtid =  keysz[pos]
-        toastz(this,districtid.toString())
+
 
     }
 
@@ -279,6 +378,20 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
                 binding.locationAddress.text = fullAddress
             }
         })
+    }
+
+    private fun checkGpsStatus() {
+        locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        gpsStatus = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+        if (gpsStatus) {
+            //toastz(this,"GPS is Enabled")
+        } else {
+            toastz(this,"Please enable Location service(GPS) on your Device")
+        }
+    }
+    fun gpsStatus(view: View) {
+        intentgps = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+        startActivity(intentgps);
     }
 
     companion object {

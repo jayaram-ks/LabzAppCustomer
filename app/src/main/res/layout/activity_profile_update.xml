@@ -15,8 +15,22 @@
         android:paddingEnd="10dp"
         android:text="@string/user_details"
         android:textColor="@color/white"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:textStyle="bold" />
+    <TextView
+        android:id="@+id/cust_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/orange"
+        android:gravity="center|start"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:text=""
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:fontFamily="@font/lato_regular" />
 
 
 
@@ -188,21 +202,6 @@
 
 
             <EditText
-                android:id="@+id/cust_name"
-                android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/round_button_white"
-                android:elevation="5dp"
-                android:hint="@string/name"
-                android:inputType="text"
-                android:paddingStart="15dp"
-                android:paddingEnd="10dp" />
-
-
-            <EditText
                 android:id="@+id/cust_age"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
@@ -214,11 +213,11 @@
                 android:hint="@string/age"
                 android:inputType="number"
                 android:paddingStart="15dp"
-                android:paddingEnd="10dp" />
+                android:paddingEnd="10dp"
+                android:textSize="15sp"/>
 
 
             <RadioGroup
-                android:id="@+id/cust_gender"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -226,7 +225,7 @@
                 android:paddingEnd="20dp">
 
                 <RadioButton
-                    android:id="@+id/radio0"
+                    android:id="@+id/radio1"
                     android:layout_width="115dp"
                     android:layout_height="30dp"
                     android:layout_marginBottom="10dp"
@@ -237,10 +236,11 @@
                     android:gravity="center"
                     android:text="@string/male"
                     android:layout_weight="1"
-                    android:textColor="@drawable/radio_flat_text_selector" />
+                    android:textColor="@drawable/radio_flat_text_selector"
+                    android:onClick="onRadioButtonClicked"/>
 
                 <RadioButton
-                    android:id="@+id/radio1"
+                    android:id="@+id/radio2"
                     android:layout_width="115dp"
                     android:layout_height="30dp"
                     android:layout_marginStart="20dp"
@@ -251,7 +251,8 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="@string/female"
-                    android:textColor="@drawable/radio_flat_text_selector" />
+                    android:textColor="@drawable/radio_flat_text_selector"
+                    android:onClick="onRadioButtonClicked"/>
 
             </RadioGroup>
 
@@ -267,7 +268,8 @@
                 android:hint="@string/address"
                 android:inputType="textPostalAddress"
                 android:paddingStart="15dp"
-                android:paddingEnd="10dp" />
+                android:paddingEnd="10dp"
+                android:textSize="15sp"/>
 
 
 

@@ -11,6 +11,8 @@ import com.labzapp.customer.models.RegisterResponse
 import com.labzapp.customer.services.ApiService
 import com.labzapp.customer.services.ServiceBuilder
 import com.labzapp.customer.storage.SharedPrefManager
+import com.labzapp.customer.utilities.network.ConnectionType
+import com.labzapp.customer.utilities.network.NetworkMonitorUtil
 import com.labzapp.customer.utilities.toastz
 import retrofit2.Call
 import retrofit2.Callback
@@ -19,11 +21,33 @@ import retrofit2.Response
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var  binding: ActivityRegisterBinding
+    private val networkMonitor = NetworkMonitorUtil(this)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        networkMonitor.result = { isAvailable, type ->
+            runOnUiThread {
+                when (isAvailable) {
+                    true -> {
+                        when (type) {
+                            ConnectionType.Wifi -> {
+                                //internet_status.text = "Wifi Connection"
+                            }
+                            ConnectionType.Cellular -> {
+                               // internet_status.text = "Cellular Connection"
+                            }
+                            else -> { }
+                        }
+                    }
+                    false -> {
+                        toastz(this,"No Network Connection")
+                    }
+                }
+            }
+        }
 
         binding.getOtp.setOnClickListener {
             val mobile = binding.mobileNumber.editText?.text.toString()
@@ -75,5 +99,16 @@ class RegisterActivity : AppCompatActivity() {
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        networkMonitor.register()
+    }
+
+
+    override fun onStop() {
+        super.onStop()
+        networkMonitor.unregister()
     }
 }

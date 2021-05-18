@@ -9,6 +9,11 @@ class SharedPrefManager private constructor(private val mCtx: Context) {
             val sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
             return sharedPreferences.getInt("logged_in", -1) != -1
         }
+    val completedProfile: Boolean
+        get() {
+            val sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
+            return sharedPreferences.getInt("profile_completed",-1) != -1
+        }
 
     val apiToken: String?
         get(){
@@ -28,6 +33,13 @@ class SharedPrefManager private constructor(private val mCtx: Context) {
         editor.putInt("logged_in", 1)
         editor.putString("api_token", apitoken)
         editor.putString("auth_key", authkey)
+        editor.apply()
+    }
+
+    fun profileCompleted(){
+        val sharedPreferences = mCtx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putInt("profile_completed", 1)
         editor.apply()
     }
 

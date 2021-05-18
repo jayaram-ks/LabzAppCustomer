@@ -179,9 +179,11 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
                 override fun onResponse(call: Call<SaveCustomerResponse>, response: Response<SaveCustomerResponse>) {
                     val resp = response.body()
                     if (resp?.code == 200) {
+                        SharedPrefManager.getInstance(applicationContext).profileCompleted()
                         val intent = Intent(this@ProfileUpdateActivity, HomeActivity::class.java)
                         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                         startActivity(intent)
+
                     } else {
                         toastz(this@ProfileUpdateActivity,resp?.message.toString())
                     }
@@ -392,6 +394,16 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
     fun gpsStatus(view: View) {
         intentgps = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
         startActivity(intentgps);
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        if(SharedPrefManager.getInstance(this).completedProfile){
+            val intent = Intent(applicationContext, HomeActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+        }
     }
 
     companion object {

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/navhome"
+        android:title="@string/home"
+        android:icon="@drawable/ic_home_page" />
+    <item android:id="@+id/navlabs"
+        android:title="Labs"
+        android:icon="@drawable/ic_laboratory" />
+    <item android:id="@+id/navsearch"
+        android:title="Search"
+        android:icon="@drawable/ic_search" />
+    <item android:id="@+id/navreports"
+        android:title="Reports"
+        android:icon="@drawable/ic_clipboard" />
+    <item android:id="@+id/navprofile"
+        android:title="Settings"
+        android:icon="@drawable/ic_user_setting" />
+</menu>

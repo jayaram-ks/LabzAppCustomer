@@ -21,6 +21,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
+        android:id="@+id/labs_recyclerview"
         android:layout_height="0dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="5dp"
@@ -28,7 +29,7 @@
         android:layout_marginBottom="10dp"
         android:layout_weight="1"
         android:paddingTop="20dp"
-        app:spanCount="4"
-        tools:listitem="@layout/d14_r1" />
+
+         />
 
 </LinearLayout>

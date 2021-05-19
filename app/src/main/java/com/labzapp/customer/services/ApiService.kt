@@ -1,13 +1,7 @@
 package com.labzapp.customer.services
 
-import com.labzapp.customer.models.OtpResponse
-import com.labzapp.customer.models.ProfileResponse
-import com.labzapp.customer.models.RegisterResponse
-import com.labzapp.customer.models.SaveCustomerResponse
-import com.labzapp.customer.utilities.REG_AFTER_OTP
-import com.labzapp.customer.utilities.REG_USER
-import com.labzapp.customer.utilities.USER_OTP_VERIFY
-import com.labzapp.customer.utilities.USER_PROFILE
+import com.labzapp.customer.models.*
+import com.labzapp.customer.utilities.*
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -47,4 +41,13 @@ interface ApiService {
         @Field("customer_address") custAddrs: String?,
         @Field("customer_district") custDistrict: String?,
     ): Call<SaveCustomerResponse>
+
+    @GET(LIST_LABS)
+    fun listLabs(
+        @Header("Authorization") authtoken: String?,
+        @Query("api_token") apitoken: String?,
+        @Query("latitude") lat: Double?,
+        @Query("longitude") lng: Double?
+    ): Call<LabsResponse>
+
 }

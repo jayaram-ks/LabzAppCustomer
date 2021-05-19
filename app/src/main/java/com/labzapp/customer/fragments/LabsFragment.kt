@@ -1,26 +1,38 @@
 package com.labzapp.customer.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.labzapp.customer.R
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.labzapp.customer.adapters.LabsAdapter
+import com.labzapp.customer.databinding.FragmentLabsBinding
+import com.labzapp.customer.models.LabsResponse
+import com.labzapp.customer.services.ApiService
+import com.labzapp.customer.services.ServiceBuilder
+import com.labzapp.customer.storage.SharedPrefManager
+import com.labzapp.customer.utilities.districtz
+import com.labzapp.customer.utilities.toastz
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [LabsFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+
 class LabsFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
+
+    private var _binding: FragmentLabsBinding? = null
+    // This property is only valid between onCreateView and onDestroyView.
+    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,8 +46,51 @@ class LabsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_labs, container, false)
+        _binding = FragmentLabsBinding.inflate(inflater, container, false)
+        val view = binding.root
+
+        return view
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val authTokn: String? = "Bearer "+ SharedPrefManager.getInstance(requireContext()).authKey
+        val apiTokn: String? = SharedPrefManager.getInstance(requireContext()).apiToken
+
+        val apiService = ServiceBuilder.buildService(ApiService::class.java)
+        val requestCall = apiService.listLabs(authTokn, apiTokn,8.8932,76.6141)
+        requestCall.enqueue(object : Callback<LabsResponse> {
+
+            override fun onResponse(call: Call<LabsResponse>, response: Response<LabsResponse>) {
+                val resp = response.body()
+
+                if (resp?.code == 200) {
+
+
+
+
+                    val layoutManager = LinearLayoutManager(requireContext())
+                    layoutManager.orientation = LinearLayoutManager.VERTICAL
+                    binding.labsRecyclerview.layoutManager = layoutManager
+
+                    val adapter= LabsAdapter(requireContext(), resp.labs)
+                    binding.labsRecyclerview.adapter = adapter
+
+
+                } else {
+                    toastz(requireContext(),resp?.message.toString())
+                }
+            }
+
+            override fun onFailure(call: Call<LabsResponse>, t: Throwable) {
+                toastz(requireContext(),t.message.toString())
+            }
+        })
     }
 
     companion object {

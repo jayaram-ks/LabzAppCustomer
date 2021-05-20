@@ -1,7 +1,6 @@
 package com.labzapp.customer.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +12,6 @@ import com.labzapp.customer.models.LabsResponse
 import com.labzapp.customer.services.ApiService
 import com.labzapp.customer.services.ServiceBuilder
 import com.labzapp.customer.storage.SharedPrefManager
-import com.labzapp.customer.utilities.districtz
 import com.labzapp.customer.utilities.toastz
 import retrofit2.Call
 import retrofit2.Callback

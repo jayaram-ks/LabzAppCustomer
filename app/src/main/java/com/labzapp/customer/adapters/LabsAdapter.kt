@@ -7,18 +7,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.labzapp.customer.databinding.LabListItemBinding
 import com.labzapp.customer.models.LabData
 
-class LabsAdapter(val context: Context, private val labs: List<LabData>) : RecyclerView.Adapter<LabsAdapter.LabViewHolder>() {
-
-    companion object {
-        val TAG: String = LabsAdapter::class.java.simpleName
-    }
+class LabsAdapter(private val labs: List<LabData>) : RecyclerView.Adapter<LabsAdapter.LabViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LabViewHolder {
-        //val view = LayoutInflater.from(context).inflate(R.layout.lab_list_item, parent, false)
-        //return MyViewHolder(view)
-
         val binding = LabListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-
         return LabViewHolder(binding)
     }
 
@@ -27,8 +19,8 @@ class LabsAdapter(val context: Context, private val labs: List<LabData>) : Recyc
     }
 
     override fun onBindViewHolder(holder: LabViewHolder, position: Int) {
-        val hobby = labs[position]
-        holder.setData(hobby, position)
+        val labp = labs[position]
+        holder.setData(labp, position)
     }
 
     inner class LabViewHolder(private val binding: LabListItemBinding) : RecyclerView.ViewHolder(binding.root){
@@ -62,7 +54,6 @@ class LabsAdapter(val context: Context, private val labs: List<LabData>) : Recyc
             lab?.let {
                 binding.labTitle.text = lab.name.toString()
             }
-
             this.currentLab = lab
             this.currentPosition = pos
         }

@@ -107,13 +107,6 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
                     lastKnownLocation!!.longitude)))
                     setMarkerDragListener(map)
                 }
-                //else
-               // {
-                //    map.animateCamera(CameraUpdateFactory.newLatLngZoom(DEF_LOCATION, ZOOM_LEVEL))
-                //    map.addMarker(MarkerOptions().draggable(true).position(DEF_LOCATION))
-                //    setMarkerDragListener(map)
-               // }
-               
 
             } else {
                 // Permission to access the location is missing. Show rationale and request permission
@@ -194,9 +187,6 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
                 }
             })
 
-
-
-
         }
 
     }
@@ -225,7 +215,6 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
        //  parent.getItemAtPosition(pos)
         val keysz: ArrayList<Int> = ArrayList(districtz.keys)
         districtid =  keysz[pos]
-
 
     }
 
@@ -265,12 +254,7 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
     }
 
     override fun onMyLocationButtonClick(): Boolean {
-       // Toast.makeText(this, "-----MyLocation button clicked----", Toast.LENGTH_SHORT).show()
         // Return false so that we don't consume the event and the default behavior still occurs
-        // (the camera animates to the user's current position).
-        //CameraUpdateFactory.newLatLngZoom(DEF_LOCATION, ZOOM_LEVEL)
-        //addMarker(MarkerOptions().position(SYDNEY))
-
         return false
     }
 

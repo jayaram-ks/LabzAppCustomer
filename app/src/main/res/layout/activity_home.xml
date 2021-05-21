@@ -41,17 +41,6 @@
 
     </LinearLayout>
 
-    <!--    <LinearLayout-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="match_parent"-->
-    <!--        android:layout_gravity="left"-->
-    <!--        android:background="@color/white"-->
-    <!--        android:orientation="vertical">-->
-
-
-    <!--    </LinearLayout>-->
-
-
 
 
 </androidx.drawerlayout.widget.DrawerLayout>

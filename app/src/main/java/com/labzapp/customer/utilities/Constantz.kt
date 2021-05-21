@@ -6,6 +6,7 @@ const val USER_OTP_VERIFY = "verifyotp"
 const val USER_PROFILE = "profile"
 const val REG_AFTER_OTP ="savecustomerdetails"
 const val LIST_LABS = "listlabs"
+const val GET_BANNERS = "banners"
 
 
 

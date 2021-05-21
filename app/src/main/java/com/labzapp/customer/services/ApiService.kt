@@ -50,4 +50,12 @@ interface ApiService {
         @Query("longitude") lng: Double?
     ): Call<LabsResponse>
 
+    @GET(GET_BANNERS)
+    fun getBanners(
+        @Header("Authorization") authtoken: String?,
+        @Query("api_token") apitoken: String?,
+    ): Call<BannerResponse>
+
+
+
 }

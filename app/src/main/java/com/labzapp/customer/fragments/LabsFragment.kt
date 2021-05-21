@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.labzapp.customer.adapters.LabsAdapter
 import com.labzapp.customer.databinding.FragmentLabsBinding
+import com.labzapp.customer.models.LabData
 import com.labzapp.customer.models.LabsResponse
 import com.labzapp.customer.services.ApiService
 import com.labzapp.customer.services.ServiceBuilder
@@ -46,8 +47,12 @@ class LabsFragment : Fragment() {
     ): View? {
         _binding = FragmentLabsBinding.inflate(inflater, container, false)
         val view = binding.root
-
         return view
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        fetchLabs()
     }
 
     override fun onDestroyView() {
@@ -55,8 +60,8 @@ class LabsFragment : Fragment() {
         _binding = null
     }
 
-    override fun onStart() {
-        super.onStart()
+    private fun fetchLabs(){
+
         val authTokn: String? = "Bearer "+ SharedPrefManager.getInstance(requireContext()).authKey
         val apiTokn: String? = SharedPrefManager.getInstance(requireContext()).apiToken
 
@@ -69,26 +74,27 @@ class LabsFragment : Fragment() {
 
                 if (resp?.code == 200) {
 
-
-
-
-                    val layoutManager = LinearLayoutManager(requireContext())
-                    layoutManager.orientation = LinearLayoutManager.VERTICAL
-                    binding.labsRecyclerview.layoutManager = layoutManager
-
-                    val adapter= LabsAdapter(requireContext(), resp.labs)
-                    binding.labsRecyclerview.adapter = adapter
-
+                    resp.labs?.let{
+                        showLabs(it)
+                    }
 
                 } else {
-                    toastz(requireContext(),resp?.message.toString())
+                    activity?.let { toastz(it,resp?.message.toString()) }
                 }
             }
 
             override fun onFailure(call: Call<LabsResponse>, t: Throwable) {
-                toastz(requireContext(),t.message.toString())
+                activity?.let { toastz(it,t.message.toString()) }
             }
         })
+    }
+
+    private fun showLabs(lablist: List<LabData>)
+    {
+        val layoutManager = LinearLayoutManager(activity)
+        layoutManager.orientation = LinearLayoutManager.VERTICAL
+        binding.labsRecyclerview.layoutManager = layoutManager
+        binding.labsRecyclerview.adapter = LabsAdapter(lablist)
     }
 
     companion object {

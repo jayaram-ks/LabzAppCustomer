@@ -24,8 +24,8 @@
         android:textSize="14sp"
         android:id="@+id/lab_title"
         android:shadowColor = "@color/txtShadow"
-        android:shadowDx = "0"
-        android:shadowDy = "0"
+        android:shadowDx = "2"
+        android:shadowDy = "2"
         android:shadowRadius = "2"
         />
 
@@ -57,7 +57,7 @@
                 android:maxLines="2"
                android:letterSpacing=".01"
                 android:layout_weight="1"
-                android:layout_marginEnd="10dp"
+
                 android:textColor="@color/black"
                 android:textSize="12sp" />
             <LinearLayout
@@ -115,8 +115,8 @@
             android:textSize="12sp"
             android:id="@+id/lab_footer"
             android:shadowColor = "@color/txtShadow"
-            android:shadowDx = "0"
-            android:shadowDy = "0"
+            android:shadowDx = "1"
+            android:shadowDy = "1"
             android:shadowRadius = "2"
             />
     </LinearLayout>

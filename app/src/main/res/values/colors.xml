@@ -23,6 +23,8 @@
     <color name="red">#F33535</color>
     <color name="txtShadow">#DD000000</color>
     <color name="green_border">#553CBFB8</color>
+    <color name="transp_black">#19000000</color>
+
 
 
 </resources>

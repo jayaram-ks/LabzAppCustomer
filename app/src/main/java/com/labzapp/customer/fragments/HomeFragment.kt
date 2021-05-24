@@ -55,9 +55,6 @@ class HomeFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         fetchBanners()
 
-
-
-
     }
 
     private fun fetchBanners() {

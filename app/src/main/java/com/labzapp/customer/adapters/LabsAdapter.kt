@@ -46,6 +46,9 @@ class LabsAdapter( val context: Context,private val labs: List<LabData>) : Recyc
                currentLab?.let {
                    val bundle = Bundle()
                    bundle.putInt("lab_id", it.lab_id)
+                   bundle.putString("lab_title", it.name)
+                   bundle.putString("lab_logo", it.thumbnail)
+                   bundle.putString("lab_address", it.address)
                    val appCompatActivity = context as AppCompatActivity
                    val transaction = appCompatActivity.supportFragmentManager.beginTransaction()
                    val openfragmt = AvailableTestsFragment()

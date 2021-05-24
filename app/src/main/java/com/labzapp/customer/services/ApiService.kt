@@ -56,6 +56,15 @@ interface ApiService {
         @Query("api_token") apitoken: String?,
     ): Call<BannerResponse>
 
+    @GET(GET_TESTS_AVAILABLE)
+    fun getAvailTests(
+        @Header("Authorization") authtoken: String?,
+        @Query("api_token") apitoken: String?,
+        @Query("lab_id") labid: Int?,
+    ): Call<AvailTestResponse>
+
+
+
 
 
 }

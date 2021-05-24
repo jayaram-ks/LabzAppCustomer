@@ -7,6 +7,7 @@ const val USER_PROFILE = "profile"
 const val REG_AFTER_OTP ="savecustomerdetails"
 const val LIST_LABS = "listlabs"
 const val GET_BANNERS = "banners"
+const val GET_TESTS_AVAILABLE = "labstestdetails"
 
 
 

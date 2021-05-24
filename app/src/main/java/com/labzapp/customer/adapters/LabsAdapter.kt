@@ -1,13 +1,20 @@
 package com.labzapp.customer.adapters
 
 import android.content.Context
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
+import com.labzapp.customer.R
 import com.labzapp.customer.databinding.LabListItemBinding
+import com.labzapp.customer.fragments.AvailableTestsFragment
 import com.labzapp.customer.models.LabData
+import com.labzapp.customer.utilities.districtz
+import com.squareup.picasso.Picasso
 
-class LabsAdapter(private val labs: List<LabData>) : RecyclerView.Adapter<LabsAdapter.LabViewHolder>() {
+class LabsAdapter( val context: Context,private val labs: List<LabData>) : RecyclerView.Adapter<LabsAdapter.LabViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LabViewHolder {
         val binding = LabListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -30,29 +37,42 @@ class LabsAdapter(private val labs: List<LabData>) : RecyclerView.Adapter<LabsAd
 
         init {
             itemView.setOnClickListener {
-                currentLab?.let {
-                    //context.showToast(currentLab!!.name + " Clicked !")
-                }
+              // currentLab?.let {
+
+               // }
             }
 
-            //itemView.imgShare.setOnClickListener {
+            binding.avlTests.setOnClickListener {
+               currentLab?.let {
+                   val bundle = Bundle()
+                   bundle.putInt("lab_id", it.lab_id)
+                   val appCompatActivity = context as AppCompatActivity
+                   val transaction = appCompatActivity.supportFragmentManager.beginTransaction()
+                   val openfragmt = AvailableTestsFragment()
+                   openfragmt.arguments = bundle
+                   transaction.replace(R.id.frame_container, openfragmt)
+                   transaction.addToBackStack(null)
+                   transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                   transaction.commit()
 
-              //  currentLab?.let {
-                //    val message: String = "My hobby is: " + currentLab!!.name
-
-                //    val intent = Intent()
-                 //   intent.action = Intent.ACTION_SEND
-                 //   intent.putExtra(Intent.EXTRA_TEXT, message)
-                  //  intent.type = "text/plain"
-
-                   // context.startActivity(Intent.createChooser(intent, "Please select app: "))
-               // }
-           // }
+                }
+            }
         }
 
         fun setData(lab: LabData?, pos: Int) {
             lab?.let {
-                binding.labTitle.text = lab.name.toString()
+                binding.labTitle.text = it.name.toString()
+                binding.labDetails.text = it.address.toString()
+                binding.labFooter.text = "Dist: " + districtz[it.district_id].toString() +", Pincode: "+ it.pincode.toString()
+                if(it.thumbnail != null) {
+                    Picasso.with(context).load(it.thumbnail).fit().centerCrop()
+                        .into(binding.labLogo)
+                }else
+                {
+                    Picasso.with(context).load(R.drawable.squarelogo).fit().centerCrop()
+                        .into(binding.labLogo)
+                }
+
             }
             this.currentLab = lab
             this.currentPosition = pos

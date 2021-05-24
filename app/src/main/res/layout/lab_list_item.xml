@@ -1,63 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
+
+<com.google.android.material.card.MaterialCardView
     android:layout_height="wrap_content"
-    app:cardBackgroundColor="@color/card_grey"
+    android:layout_width="match_parent"
     app:cardCornerRadius="10dp"
-    app:cardUseCompatPadding="true">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:strokeColor="@color/green_border"
+    app:strokeWidth="1dp"
+    app:cardBackgroundColor="@color/white"
+    android:layout_marginVertical="4dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:background="@color/green"
+        android:paddingVertical="4dp"
+        android:paddingHorizontal="10dp"
+        android:textSize="14sp"
+        android:id="@+id/lab_title"
+        android:shadowColor = "@color/txtShadow"
+        android:shadowDx = "0"
+        android:shadowDy = "0"
+        android:shadowRadius = "2"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:padding="5dp" >
+        android:padding="6dp" >
+
+        <ImageView
+            android:id="@+id/lab_logo"
+            android:layout_width="70dp"
+            android:layout_height="70dp"/>
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingHorizontal="6dp"
+            >
 
-            <TextView
-                android:id="@+id/lab_title"
-                android:padding="3dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:maxLines="2"
-                android:text="@string/_3_tests_selected_click_to_add_more_or_remove"
-                android:textColor="@color/black"
-                android:textSize="12sp" />
             <TextView
                 android:id="@+id/lab_details"
-                android:padding="3dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
+                android:gravity="top"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
                 android:maxLines="2"
-                android:text="@string/_3_tests_selected_click_to_add_more_or_remove"
+               android:letterSpacing=".01"
+                android:layout_weight="1"
+                android:layout_marginEnd="10dp"
                 android:textColor="@color/black"
                 android:textSize="12sp" />
-
+            <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+                android:gravity="bottom">
+            <Button
+                android:id="@+id/avl_tests"
+                android:layout_gravity="end"
+                android:paddingBottom="0dp"
+                android:paddingTop="0dp"
+                android:layout_marginRight="7dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:text="@string/available_tests"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:fontFamily="@font/lato_regular"
+                android:textSize="12sp"
+                android:letterSpacing=".01"
+                android:backgroundTint="@color/green"
+                 />
+            <Button
+                android:id="@+id/avl_packs"
+                android:paddingBottom="0dp"
+                android:layout_gravity="end"
+                android:paddingTop="0dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:text="Available Packages"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:fontFamily="@font/lato_regular"
+                android:textSize="12sp"
+                android:letterSpacing=".01"
+                android:lineHeight="10sp"
+                android:backgroundTint="@color/green"
+                />
+            </LinearLayout>
         </LinearLayout>
-
-
-        <Button
-            android:id="@+id/btn1"
-
-            android:layout_width="wrap_content"
-            android:layout_height="35dp"
-            android:background="@drawable/round_button_white"
-            android:elevation="5dp"
-            android:text="@string/available_tests"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="12sp"
-            app:backgroundTint="@color/green" />
-
 
     </LinearLayout>
 
-</androidx.cardview.widget.CardView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:background="@color/green"
+            android:paddingVertical="5dp"
+            android:paddingHorizontal="10dp"
+            android:textSize="12sp"
+            android:id="@+id/lab_footer"
+            android:shadowColor = "@color/txtShadow"
+            android:shadowDx = "0"
+            android:shadowDy = "0"
+            android:shadowRadius = "2"
+            />
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

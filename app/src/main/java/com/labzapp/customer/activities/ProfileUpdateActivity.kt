@@ -65,8 +65,6 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
     val DEF_LOCATION = LatLng(9.9312, 76.2673)
     val ZOOM_LEVEL = 16f
 
-
-
     private var custGender: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -312,13 +310,14 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
                         // Set the map's camera position to the current location of the device.
                         lastKnownLocation = task.result
                         if(task.result != null) {
+                            binding.usrLat.text = lastKnownLocation!!.latitude.toString()
+                            binding.usrLong.text = lastKnownLocation!!.longitude.toString()
 
                             val geocoder = Geocoder(this)
                             val list = geocoder.getFromLocation(lastKnownLocation!!.latitude, lastKnownLocation!!.longitude, 1)
                             val fullAddress = list[0].getAddressLine(0)
-                            binding.usrLat.text = lastKnownLocation!!.latitude.toString()
-                            binding.usrLong.text = lastKnownLocation!!.longitude.toString()
                             binding.locationAddress.text = fullAddress
+
                         }
                         else {
                             binding.locationAddress.text = "Location not available."

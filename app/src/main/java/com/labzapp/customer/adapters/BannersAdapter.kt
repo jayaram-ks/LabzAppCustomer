@@ -6,10 +6,11 @@ import android.view.ViewGroup
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.labzapp.customer.databinding.BannerListItemBinding
+import com.labzapp.customer.fragments.HomeFragment
 import com.labzapp.customer.models.BannerData
 import com.squareup.picasso.Picasso
 
-class BannersAdapter(val context: Context,private val banners: List<BannerData>) : RecyclerView.Adapter<BannersAdapter.BannerViewHolder>() {
+class BannersAdapter(val context: Context, private val banners: List<BannerData>) : RecyclerView.Adapter<BannersAdapter.BannerViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BannerViewHolder {
         val binding = BannerListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -62,5 +63,7 @@ class BannersAdapter(val context: Context,private val banners: List<BannerData>)
             this.currentBanner = banner
             this.currentPosition = pos
         }
+
     }
+    
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" android:background="@color/red">
+    android:layout_height="match_parent" android:background="@color/black">
 
 
     <ImageView
@@ -15,10 +15,15 @@
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
+        android:textAllCaps="true"
         android:layout_alignTop="@id/ivImage"
         android:textColor="@color/white"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
+        android:shadowColor = "@color/txtShadow"
+        android:shadowDx = "0"
+        android:shadowDy = "0"
+        android:shadowRadius = "1"
         android:fontFamily="@font/lato_black"
         android:layout_centerHorizontal="true" />
 
@@ -30,7 +35,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:textSize="12dp"
+        android:shadowColor = "@color/txtShadow"
+        android:shadowDx = "0"
+        android:shadowDy = "0"
+        android:shadowRadius = "1"
+        android:textSize="13dp"
         android:fontFamily="@font/lato_regular"
         android:layout_centerHorizontal="true" />
 

@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#BE3C42"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <TextView
@@ -12,7 +12,7 @@
         android:gravity="center|start"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
-        android:text="@string/available_labs"
+        android:text="@string/available_tests"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -21,9 +21,10 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_marginHorizontal="8dp"
-        android:id="@+id/labs_recyclerview"
+        android:id="@+id/availtests_recycler"
         android:layout_height="0dp"
         android:layout_weight="1"
-         />
+
+        />
 
 </LinearLayout>

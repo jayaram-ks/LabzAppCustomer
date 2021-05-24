@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.labzapp.customer.adapters.BannersAdapter
 import com.labzapp.customer.databinding.FragmentHomeBinding
 import com.labzapp.customer.models.BannerData
@@ -13,6 +14,8 @@ import com.labzapp.customer.services.ApiService
 import com.labzapp.customer.services.ServiceBuilder
 import com.labzapp.customer.storage.SharedPrefManager
 import com.labzapp.customer.utilities.toastz
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -51,6 +54,10 @@ class HomeFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         fetchBanners()
+
+
+
+
     }
 
     private fun fetchBanners() {
@@ -65,9 +72,7 @@ class HomeFragment : Fragment() {
             override fun onResponse(call: Call<BannerResponse>, response: Response<BannerResponse>) {
                 val resp = response.body()
                 if (resp?.code == 200) {
-                    resp.banner.let {
-                        showBanners(it)
-                    }
+                    showBanners(resp.banner)
                 } else {
                     activity?.let { toastz(it,resp?.message.toString()) }
                 }
@@ -81,7 +86,21 @@ class HomeFragment : Fragment() {
 
     private fun showBanners(bannerlist: List<BannerData>)
     {
+        if (!isAdded) return
         binding.viewPager2.adapter = BannersAdapter(requireContext(),bannerlist)
+
+        lifecycleScope.launch {
+            while(true){
+                for(i in 0..bannerlist.size){
+                    delay(3500)
+                    if(i==0){
+                        binding.viewPager2.setCurrentItem(i,true)
+                    }else{
+                        binding.viewPager2.setCurrentItem(i,true)
+                    }
+                }
+            }
+        }
     }
 
     companion object {

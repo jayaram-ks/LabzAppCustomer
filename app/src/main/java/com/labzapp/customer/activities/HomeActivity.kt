@@ -3,6 +3,7 @@ package com.labzapp.customer.activities
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import com.labzapp.customer.R
 import com.labzapp.customer.databinding.ActivityHomeBinding
 import com.labzapp.customer.fragments.HomeFragment
@@ -17,13 +18,14 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-
         val homeFragment = HomeFragment()
+        setCurrentFragment(homeFragment)
+
         val labsFragment = LabsFragment()
         val reportsFragment = ReportsFragment()
         val profileFragment = ProfileFragment()
 
-        setCurrentFragment(homeFragment)
+
 
         binding.bottomNavigationView.setOnNavigationItemSelectedListener {
             when(it.itemId){
@@ -39,6 +41,7 @@ class HomeActivity : AppCompatActivity() {
     private fun setCurrentFragment(fragment: Fragment)=
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.frame_container,fragment)
+            setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
             commit()
         }
 }

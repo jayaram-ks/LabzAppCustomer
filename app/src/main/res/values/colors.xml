@@ -10,7 +10,7 @@
     <color name="light_grey">#EEDDDDDD</color>
     <color name="medium_grey">#EE999999</color>
     <color name="dark_grey">#EE444444</color>
-    <color name="card_grey">#FEFEFE</color>
+
 
 
     <color name="textBlack">#DD222222</color>
@@ -21,5 +21,8 @@
     <color name="gray">#FFDAD8D8</color>
     <color name="violet">#FF000E88</color>
     <color name="red">#F33535</color>
+    <color name="txtShadow">#DD000000</color>
+    <color name="green_border">#553CBFB8</color>
+
 
 </resources>

@@ -1,16 +1,14 @@
 package com.labzapp.customer.fragments
 
 import android.app.Dialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
 import androidx.fragment.app.DialogFragment
-import com.labzapp.customer.R
-import com.labzapp.customer.databinding.FragmentLabsBinding
+import com.labzapp.customer.activities.BookingActivity
 import com.labzapp.customer.databinding.FragmentTestDialogBinding
-import com.labzapp.customer.utilities.toastz
 
 
 private const val ARG_PARAM1 = "test_title"
@@ -58,13 +56,20 @@ class TestDialogFragment : DialogFragment() {
         return dialog
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         binding.tstTitle.text = param1
         binding.tstDetails.text = param2
         binding.tstRecommendations.text = param3
-
+        binding.closedialg.setOnClickListener {
+            dialog?.dismiss()
+        }
+        binding.bookatest.setOnClickListener{
+            val intent = Intent(requireActivity(), BookingActivity::class.java)
+            startActivity(intent)
+        }
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -72,15 +77,6 @@ class TestDialogFragment : DialogFragment() {
 
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment HomeFragment.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String, param3: String) =
             HomeFragment().apply {

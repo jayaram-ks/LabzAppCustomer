@@ -1,60 +1,119 @@
 package com.labzapp.customer.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import com.labzapp.customer.R
+import com.labzapp.customer.databinding.FragmentProfileBinding
+import com.labzapp.customer.models.ProfileResponse
+import com.labzapp.customer.services.ApiService
+import com.labzapp.customer.services.ServiceBuilder
+import com.labzapp.customer.storage.SharedPrefManager
+import com.labzapp.customer.utilities.toastz
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ProfileFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ProfileFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var _binding: FragmentProfileBinding? = null
+    private val binding get() = _binding!!
+
+    private val homeF = HomeFragment()
+    private val aboutF = AboutFragment()
+    private val myprofileF = MyprofileFragment()
+    private val mybookingsF = MybookingsFragment()
+    private val myresultsF = MyresultsFragment()
+    private val termsF  = TermsFragment()
+    private val contactF = ContactFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false)
+        _binding = FragmentProfileBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ProfileFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ProfileFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        fetchProfile()
+
+        binding.goHome.setOnClickListener { view -> menuClick(view) }
+        binding.goAbout.setOnClickListener { view -> menuClick(view) }
+        binding.goProfile.setOnClickListener { view -> menuClick(view) }
+        binding.goBookings.setOnClickListener { view -> menuClick(view) }
+        binding.goResults.setOnClickListener { view -> menuClick(view) }
+        binding.goTerms.setOnClickListener { view -> menuClick(view) }
+        binding.goContact.setOnClickListener { view -> menuClick(view) }
+        binding.goLogout.setOnClickListener { view -> menuClick(view) }
+    }
+
+    private fun menuClick(v: View?) {
+        when (v?.id) {
+            binding.goHome.id -> { setCurrentFragment(homeF) }
+            binding.goAbout.id -> { setCurrentFragment(aboutF) }
+            binding.goProfile.id -> { setCurrentFragment(myprofileF) }
+            binding.goBookings.id -> { setCurrentFragment(mybookingsF) }
+            binding.goResults.id -> { setCurrentFragment(myresultsF) }
+            binding.goTerms.id -> { setCurrentFragment(termsF) }
+            binding.goContact.id -> { setCurrentFragment(contactF) }
+            binding.goLogout.id -> {
+                //TODO
+            }
+            else -> {
+                //TODO
+            }
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+    private fun fetchProfile(){
+        val authTokn: String? = "Bearer "+ SharedPrefManager.getInstance(requireContext()).authKey
+        val apiTokn: String? = SharedPrefManager.getInstance(requireContext()).apiToken
+        val apiService = ServiceBuilder.buildService(ApiService::class.java)
+        val requestCall = apiService.getProfile(authTokn, apiTokn)
+        requestCall.enqueue(object : Callback<ProfileResponse> {
+            override fun onResponse(call: Call<ProfileResponse>, response: Response<ProfileResponse>) {
+                val resp = response.body()
+                if (resp?.code == 200) {
+                    resp.let {
+                        if (!isAdded) return
+                        binding.userName.text = it.customer.name
+                        binding.userPhone.text = it.customer.phone
+                    }
+
+                } else {
+                    toastz(requireActivity(),resp?.message.toString())
                 }
             }
+
+            override fun onFailure(call: Call<ProfileResponse>, t: Throwable) {
+                toastz(requireActivity(),t.message.toString())
+            }
+        })
     }
+
+    private fun setCurrentFragment(openfragmt: Fragment){
+        val appCompatActivity = context as AppCompatActivity
+        val transaction = appCompatActivity.supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.frame_container, openfragmt)
+        transaction.addToBackStack(null)
+        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+        transaction.commit()
+    }
+
 }

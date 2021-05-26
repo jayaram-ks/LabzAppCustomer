@@ -4,8 +4,8 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -15,10 +15,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LabzApp"
         android:usesCleartextTraffic="true">
+        <activity android:name=".activities.BookingActivity"></activity>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
-        <activity android:name=".activities.ProfileUpdateActivity"></activity>
+
+        <activity android:name=".activities.ProfileUpdateActivity" />
         <activity android:name=".activities.HomeActivity" />
         <activity android:name=".activities.OtpVerifyActivity" />
         <activity
@@ -30,7 +33,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.RegisterActivity"/>
+        <activity android:name=".activities.RegisterActivity" />
     </application>
 
 </manifest>

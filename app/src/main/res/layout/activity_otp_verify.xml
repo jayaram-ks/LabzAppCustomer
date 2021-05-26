@@ -5,16 +5,29 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    android:padding="23dp">
+    >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="@color/orange"
+        android:gravity="center|start"
+        android:fontFamily="@font/blippo_black_regular"
+        android:textColor="@color/white"
+        android:textSize="25dp"
+        android:paddingStart="20dp"
+        android:text="@string/app_title" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="3dp"
+        android:layout_margin="20dp"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="20dp"
         android:layout_marginTop="2dp"
         app:cardElevation="7dp">
+
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -74,24 +87,18 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
                 android:layout_marginTop="15dp"
                 android:orientation="horizontal"
-                android:paddingBottom="50dp">
-
-
-
+                android:paddingBottom="10dp">
                 <Button
                     android:layout_width="wrap_content"
                     android:id="@+id/cancel_otp"
                     android:layout_height="45dp"
-                    android:layout_weight="1"
-                    android:text="CANCEL"
-                    android:textAllCaps="false"
+                    android:layout_marginTop="30dp"
+                    android:text="@string/cancel"
                     android:textSize="12sp"
                     app:backgroundTint="@color/orange" />
-
-
-
             </LinearLayout>
 
         </LinearLayout>

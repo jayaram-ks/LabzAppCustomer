@@ -108,8 +108,8 @@ class ProfileFragment : Fragment() {
     }
 
     private fun setCurrentFragment(openfragmt: Fragment){
-        val appCompatActivity = context as AppCompatActivity
-        val transaction = appCompatActivity.supportFragmentManager.beginTransaction()
+
+        val transaction = parentFragmentManager.beginTransaction()
         transaction.replace(R.id.frame_container, openfragmt)
         transaction.addToBackStack(null)
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)

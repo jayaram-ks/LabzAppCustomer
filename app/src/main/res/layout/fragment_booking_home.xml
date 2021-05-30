@@ -17,15 +17,18 @@
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:layout_marginBottom="12dp"/>
+        android:layout_marginBottom="10dp"/>
+
+
+
 
 
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginEnd="12dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="10dp"
@@ -45,43 +48,70 @@
             android:paddingHorizontal="10dp"
             android:textSize="14sp"
             android:id="@+id/lab_title"
-            android:text="Preferred Location"
+            android:text="Patient's Location"
             android:shadowColor = "@color/txtShadow"
             android:shadowDx="2"
             android:shadowDy="2"
             android:shadowRadius="2"
             />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="left|start"
-            android:orientation="horizontal"
-           >
 
-            <fragment
-                android:id="@+id/map"
-                class="com.google.android.gms.maps.SupportMapFragment"
-                android:layout_width="match_parent"
-                android:layout_height="100dp" />
+            <RelativeLayout android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center_horizontal">
+                <fragment
+                    android:id="@+id/map_book"
+                    class="com.google.android.gms.maps.SupportMapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp" />
+
+                <LinearLayout android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="3dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/usr_lat"
+                        android:paddingEnd="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:shadowColor="@color/black"
+                        android:shadowRadius="5"
+                        android:shadowDx="0"
+                        android:shadowDy="0"
+                        android:fontFamily="@font/roboto_condensed_regular"
+                        android:textSize="9sp"
+                        />
+                    <TextView
+                        android:id="@+id/usr_long"
+                        android:paddingEnd="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:shadowColor="@color/black"
+                        android:shadowRadius="5"
+                        android:shadowDx="0"
+                        android:shadowDy="0"
+                        android:fontFamily="@font/roboto_condensed_regular"
+                        android:textSize="9sp"
+                        />
+                </LinearLayout>
+
+            </RelativeLayout>
 
 
-
-         </LinearLayout>
             <TextView
+                android:id="@+id/location_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 android:background="@color/green"
                 android:paddingVertical="4dp"
                 android:paddingHorizontal="10dp"
-                android:textSize="14sp"
-                android:id="@+id/latle"
-                android:text="@string/ayur_anchal_road_sh1_kollam_691532"
-                android:shadowColor = "@color/txtShadow"
-                android:shadowDx="2"
-                android:shadowDy="2"
-                android:shadowRadius="2"
+                android:textSize="12sp"
+                android:fontFamily="@font/roboto_condensed_regular"
+
                 />
         </LinearLayout>
 
@@ -91,8 +121,8 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginEnd="12dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="10dp"
@@ -118,11 +148,29 @@
                 android:shadowDy="2"
                 android:shadowRadius="2"
                 />
-<EditText
-    android:layout_width="match_parent"
-    android:layout_margin="5dp"
-    android:text="@string/_11_04_2021"
-    android:layout_height="match_parent"/>
+            <LinearLayout android:layout_height="wrap_content"
+                android:layout_width="match_parent" android:orientation="horizontal"
+                android:paddingHorizontal="5dp">
+            <TextView
+                android:id="@+id/text_view_date_1"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:gravity="center_horizontal"
+                android:padding="5dp" />
+
+            <Button
+                android:id="@+id/button_date_1"
+                android:layout_width="0dp"
+                android:layout_marginStart="5dp"
+                android:layout_weight="1"
+                android:textAllCaps="false"
+                android:letterSpacing=".01"
+                android:layout_height="40dp"
+                android:text="Change"
+                android:backgroundTint="@color/green"/>
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -133,13 +181,15 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginEnd="12dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="10dp"
         app:cardElevation="15dp">
         <LinearLayout
+            android:id="@+id/req_lab_tests"
+            android:foreground="?android:attr/selectableItemBackground"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -150,10 +200,9 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 android:background="@color/green"
-                android:paddingVertical="4dp"
+                android:paddingTop="4dp"
                 android:paddingHorizontal="10dp"
                 android:textSize="14sp"
-                android:id="@+id/lab_gdaad"
                 android:text="Required Lab Tests(Click to Add)"
                 android:shadowColor = "@color/txtShadow"
                 android:shadowDx="2"
@@ -161,13 +210,17 @@
                 android:shadowRadius="2"
                 />
             <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/home_test_count"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:padding="5dp"
-                android:text="@string/ayur_anchal_road_sh1_kollam_691532"
-                android:textColor="@color/textBlack"
-                android:textSize="15sp" />
+                android:gravity="start"
+                android:background="@color/green"
+                android:paddingHorizontal="10dp"
+                android:paddingBottom="3dp"
+                android:fontFamily="@font/roboto_condensed_regular"
+                android:text="No tests selected"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
 
         </LinearLayout>
 
@@ -176,17 +229,18 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginEnd="12dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="10dp"
         app:cardElevation="15dp">
         <LinearLayout
+            android:id="@+id/selected_lab"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
+            android:orientation="vertical"
+            android:foreground="?android:attr/selectableItemBackground">
 
             <TextView
                 android:layout_width="match_parent"
@@ -208,13 +262,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="left|start"
+                android:background="@color/green"
                 android:orientation="horizontal"
                 >
 
                 <ImageView
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:background="?android:attr/selectableItemBackground"
+
                     android:src="@drawable/no_image" />
 
                 <TextView
@@ -222,9 +277,10 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:padding="5dp"
+                    android:fontFamily="@font/roboto_condensed_regular"
                     android:text="@string/ayur_anchal_road_sh1_kollam_691532"
-                    android:textColor="@color/textBlack"
-                    android:textSize="15sp" />
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
 
             </LinearLayout>
         </LinearLayout>
@@ -237,6 +293,7 @@
         android:layout_weight="1" />
 
     <androidx.appcompat.widget.AppCompatButton
+
         android:layout_width="170dp"
         android:layout_height="50dp"
         android:layout_gravity="center"

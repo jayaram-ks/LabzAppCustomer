@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/transp_black"
+    android:orientation="vertical"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_weight="1"
+        android:background="@color/green"
+        android:gravity="center|start"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:text="Select Test/Tests"
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        android:textStyle="bold"
+
+        />
+    <TextView
+        android:id="@+id/test_num"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="45dp"
+        android:background="@color/green"
+        android:gravity="center|end"
+        android:paddingStart="5dp"
+        android:paddingEnd="15dp"
+        android:fontFamily="@font/roboto_condensed_regular"
+        android:text="0 selected"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:textSize="16sp"
+
+        />
+</LinearLayout>
+    <EditText
+        android:id="@+id/srch_txt"
+        android:padding="10dp"
+        android:textSize="12dp"
+        android:hint="Search Tests"
+        android:layout_marginHorizontal="7dp"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/round_button_white"
+        />
+
+<LinearLayout android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginBottom="8dp"
+        android:id="@+id/alltests_recycler"
+        android:layout_height="0dp"
+        android:layout_weight="12"
+        />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/test_continue"
+        android:layout_width="170dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/round_button_white"
+        android:backgroundTint="@color/orange"
+        android:elevation="5dp"
+        android:text="@string/_continue"
+        android:textAllCaps="false"
+        android:textColor="@color/white" />
+
+</LinearLayout>
+
+</LinearLayout>

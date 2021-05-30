@@ -1,11 +1,13 @@
 package com.labzapp.customer.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import com.labzapp.customer.activities.BookingActivity
 import com.labzapp.customer.adapters.BannersAdapter
 import com.labzapp.customer.databinding.FragmentHomeBinding
 import com.labzapp.customer.models.BannerData
@@ -52,6 +54,10 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         fetchBanners()
+        binding.bookNewTest.setOnClickListener{
+            val intent = Intent(requireActivity(), BookingActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun fetchBanners() {
@@ -86,7 +92,7 @@ class HomeFragment : Fragment() {
         lifecycleScope.launch {
             while(true){
                 for(i in 0..bannerlist.size){
-                    delay(3500)
+                    delay(3000)
                     if(i==0){
                         binding.viewPager2.setCurrentItem(i,true)
                     }else{

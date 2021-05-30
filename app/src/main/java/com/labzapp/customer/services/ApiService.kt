@@ -63,7 +63,20 @@ interface ApiService {
         @Query("lab_id") labid: Int?,
     ): Call<AvailTestResponse>
 
+    @GET(GET_ALL_TESTS)
+    fun getAllTests(
+        @Header("Authorization") authtoken: String?,
+        @Query("api_token") apitoken: String?,
+    ): Call<BookingTestsResponse>
 
+    @GET(GET_LABS_HAVING_TESTS)
+    fun getLabsHavingTests(
+        @Header("Authorization") authtoken: String?,
+        @Query("api_token") apitoken: String?,
+        @Query("latitude") latitude: Double?,
+        @Query("longitude") longitude: Double?,
+        @Query("test_ids[]") items:MutableList<String>,
+    ):Call<BookingLabsResponse>
 
 
 

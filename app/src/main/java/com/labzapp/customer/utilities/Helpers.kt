@@ -13,4 +13,10 @@ fun toastz(cnxt: Context, messg: String)
     tst.setGravity( Gravity.FILL_HORIZONTAL, 0, 0)
     tst.show()
 }
+fun toastzs(cnxt: Context, messg: String)
+{
+    val tst = Toast.makeText(cnxt, messg, Toast.LENGTH_SHORT)
+    tst.setGravity( Gravity.FILL_HORIZONTAL, 0, 0)
+    tst.show()
+}
 

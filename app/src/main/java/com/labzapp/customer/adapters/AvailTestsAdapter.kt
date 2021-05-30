@@ -2,21 +2,16 @@ package com.labzapp.customer.adapters
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import com.labzapp.customer.R
 import com.labzapp.customer.databinding.AvailTestListItemBinding
-import com.labzapp.customer.fragments.AvailableTestsFragment
 import com.labzapp.customer.fragments.TestDialogFragment
 import com.labzapp.customer.models.Laballtests
-import com.labzapp.customer.utilities.toastz
-import java.io.Console
 import java.util.*
 import kotlin.collections.ArrayList
 

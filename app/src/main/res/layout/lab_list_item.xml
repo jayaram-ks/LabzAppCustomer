@@ -80,7 +80,7 @@
                 android:fontFamily="@font/lato_regular"
                 android:textSize="12sp"
                 android:letterSpacing=".01"
-                android:backgroundTint="@color/green"
+                android:backgroundTint="@color/orange"
                  />
             <Button
                 android:id="@+id/avl_packs"
@@ -97,7 +97,7 @@
                 android:textSize="12sp"
                 android:letterSpacing=".01"
                 android:lineHeight="10sp"
-                android:backgroundTint="@color/green"
+                android:backgroundTint="@color/orange"
                 />
             </LinearLayout>
         </LinearLayout>

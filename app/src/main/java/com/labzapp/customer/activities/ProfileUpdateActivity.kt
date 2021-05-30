@@ -151,8 +151,6 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
         })
 
 
-
-
         binding.updateProfile.setOnClickListener{
             val custLatitude = binding.usrLat.text.toString()
             val custLongitude = binding.usrLong.text.toString()
@@ -262,6 +260,7 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
 
     // [START maps_check_location_permission_result]
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode != LOCATION_PERMISSION_REQUEST_CODE) {
             return
         }

@@ -2,6 +2,7 @@ package com.labzapp.customer.fragments
 
 import android.app.Dialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,25 +24,33 @@ import com.labzapp.customer.services.ApiService
 import com.labzapp.customer.services.ServiceBuilder
 import com.labzapp.customer.storage.SharedPrefManager
 import com.labzapp.customer.utilities.toastz
+import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
+import kotlin.collections.ArrayList
 
+
+private const val ARG_PARAM1 = "selcted_tests_pos"
 
 class BookingTestsFragment : DialogFragment() {
     private var _binding: FragmentBookingTestsBinding? = null
     private val binding get() = _binding!!
     var selectedTests:String? = "No tests selected."
-    lateinit var testadapter: AllTestsAdapter
+    private lateinit var oldTestsPos: ArrayList<Long>
+    private lateinit var testadapter: AllTestsAdapter
     private var tracker: SelectionTracker<Long>? = null
+    private var selcTsts: String? = null
+    val posArr:MutableList<Long> = ArrayList()
+    var testmodel:ArrayList<Tests> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-
+            selcTsts = it.getString(ARG_PARAM1)
         }
     }
 
@@ -65,8 +74,21 @@ class BookingTestsFragment : DialogFragment() {
         fetchTests()
         binding.testContinue.setOnClickListener{
             dialog?.dismiss()
-            var selIDS = Json.encodeToString(testadapter.selctedIdList)
-            setFragmentResult("testKey", bundleOf("sel_tests" to selectedTests,"sel_ids" to selIDS ))
+            val selPositions = Json.encodeToString(posArr)
+
+            var idarray: MutableList<String> = ArrayList()
+            for( (index, row) in testmodel.withIndex()){
+                for(t in posArr){
+                    if(index.toLong() == t){
+                        idarray.add(row.id.toString())
+                    }
+                }
+
+            }
+
+            val iDstring: String = Json.encodeToString(idarray)
+
+            setFragmentResult("testKey", bundleOf("sel_pos" to selPositions, "sel_test_ids" to iDstring ))
         }
     }
 
@@ -87,6 +109,7 @@ class BookingTestsFragment : DialogFragment() {
                     resp.tests?.let{
                         showTests(it)
                         val testsToSrch = it
+                        testmodel = it
                         binding.srchTxt.addTextChangedListener{
                             val positn = performFiltering(binding.srchTxt.text,testsToSrch)
                             binding.alltestsRecycler.scrollToPosition(positn)
@@ -101,6 +124,7 @@ class BookingTestsFragment : DialogFragment() {
             }
         })
     }
+
 
     private fun showTests(testlist: ArrayList<Tests>) {
         if (!isAdded) return
@@ -121,10 +145,26 @@ class BookingTestsFragment : DialogFragment() {
         ).build()
 
         testadapter.setTracker(tracker)
+
         tracker?.addObserver(
             object: SelectionTracker.SelectionObserver<Long>() {
                 override fun onSelectionChanged() {
                     val nItems:Int? = tracker?.selection?.size()
+
+                 //   Selection{primary{size=7, entries=[3, 4, 5, 13, 12, 19, 29]}, provisional{size=0, entries=[]}}
+Log.d("Tracker--------POST",tracker?.selection.toString())
+
+                    for( (index, row) in testlist.withIndex()){
+                        if(tracker!!.isSelected(index.toLong())){
+                            if(index.toLong() !in posArr) {
+                                posArr.add(index.toLong())
+                            }
+                        } else{
+                            posArr.remove(index.toLong())
+                        }
+                    }
+
+
 
                     if(nItems!=null && nItems > 0) {
                         selectedTests = "$nItems tests selected"
@@ -136,6 +176,28 @@ class BookingTestsFragment : DialogFragment() {
                     }
                 }
             })
+
+
+
+
+            if(selcTsts != null) {
+                oldTestsPos = selcTsts?.let { Json.decodeFromString(it) }!!
+                tracker?.setItemsSelected(oldTestsPos,true)
+            }
+
+        for( (index, row) in testlist.withIndex()){
+            if(tracker!!.isSelected(index.toLong())){
+                if(index.toLong() !in posArr) {
+                    posArr.add(index.toLong())
+                }
+            } else{
+                posArr.remove(index.toLong())
+            }
+        }
+
+
+        Log.d("new ARRAY === ",posArr.toString())
+
 
     }
 
@@ -162,11 +224,13 @@ class BookingTestsFragment : DialogFragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance() =
+        fun newInstance(param1:String) =
             BookingTestsFragment().apply {
                 arguments = Bundle().apply {
+                    putString(ARG_PARAM1, param1)
                 }
             }
         const val TAG = "BookingTestsFragment"
     }
+
 }

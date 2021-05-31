@@ -78,6 +78,4 @@ interface ApiService {
         @Query("test_ids[]") items:MutableList<String>,
     ):Call<BookingLabsResponse>
 
-
-
 }

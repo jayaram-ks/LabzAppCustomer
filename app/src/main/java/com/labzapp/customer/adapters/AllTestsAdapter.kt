@@ -18,6 +18,7 @@ class AllTestsAdapter( val context: Context,private val tests: ArrayList<Tests>)
     var testFilterList = ArrayList<Tests>()
     private var tracker: SelectionTracker<Long>? = null
     val selctedIdList: MutableList<String> = ArrayList()
+    var selectedTestsPos: ArrayList<Long> = ArrayList()
     init {
         testFilterList = tests
         setHasStableIds(true)
@@ -59,14 +60,21 @@ class AllTestsAdapter( val context: Context,private val tests: ArrayList<Tests>)
             this.currentPosition = pos
 
             if(tracker!!.isSelected(pos.toLong())) {
-                //itemView.background = ContextCompat.getDrawable(context,R.drawable.stroke_green_test)
-                if (binding.tstId.text.toString() !in selctedIdList) {
+               
+               /* if (binding.tstId.text.toString() !in selctedIdList) {
                     selctedIdList.add(binding.tstId.text.toString())
                 }
+                if (pos.toLong() !in selectedTestsPos) {
+                    selectedTestsPos.add(pos.toLong())
+                }*/
+                
                 itemView.setBackgroundColor( ContextCompat.getColor(context,R.color.green))
             } else {
-               // itemView.background = ContextCompat.getDrawable(context,R.drawable.stroke_white_test)
-                selctedIdList.remove(binding.tstId.text.toString())
+               
+               /* selctedIdList.remove(binding.tstId.text.toString())
+
+                selectedTestsPos.remove(pos.toLong())*/
+                
                 itemView.setBackgroundColor( ContextCompat.getColor(context,R.color.white))
             }
             //Log.d("TestID_ARRAYS_", selctedIdList.toString())
@@ -76,6 +84,10 @@ class AllTestsAdapter( val context: Context,private val tests: ArrayList<Tests>)
             object: ItemDetailsLookup.ItemDetails<Long>() {
                 override fun getPosition(): Int = absoluteAdapterPosition
                 override fun getSelectionKey(): Long? = itemId
+
+                override fun inSelectionHotspot(e: MotionEvent): Boolean {
+                    return true
+                }
             }
 
     }

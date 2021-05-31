@@ -70,6 +70,8 @@ ActivityCompat.OnRequestPermissionsResultCallback{
     private var _binding: FragmentBookingHomeBinding? = null
     private val binding get() = _binding!!
 
+    private var bookedTestpos: String? = null
+
     var cal: Calendar = Calendar.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -138,20 +140,32 @@ ActivityCompat.OnRequestPermissionsResultCallback{
         mapFragment?.getMapAsync(this)
 
         binding.reqLabTests.setOnClickListener{
+
+            val bundle = Bundle()
+            bundle.putString("selcted_tests_pos", bookedTestpos)
             val fragmentTests = BookingTestsFragment()
+            fragmentTests.arguments = bundle
             val transaction2 = childFragmentManager.beginTransaction()
             transaction2.addToBackStack(BookingTestsFragment.TAG)
             fragmentTests.show(transaction2,BookingTestsFragment.TAG)
         }
 
         childFragmentManager.setFragmentResultListener("testKey", this) { key, bundle ->
-            val selCount = bundle.getString("sel_tests")
-            val bookedTestids =  bundle.getString("sel_ids")
-            var arr: MutableList<String>? = bookedTestids?.let { Json.decodeFromString(it) }
-            binding.homeTestCount.text = selCount
-            if (arr != null) {
-                fetchMatchingLabs(arr)
+
+            bookedTestpos =  bundle.getString("sel_pos")
+            var bookTestIds: String? = bundle.getString("sel_test_ids")
+
+            val tIdArray: MutableList<String>? = bookTestIds?.let { Json.decodeFromString(it) }
+
+            if (tIdArray != null) {
+                binding.homeTestCount.text = tIdArray.size.toString() + " Tests Selected"
+                if (tIdArray.size > 0) {
+                    fetchMatchingLabs(tIdArray)
+                }
             }
+
+            Log.d("POSITIOnzzzz",bookedTestpos.toString())
+            Log.d("testzzzzzzz",bookTestIds.toString())
         }
 
         binding.selectedLab.setOnClickListener{

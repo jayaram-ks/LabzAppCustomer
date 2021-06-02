@@ -30,13 +30,15 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.labzapp.customer.R
 import com.labzapp.customer.databinding.FragmentBookingHomeBinding
-import com.labzapp.customer.models.BookingLabsResponse
+import com.labzapp.customer.models.Labswithtest
 import com.labzapp.customer.models.ProfileResponse
 import com.labzapp.customer.services.ApiService
 import com.labzapp.customer.services.ServiceBuilder
 import com.labzapp.customer.storage.SharedPrefManager
 import com.labzapp.customer.utilities.maps.PermissionUtils
 import com.labzapp.customer.utilities.toastz
+import com.labzapp.customer.utilities.toastzs
+import com.squareup.picasso.Picasso
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -51,32 +53,24 @@ class BookingHomeFragment : Fragment() , GoogleMap.OnMyLocationButtonClickListen
 GoogleMap.OnMyLocationClickListener, OnMapReadyCallback,
 ActivityCompat.OnRequestPermissionsResultCallback{
 
-
     private lateinit var locationManager: LocationManager
     var gpsStatus = false
-   
     var intentgps: Intent? = null
-
     private var permissionDenied = false
     private var lastKnownLocation: Location? = null
-
     private lateinit var map: GoogleMap
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     val DEF_LOCATION = LatLng(9.9312, 76.2673)
     val ZOOM_LEVEL = 16f
-
-
     private var _binding: FragmentBookingHomeBinding? = null
     private val binding get() = _binding!!
-
+    private var bookingFor: String? = null
     private var bookedTestpos: String? = null
-
+    private var bookTestIds: String? = null
     private var tIdArray: MutableList<String> = ArrayList()
-
     private var bookedLabpos: String? = null
-
-    private var labDataArray: MutableList<String> = ArrayList()
-
+    private var bookLabstring: String? = null
+    private var labDataArray: ArrayList<Labswithtest> = ArrayList()
     var cal: Calendar = Calendar.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,7 +78,6 @@ ActivityCompat.OnRequestPermissionsResultCallback{
         lastKnownLocation?.latitude  = DEF_LOCATION.latitude
         lastKnownLocation?.longitude = DEF_LOCATION.longitude
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity())
-
     }
 
     override fun onCreateView(
@@ -98,27 +91,22 @@ ActivityCompat.OnRequestPermissionsResultCallback{
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         val frgment = SelfDialogFragment()
         frgment.isCancelable = false
-       // frgment.show(childFragmentManager, SelfDialogFragment.TAG)
-
         val transaction = childFragmentManager.beginTransaction()
         transaction.addToBackStack(null)
         frgment.show(transaction, SelfDialogFragment.TAG)
 
         childFragmentManager.setFragmentResultListener("bookingKey", this) { key, bundle ->
-            val bookingFor = bundle.getString("booking_for")
-            if(bookingFor == "1"){
+            bookingFor = bundle.getString("booking_for")
+            if(bookingFor == "1"){ //self
                 checkGpsStatus()
                 fillMyData()
             }else{
                 checkGpsStatus()
                 getDeviceLocation()
-               // fillOtherData()
             }
         }
-
 
         // create an OnDateSetListener
         val dateSetListener =
@@ -128,6 +116,8 @@ ActivityCompat.OnRequestPermissionsResultCallback{
                 cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
                 updateDateInView()
             }
+
+        updateDateInView()
 
         // when you click on the button, show DatePickerDialog that is set with OnDateSetListener
         binding.buttonDate1.setOnClickListener {
@@ -156,9 +146,8 @@ ActivityCompat.OnRequestPermissionsResultCallback{
         }
 
         childFragmentManager.setFragmentResultListener("testKey", this) { key, bundle ->
-
             bookedTestpos =  bundle.getString("sel_pos")
-            var bookTestIds: String? = bundle.getString("sel_test_ids")
+            bookTestIds = bundle.getString("sel_test_ids")
 
             tIdArray = bookTestIds?.let { Json.decodeFromString(it) }!!
 
@@ -167,14 +156,19 @@ ActivityCompat.OnRequestPermissionsResultCallback{
                     binding.homeTestCount.text = tIdArray.size.toString() + " Tests Selected"
                 } else{
                     binding.homeTestCount.text ="No Tests Selected"
+                    clearLabdata()
                 }
             }
 
-            Log.d("POSITIOnzzzz",bookedTestpos.toString())
-            Log.d("testzzzzzzz",bookTestIds.toString())
         }
         //----LABS POPUP-----
         binding.selectedLab.setOnClickListener{
+
+            if(tIdArray.size < 1){
+                toastzs(requireContext(),"Please select required tests")
+                return@setOnClickListener
+            }
+
             val bundle = Bundle()
             bundle.putString("param1", Json.encodeToString(tIdArray))
             bundle.putString("param2", binding.usrLat.text.toString())
@@ -190,21 +184,67 @@ ActivityCompat.OnRequestPermissionsResultCallback{
         childFragmentManager.setFragmentResultListener("labKey", this) { key, bundle ->
 
             bookedLabpos =  bundle.getString("selpos")
-            var bookLabstring: String? = bundle.getString("sel_labs")
+            bookLabstring = bundle.getString("sel_labs")
 
             labDataArray = bookLabstring?.let { Json.decodeFromString(it) }!!
 
-
-
             if (labDataArray.size > 0) {
-                binding.selectedLabName.text =labDataArray.toString()
+                binding.selectedLabName.text = labDataArray[0].name
+                binding.selectedLabAddress.text = labDataArray[0].address
+                if(labDataArray[0].thumbnail != null) {
+                    Picasso.with(context).load(labDataArray[0].thumbnail).fit().centerCrop()
+                        .into(binding.selectedLablogo)
+                }else {
+                    Picasso.with(context).load(R.drawable.squarelogo).fit().centerCrop()
+                        .into(binding.selectedLablogo)
+                }
             } else{
-                binding.selectedLabName.text ="No Lab Selected"
+                clearLabdata()
             }
-
-
         }
 
+        ///SUBMIT COLLECTED DATA
+        binding.continueBookBtn.setOnClickListener {
+            val patbookfor =  bookingFor
+            val patlatitude = binding.usrLat.text.toString()
+            val patlongitude = binding.usrLong.text.toString()
+            val patprefdate = binding.textViewDate1.text.toString()
+            val pattests = bookTestIds
+            val patlab = bookLabstring
+
+            var errmessage: String? = null
+            if(patbookfor == null)
+            {
+                return@setOnClickListener
+            }
+            else if( (patlatitude == "") or (patlongitude == "") )
+            {
+                errmessage = "Please select patient's Location from Map"
+            }
+            else if(patprefdate == "")
+            {
+                errmessage = "Please select Preferred Date"
+            }
+            else if(tIdArray.size < 1)
+            {
+                errmessage = "Please select required Tests"
+            }
+            else if(labDataArray.size < 1)
+            {
+                errmessage = "Please select preferred Lab"
+            }
+
+            if(errmessage != null) {
+                toastzs(requireContext(),errmessage.toString())
+                return@setOnClickListener
+            } else{
+
+
+                activity?.let { toastz(it,patbookfor+"\n"+patlatitude+"\n"+patlongitude+"\n"+patprefdate+"\n"+pattests+"\n"+patlab) }
+
+            }
+
+        }
     }
 
     private fun updateDateInView() {
@@ -227,7 +267,6 @@ ActivityCompat.OnRequestPermissionsResultCallback{
         }
        // getDeviceLocation()
     }
-
     /**
      * Enables the My Location layer if the fine location permission has been granted.
      */
@@ -361,8 +400,19 @@ ActivityCompat.OnRequestPermissionsResultCallback{
                 binding.usrLat.text = actualLatLng!!.latitude.toString()
                 binding.usrLong.text = actualLatLng!!.longitude.toString()
                 binding.locationAddress.text = fullAddress
+                //on map drag force reset and reselect new  labs based on location
+                clearLabdata()
             }
         })
+    }
+
+    private fun clearLabdata(){
+        bookedLabpos = null
+        bookLabstring = null
+        labDataArray.clear()
+        binding.selectedLabAddress.text = null
+        binding.selectedLabName.text = "Select a Lab"
+        binding.selectedLablogo.setImageResource(0)
     }
 
     private fun checkGpsStatus() {
@@ -416,17 +466,13 @@ ActivityCompat.OnRequestPermissionsResultCallback{
                     }
 
                 } else {
-                    toastz(requireActivity(),resp?.message.toString())
+                    activity?.let { toastz(it,resp?.message.toString()) }
                 }
             }
             override fun onFailure(call: Call<ProfileResponse>, t: Throwable) {
-                toastz(requireActivity(),t.message.toString())
+                activity?.let { toastz(it,t?.message.toString()) }
             }
         })
-    }
-
-    private fun fillOtherData(){
-        //clear userdata form
     }
 
     companion object {
@@ -438,6 +484,5 @@ ActivityCompat.OnRequestPermissionsResultCallback{
         private const val LOCATION_PERMISSION_REQUEST_CODE = 1
         const val TAG = "BookingHomeFragment"
     }
-
 
 }

@@ -93,12 +93,12 @@ class BookingLabsFragment : DialogFragment() {
 
             val selPositions = Json.encodeToString(posArr)
 
-            var labarray: ArrayList<String> = ArrayList()
+           var labarray: ArrayList<Labswithtest> = ArrayList()
 
             for( (index, row) in labmodel.withIndex()){
                 for(t in posArr){
                     if(index.toLong() == t){
-                        labarray.add(row.toString())
+                        labarray.add(Labswithtest(row.lab_id,row.name,row.address,row.thumbnail,row.test_amount,row.service_charge,row.total_to_pay))
                     }
                 }
 
@@ -135,11 +135,11 @@ class BookingLabsFragment : DialogFragment() {
                     showLabs(resp.labswithtest)
                     labmodel = resp.labswithtest
                 } else {
-                    toastz(requireActivity(),resp?.message.toString())
+                    activity?.let { toastz(it,resp?.message.toString()) }
                 }
             }
             override fun onFailure(call: Call<BookingLabsResponse>, t: Throwable) {
-                toastz(requireActivity(),t.message.toString())
+                activity?.let { toastz(it, t.message.toString()) }
             }
         })
     }

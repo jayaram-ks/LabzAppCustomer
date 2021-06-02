@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical">
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="?android:attr/actionBarSize"
@@ -18,12 +17,6 @@
         android:textSize="20sp"
         android:textStyle="bold"
         android:layout_marginBottom="10dp"/>
-
-
-
-
-
-
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -37,8 +30,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -54,8 +45,6 @@
             android:shadowDy="2"
             android:shadowRadius="2"
             />
-
-
             <RelativeLayout android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -97,9 +86,7 @@
                         android:textSize="9sp"
                         />
                 </LinearLayout>
-
             </RelativeLayout>
-
 
             <TextView
                 android:id="@+id/location_address"
@@ -111,13 +98,9 @@
                 android:paddingHorizontal="10dp"
                 android:textSize="12sp"
                 android:fontFamily="@font/roboto_condensed_regular"
-
                 />
         </LinearLayout>
-
     </androidx.cardview.widget.CardView>
-
-
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -131,8 +114,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -159,7 +140,6 @@
                 android:textSize="16sp"
                 android:gravity="center_horizontal"
                 android:padding="5dp" />
-
             <Button
                 android:id="@+id/button_date_1"
                 android:layout_width="0dp"
@@ -173,11 +153,7 @@
             </LinearLayout>
 
         </LinearLayout>
-
     </androidx.cardview.widget.CardView>
-
-
-
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -193,8 +169,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -221,11 +195,8 @@
                 android:text="No tests selected"
                 android:textColor="@color/white"
                 android:textSize="12sp" />
-
         </LinearLayout>
-
     </androidx.cardview.widget.CardView>
-
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -241,13 +212,12 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:foreground="?android:attr/selectableItemBackground">
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
                 android:background="@color/green"
-                android:paddingVertical="4dp"
+                android:paddingTop="4dp"
                 android:paddingHorizontal="10dp"
                 android:textSize="14sp"
                 android:id="@+id/labtitle"
@@ -257,44 +227,52 @@
                 android:shadowDy="2"
                 android:shadowRadius="2"
                 />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="left|start"
+                android:gravity="top"
                 android:background="@color/green"
                 android:orientation="horizontal"
+                android:paddingStart="10dp"
+                android:paddingEnd="10dp"
+                android:paddingBottom="7dp"
                 >
-
                 <ImageView
+                    android:id="@+id/selected_lablogo"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-
-                    android:src="@drawable/no_image" />
-
+                    android:paddingEnd="5dp"/>
+                <LinearLayout android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
+                    android:gravity="start"
                     android:id="@+id/selected_lab_name"
-                    android:padding="5dp"
                     android:fontFamily="@font/roboto_condensed_regular"
-                    android:text="@string/ayur_anchal_road_sh1_kollam_691532"
+                    android:text="Select a Lab"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:id="@+id/selected_lab_address"
+                    android:fontFamily="@font/roboto_condensed_regular"
                     android:textColor="@color/white"
                     android:textSize="12sp" />
-
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-
     </androidx.cardview.widget.CardView>
-
     <View
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_weight="1" />
-
     <androidx.appcompat.widget.AppCompatButton
-
+        android:id="@+id/continue_book_btn"
         android:layout_width="170dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
@@ -305,5 +283,4 @@
         android:text="@string/_continue"
         android:textAllCaps="false"
         android:textColor="@color/white" />
-
 </LinearLayout>

@@ -106,7 +106,7 @@ class BookingTestsFragment : DialogFragment() {
             override fun onResponse(call: Call<BookingTestsResponse>, response: Response<BookingTestsResponse>) {
                 val resp = response.body()
                 if (resp?.code == 200) {
-                    resp.tests?.let{
+                    resp.tests.let{
                         showTests(it)
                         val testsToSrch = it
                         testmodel = it
@@ -151,7 +151,7 @@ class BookingTestsFragment : DialogFragment() {
                 override fun onSelectionChanged() {
                     val nItems:Int? = tracker?.selection?.size()
 
-                 //   Selection{primary{size=7, entries=[3, 4, 5, 13, 12, 19, 29]}, provisional{size=0, entries=[]}}
+
 Log.d("Tracker--------POST",tracker?.selection.toString())
 
                     for( (index, row) in testlist.withIndex()){
@@ -164,8 +164,6 @@ Log.d("Tracker--------POST",tracker?.selection.toString())
                         }
                     }
 
-
-
                     if(nItems!=null && nItems > 0) {
                         selectedTests = "$nItems tests selected"
                        binding.testNum.text = selectedTests
@@ -176,7 +174,6 @@ Log.d("Tracker--------POST",tracker?.selection.toString())
                     }
                 }
             })
-
 
 
 
@@ -195,8 +192,6 @@ Log.d("Tracker--------POST",tracker?.selection.toString())
             }
         }
 
-
-        Log.d("new ARRAY === ",posArr.toString())
 
 
     }

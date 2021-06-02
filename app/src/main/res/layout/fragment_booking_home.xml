@@ -276,6 +276,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
+                    android:id="@+id/selected_lab_name"
                     android:padding="5dp"
                     android:fontFamily="@font/roboto_condensed_regular"
                     android:text="@string/ayur_anchal_road_sh1_kollam_691532"

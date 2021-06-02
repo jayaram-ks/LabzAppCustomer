@@ -38,12 +38,14 @@ import com.labzapp.customer.storage.SharedPrefManager
 import com.labzapp.customer.utilities.maps.PermissionUtils
 import com.labzapp.customer.utilities.toastz
 import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 class BookingHomeFragment : Fragment() , GoogleMap.OnMyLocationButtonClickListener,
 GoogleMap.OnMyLocationClickListener, OnMapReadyCallback,
@@ -64,13 +66,16 @@ ActivityCompat.OnRequestPermissionsResultCallback{
     val ZOOM_LEVEL = 16f
 
 
-    private var patientLat: Double = 0.0
-    private var patientLong: Double = 0.0
-
     private var _binding: FragmentBookingHomeBinding? = null
     private val binding get() = _binding!!
 
     private var bookedTestpos: String? = null
+
+    private var tIdArray: MutableList<String> = ArrayList()
+
+    private var bookedLabpos: String? = null
+
+    private var labDataArray: MutableList<String> = ArrayList()
 
     var cal: Calendar = Calendar.getInstance()
 
@@ -139,8 +144,8 @@ ActivityCompat.OnRequestPermissionsResultCallback{
         val mapFragment = childFragmentManager.findFragmentById(R.id.map_book) as SupportMapFragment?
         mapFragment?.getMapAsync(this)
 
+        //----TESTS POP-UP-----
         binding.reqLabTests.setOnClickListener{
-
             val bundle = Bundle()
             bundle.putString("selcted_tests_pos", bookedTestpos)
             val fragmentTests = BookingTestsFragment()
@@ -155,20 +160,48 @@ ActivityCompat.OnRequestPermissionsResultCallback{
             bookedTestpos =  bundle.getString("sel_pos")
             var bookTestIds: String? = bundle.getString("sel_test_ids")
 
-            val tIdArray: MutableList<String>? = bookTestIds?.let { Json.decodeFromString(it) }
+            tIdArray = bookTestIds?.let { Json.decodeFromString(it) }!!
 
             if (tIdArray != null) {
-                binding.homeTestCount.text = tIdArray.size.toString() + " Tests Selected"
                 if (tIdArray.size > 0) {
-                    fetchMatchingLabs(tIdArray)
+                    binding.homeTestCount.text = tIdArray.size.toString() + " Tests Selected"
+                } else{
+                    binding.homeTestCount.text ="No Tests Selected"
                 }
             }
 
             Log.d("POSITIOnzzzz",bookedTestpos.toString())
             Log.d("testzzzzzzz",bookTestIds.toString())
         }
-
+        //----LABS POPUP-----
         binding.selectedLab.setOnClickListener{
+            val bundle = Bundle()
+            bundle.putString("param1", Json.encodeToString(tIdArray))
+            bundle.putString("param2", binding.usrLat.text.toString())
+            bundle.putString("param3", binding.usrLong.text.toString())
+            bundle.putString("param4", bookedLabpos)
+            val fragmentSelectLab = BookingLabsFragment()
+            fragmentSelectLab.arguments = bundle
+            val transactionlab = childFragmentManager.beginTransaction()
+            transactionlab.addToBackStack(BookingLabsFragment.TAG)
+            fragmentSelectLab.show(transactionlab,BookingLabsFragment.TAG)
+        }
+
+        childFragmentManager.setFragmentResultListener("labKey", this) { key, bundle ->
+
+            bookedLabpos =  bundle.getString("selpos")
+            var bookLabstring: String? = bundle.getString("sel_labs")
+
+            labDataArray = bookLabstring?.let { Json.decodeFromString(it) }!!
+
+
+
+            if (labDataArray.size > 0) {
+                binding.selectedLabName.text =labDataArray.toString()
+            } else{
+                binding.selectedLabName.text ="No Lab Selected"
+            }
+
 
         }
 
@@ -284,7 +317,6 @@ ActivityCompat.OnRequestPermissionsResultCallback{
                             val list = geocoder.getFromLocation(lastKnownLocation!!.latitude, lastKnownLocation!!.longitude, 1)
                             val fullAddress = list[0].getAddressLine(0)
                             binding.locationAddress.text = fullAddress
-
                         }
                         else {
                             binding.locationAddress.text = "Location not available."
@@ -320,7 +352,6 @@ ActivityCompat.OnRequestPermissionsResultCallback{
             override fun onMarkerDrag(marker: Marker) {
                 //val p = marker.position
             }
-
             override fun onMarkerDragEnd(marker: Marker) {
                 val actualLatLng: LatLng = marker.position
                 map?.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(actualLatLng!!.latitude, actualLatLng!!.longitude), ZOOM_LEVEL))
@@ -344,6 +375,7 @@ ActivityCompat.OnRequestPermissionsResultCallback{
             gpsStatus()
         }
     }
+
     private fun gpsStatus() {
         intentgps = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
         startActivity(intentgps);
@@ -353,31 +385,6 @@ ActivityCompat.OnRequestPermissionsResultCallback{
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    private fun fetchMatchingLabs(selectedTests: MutableList<String>){
-        val authTokn: String? = "Bearer "+ SharedPrefManager.getInstance(requireContext()).authKey
-        val apiTokn: String? = SharedPrefManager.getInstance(requireContext()).apiToken
-        val apiService = ServiceBuilder.buildService(ApiService::class.java)
-        val requestCall = apiService.getLabsHavingTests(authTokn, apiTokn,patientLat,patientLong,selectedTests)
-
-        requestCall.enqueue(object : Callback<BookingLabsResponse> {
-            override fun onResponse(call: Call<BookingLabsResponse>, response: Response<BookingLabsResponse>) {
-                val resp = response.body()
-                if (resp?.code == 200) {
-                    resp.let {
-                        if (!isAdded) return
-                            Log.d("--sads",it.labswithtest.toString())
-                    }
-
-                } else {
-                    toastz(requireActivity(),resp?.message.toString())
-                }
-            }
-            override fun onFailure(call: Call<BookingLabsResponse>, t: Throwable) {
-                toastz(requireActivity(),t.message.toString())
-            }
-        })
     }
 
     private fun fillMyData(){
@@ -393,8 +400,7 @@ ActivityCompat.OnRequestPermissionsResultCallback{
                         if (!isAdded) return
                         val clatitude  = it.customer.latitude!!
                         val clongitude   = it.customer.longitude!!
-                        patientLat = clatitude
-                        patientLong = clongitude
+
                         map.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(clatitude,clongitude), ZOOM_LEVEL))
                         map.addMarker(MarkerOptions().draggable(true).position( LatLng(clatitude,clongitude)).icon(
                             BitmapDescriptorFactory.defaultMarker(

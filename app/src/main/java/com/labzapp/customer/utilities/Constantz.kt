@@ -10,6 +10,7 @@ const val GET_BANNERS = "banners"
 const val GET_TESTS_AVAILABLE = "labstestdetails"
 const val GET_ALL_TESTS = "tests"
 const val GET_LABS_HAVING_TESTS = "labswithtest"
+const val GET_LABTEST_RATE = "labtestswithrates"
 
 
 

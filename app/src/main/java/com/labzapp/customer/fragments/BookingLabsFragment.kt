@@ -25,6 +25,7 @@ import com.labzapp.customer.services.ApiService
 import com.labzapp.customer.services.ServiceBuilder
 import com.labzapp.customer.storage.SharedPrefManager
 import com.labzapp.customer.utilities.toastz
+import com.labzapp.customer.utilities.toastzs
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -146,6 +147,12 @@ class BookingLabsFragment : DialogFragment() {
 
     private fun showLabs(lablist: ArrayList<Labswithtest>) {
         if (!isAdded) return
+
+        if(lablist.size < 1 ){
+            context?.let { toastzs(it,"No labs available based on your tests selection and location") }
+            return
+        }
+
         val layoutManager = LinearLayoutManager(activity)
         layoutManager.orientation = LinearLayoutManager.VERTICAL
         binding.selectLabsRecycler.layoutManager = layoutManager

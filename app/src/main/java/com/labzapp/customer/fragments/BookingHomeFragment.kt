@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -30,6 +31,7 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.labzapp.customer.R
 import com.labzapp.customer.databinding.FragmentBookingHomeBinding
+import com.labzapp.customer.models.BookingDataTransfer
 import com.labzapp.customer.models.Labswithtest
 import com.labzapp.customer.models.ProfileResponse
 import com.labzapp.customer.services.ApiService
@@ -136,6 +138,7 @@ ActivityCompat.OnRequestPermissionsResultCallback{
 
         //----TESTS POP-UP-----
         binding.reqLabTests.setOnClickListener{
+            clearLabdata()
             val bundle = Bundle()
             bundle.putString("selcted_tests_pos", bookedTestpos)
             val fragmentTests = BookingTestsFragment()
@@ -143,6 +146,7 @@ ActivityCompat.OnRequestPermissionsResultCallback{
             val transaction2 = childFragmentManager.beginTransaction()
             transaction2.addToBackStack(BookingTestsFragment.TAG)
             fragmentTests.show(transaction2,BookingTestsFragment.TAG)
+
         }
 
         childFragmentManager.setFragmentResultListener("testKey", this) { key, bundle ->
@@ -195,7 +199,7 @@ ActivityCompat.OnRequestPermissionsResultCallback{
                     Picasso.with(context).load(labDataArray[0].thumbnail).fit().centerCrop()
                         .into(binding.selectedLablogo)
                 }else {
-                    Picasso.with(context).load(R.drawable.squarelogo).fit().centerCrop()
+                    Picasso.with(context).load(R.drawable.no_lab).fit().centerCrop()
                         .into(binding.selectedLablogo)
                 }
             } else{
@@ -203,14 +207,12 @@ ActivityCompat.OnRequestPermissionsResultCallback{
             }
         }
 
-        ///SUBMIT COLLECTED DATA
+        ///SUBMIT COLLECTED DATA TO PREVIEW
         binding.continueBookBtn.setOnClickListener {
             val patbookfor =  bookingFor
             val patlatitude = binding.usrLat.text.toString()
             val patlongitude = binding.usrLong.text.toString()
             val patprefdate = binding.textViewDate1.text.toString()
-            val pattests = bookTestIds
-            val patlab = bookLabstring
 
             var errmessage: String? = null
             if(patbookfor == null)
@@ -239,8 +241,19 @@ ActivityCompat.OnRequestPermissionsResultCallback{
                 return@setOnClickListener
             } else{
 
+                var arrayBookData = BookingDataTransfer(patbookfor.toString(),patlatitude,patlongitude,patprefdate,tIdArray,labDataArray)
 
-                activity?.let { toastz(it,patbookfor+"\n"+patlatitude+"\n"+patlongitude+"\n"+patprefdate+"\n"+pattests+"\n"+patlab) }
+                val bundle = Bundle()
+                bundle.putString("param1", Json.encodeToString(arrayBookData))
+                val prevFragment = BookingPreviewFragment()
+                prevFragment.arguments = bundle
+                val transPrev = parentFragmentManager.beginTransaction()
+                transPrev.replace(R.id.booking_container,prevFragment)
+               // transPrev.addToBackStack(BookingPreviewFragment.TAG)
+                transPrev.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                transPrev.commit()
+
+                //activity?.let { toastz(it,patbookfor+"\n"+patlatitude+"\n"+patlongitude+"\n"+patprefdate+"\n"+pattests+"\n"+patlab) }
 
             }
 

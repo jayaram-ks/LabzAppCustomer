@@ -72,7 +72,7 @@ class LabsAdapter( val context: Context,private val labs: List<LabData>) : Recyc
                         .into(binding.labLogo)
                 }else
                 {
-                    Picasso.with(context).load(R.drawable.squarelogo).fit().centerCrop()
+                    Picasso.with(context).load(R.drawable.no_lab).fit().centerCrop()
                         .into(binding.labLogo)
                 }
 

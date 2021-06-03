@@ -78,4 +78,13 @@ interface ApiService {
         @Query("test_ids[]") items:MutableList<String>,
     ):Call<BookingLabsResponse>
 
+    @GET(GET_LABTEST_RATE)
+    fun getTestRatesforLab(
+        @Header("Authorization") authtoken: String?,
+        @Query("api_token") apitoken: String?,
+        @Query("lab_id") labid: String?,
+        @Query("test_ids[]") items:MutableList<String>,
+    ):Call<BookingTestRatesResponse>
+
+
 }

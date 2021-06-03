@@ -37,6 +37,8 @@ android {
     }
 }
 
+apply plugin: 'kotlinx-serialization'
+
 dependencies {
 
     //noinspection GradleDependency

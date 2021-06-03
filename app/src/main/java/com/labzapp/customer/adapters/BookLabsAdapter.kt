@@ -54,7 +54,7 @@ class BookLabsAdapter( val context: Context,private val labs: ArrayList<Labswith
                     Picasso.with(context).load(it.thumbnail).fit().centerCrop()
                         .into(binding.labzLogo)
                 }else {
-                    Picasso.with(context).load(R.drawable.squarelogo).fit().centerCrop()
+                    Picasso.with(context).load(R.drawable.no_lab).fit().centerCrop()
                         .into(binding.labzLogo)
                 }
 

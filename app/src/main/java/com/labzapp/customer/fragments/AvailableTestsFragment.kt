@@ -67,7 +67,7 @@ class AvailableTestsFragment : Fragment() {
                 .into(binding.lablogo)
         }else
         {
-            Picasso.with(context).load(R.drawable.squarelogo).fit().centerCrop()
+            Picasso.with(context).load(R.drawable.no_lab).fit().centerCrop()
                 .into(binding.lablogo)
         }
         fetchTests()

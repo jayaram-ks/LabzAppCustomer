@@ -11,10 +11,9 @@ const val GET_TESTS_AVAILABLE = "labstestdetails"
 const val GET_ALL_TESTS = "tests"
 const val GET_LABS_HAVING_TESTS = "labswithtest"
 const val GET_LABTEST_RATE = "labtestswithrates"
-
-
+const val SUBMIT_BOOKING = "submitbooking"
+const val REGISTER_CALL = "callregistration"
 
 val districtz = linkedMapOf(0 to "--Select District--", 1 to "Thiruvananthapuram", 2 to "Kollam", 3 to "Pathanamthitta", 4 to "Alappuzha", 5 to "Kottayam", 6 to "Idukki",
     7 to "Ernakulam", 8 to "Thrissur", 9 to "Palakkad", 10 to "Malappuram", 11 to "Kozhikode", 12 to "Wayanad", 13 to "Kannur", 14 to "Kasaragod")
-
 val genderz = linkedMapOf(1 to "Male", 2 to "Female")

@@ -272,6 +272,64 @@
         </LinearLayout>
      </androidx.cardview.widget.CardView>
 
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="15dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="15dp">
+
+        <LinearLayout android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingVertical="8dp"
+            android:paddingHorizontal="5dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textColor="@color/textBlack"
+                android:text="No need to pay now"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="12sp"
+                android:textColor="@color/textBlack"
+                android:text="Payment will be collected at the time of sample collection"/>
+            <TextView
+                android:id="@+id/sample_pref_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="12sp"
+                android:layout_marginBottom="5dp"
+                android:textColor="@color/textBlack"
+                android:text=""/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/golden"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:gravity="center"
+                android:letterSpacing=".01"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:textColor="@color/textBlack"
+                android:text="You will get an intimation when the reports are ready"/>
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
     <View
         android:layout_width="0dp"
         android:layout_height="0dp"

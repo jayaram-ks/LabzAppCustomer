@@ -149,7 +149,7 @@ class BookingLabsFragment : DialogFragment() {
         if (!isAdded) return
 
         if(lablist.size < 1 ){
-            context?.let { toastzs(it,"No labs available based on your tests selection and location") }
+            context?.let { toastz(it,"No labs available based on your tests selection and location") }
             return
         }
 
@@ -197,7 +197,6 @@ class BookingLabsFragment : DialogFragment() {
                 }
             })
 
-
         if(param4 != null) {
             oldLabspos = param4?.let { Json.decodeFromString(it) }!!
             ltracker?.setItemsSelected(oldLabspos,true)
@@ -212,7 +211,6 @@ class BookingLabsFragment : DialogFragment() {
                 posArr.remove(index.toLong())
             }
         }
-
 
     }
 

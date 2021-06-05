@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_gravity="center|center"
+    android:layout_height="wrap_content">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:textColor="@color/white"
+        android:background="@color/green"
+        android:paddingVertical="4dp"
+        android:paddingHorizontal="10dp"
+        android:text="Booking Successfull"
+        android:textSize="17sp"
+        android:shadowColor = "@color/txtShadow"
+        android:shadowDx = "2"
+        android:shadowDy = "2"
+        android:shadowRadius = "2"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:id="@+id/bookid_message"
+        android:gravity="center_horizontal"
+        android:padding="20dp"
+        android:text="@string/_3_tests_selected_click_to_add_more_or_remove"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/textBlack"
+        android:textSize="15sp" />
+
+        <Button
+            android:layout_width="120dp"
+            android:layout_gravity="center_horizontal"
+            android:id="@+id/closedialg"
+            android:layout_marginBottom="20dp"
+            android:layout_height="50dp"
+            android:textAllCaps="false"
+            android:text="OK"
+            android:textSize="12sp"
+            app:backgroundTint="@color/orange" />
+
+</LinearLayout>

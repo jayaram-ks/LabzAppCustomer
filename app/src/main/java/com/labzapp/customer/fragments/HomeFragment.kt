@@ -12,6 +12,7 @@ import com.labzapp.customer.adapters.BannersAdapter
 import com.labzapp.customer.databinding.FragmentHomeBinding
 import com.labzapp.customer.models.BannerData
 import com.labzapp.customer.models.BannerResponse
+import com.labzapp.customer.models.MakeCallResponse
 import com.labzapp.customer.services.ApiService
 import com.labzapp.customer.services.ServiceBuilder
 import com.labzapp.customer.storage.SharedPrefManager
@@ -58,6 +59,10 @@ class HomeFragment : Fragment() {
             val intent = Intent(requireActivity(), BookingActivity::class.java)
             startActivity(intent)
         }
+
+        binding.reqACall.setOnClickListener {
+            requestACall()
+        }
     }
 
     private fun fetchBanners() {
@@ -101,6 +106,31 @@ class HomeFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun requestACall() {
+
+        val authTokn: String? = "Bearer "+ SharedPrefManager.getInstance(requireContext()).authKey
+        val apiTokn: String? = SharedPrefManager.getInstance(requireContext()).apiToken
+
+        val apiService = ServiceBuilder.buildService(ApiService::class.java)
+        val requestCall = apiService.registerCustomerCall(authTokn, apiTokn)
+        requestCall.enqueue(object : Callback<MakeCallResponse> {
+
+            override fun onResponse(call: Call<MakeCallResponse>, response: Response<MakeCallResponse>) {
+                val resp = response.body()
+                if (resp?.code == 200) {
+                    activity?.let { toastz(it,resp?.message.toString()) }
+                    binding.reqACall.isClickable = false
+                } else {
+                    activity?.let { toastz(it,resp?.message.toString()) }
+                }
+            }
+
+            override fun onFailure(call: Call<MakeCallResponse>, t: Throwable) {
+                activity?.let { toastz(it,t.message.toString()) }
+            }
+        })
     }
 
     companion object {

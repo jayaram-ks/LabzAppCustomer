@@ -42,6 +42,7 @@ import com.labzapp.customer.utilities.maps.PermissionUtils.PermissionDeniedDialo
 import com.labzapp.customer.utilities.maps.PermissionUtils.isPermissionGranted
 import com.labzapp.customer.utilities.maps.PermissionUtils.requestPermission
 import com.labzapp.customer.utilities.toastz
+import com.labzapp.customer.utilities.toastzs
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -65,7 +66,7 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
     val DEF_LOCATION = LatLng(9.9312, 76.2673)
     val ZOOM_LEVEL = 16f
 
-    private var custGender: Int = 0
+    private var custGender: Int = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -152,11 +153,25 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
 
 
         binding.updateProfile.setOnClickListener{
+
             val custLatitude = binding.usrLat.text.toString()
             val custLongitude = binding.usrLong.text.toString()
             val custAge = binding.custAge.text.toString()
             val custAddrs = binding.custAddress.text.toString()
             val custDistrict = districtid.toString()
+
+            var errmsg: String? = null
+
+            if((custLatitude == "") or (custLongitude == "" ))
+            {
+                errmsg = "Please select a location from map"
+                binding.textVwLocation.performClick()
+            }
+
+            if(errmsg != null){
+                toastzs(context,errmsg)
+                return@setOnClickListener
+            }
 
             val authTokn: String? = "Bearer "+SharedPrefManager.getInstance(this).authKey
             val apiTokn: String? = SharedPrefManager.getInstance(this).apiToken
@@ -227,7 +242,7 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
         enableMyLocation()
         with(map.uiSettings) {
             isZoomControlsEnabled = true
-            isMyLocationButtonEnabled = false
+            isMyLocationButtonEnabled = true
         }
         getDeviceLocation()
     }
@@ -371,9 +386,10 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
             //toastz(this,"GPS is Enabled")
         } else {
             toastz(this,"Please enable Location service(GPS) on your Device")
+            gpsStatus()
         }
     }
-    fun gpsStatus(view: View) {
+    fun gpsStatus() {
         intentgps = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
         startActivity(intentgps);
     }

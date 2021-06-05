@@ -14,6 +14,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.DatePicker
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -111,6 +112,7 @@ ActivityCompat.OnRequestPermissionsResultCallback{
         }
 
         // create an OnDateSetListener
+
         val dateSetListener =
             DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
                 cal.set(Calendar.YEAR, year)
@@ -121,16 +123,19 @@ ActivityCompat.OnRequestPermissionsResultCallback{
 
         updateDateInView()
 
+        val datedialog =  DatePickerDialog(
+            requireContext(),
+            dateSetListener,
+            // set DatePickerDialog to point to today's date when it loads up
+            cal.get(Calendar.YEAR),
+            cal.get(Calendar.MONTH),
+            cal.get(Calendar.DAY_OF_MONTH)
+        )
+        datedialog.datePicker.minDate = cal.timeInMillis
+
         // when you click on the button, show DatePickerDialog that is set with OnDateSetListener
         binding.buttonDate1.setOnClickListener {
-            DatePickerDialog(
-                requireContext(),
-                dateSetListener,
-                // set DatePickerDialog to point to today's date when it loads up
-                cal.get(Calendar.YEAR),
-                cal.get(Calendar.MONTH),
-                cal.get(Calendar.DAY_OF_MONTH)
-            ).show()
+            datedialog.show()
         }
 
         val mapFragment = childFragmentManager.findFragmentById(R.id.map_book) as SupportMapFragment?
@@ -252,11 +257,7 @@ ActivityCompat.OnRequestPermissionsResultCallback{
                // transPrev.addToBackStack(BookingPreviewFragment.TAG)
                 transPrev.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 transPrev.commit()
-
-                //activity?.let { toastz(it,patbookfor+"\n"+patlatitude+"\n"+patlongitude+"\n"+patprefdate+"\n"+pattests+"\n"+patlab) }
-
             }
-
         }
     }
 

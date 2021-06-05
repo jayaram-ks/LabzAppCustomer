@@ -22,7 +22,6 @@ interface ApiService {
         @Field("customer_mobile_otp") otp : String
     ): Call<OtpResponse>
 
-
     @GET(USER_PROFILE)
     fun getProfile(
         @Header("Authorization") authtoken: String?,
@@ -86,5 +85,31 @@ interface ApiService {
         @Query("test_ids[]") items:MutableList<String>,
     ):Call<BookingTestRatesResponse>
 
+    @FormUrlEncoded
+    @POST(SUBMIT_BOOKING)
+    fun submitBooking(
+        @Header("Authorization") authtoken: String?,
+        @Field("api_token") apitoken: String?,
+        @Field("patient_name") pname: String?,
+        @Field("patient_mobile") pmobile: String?,
+        @Field("age") patntage: String?,
+        @Field("gender") pgender: String?,
+        @Field("patient_address") paddress: String?,
+        @Field("patient_pincode") pincode: String?,
+        @Field("patient_latitude") plat: String?,
+        @Field("patient_longitude") plong: String?,
+        @Field("patient_district") pdist: String?,
+        @Field("test_ids[]") testids:MutableList<String>,
+        @Field("lab_id") labid: String?,
+        @Field("paper_bill_needed") paperbill: String?,
+        @Field("pref_date") prefdate: String?,
+        ): Call<SubmitBookingResponse>
+
+    @FormUrlEncoded
+    @POST(REGISTER_CALL)
+    fun registerCustomerCall(
+        @Header("Authorization") authtoken: String?,
+        @Field("api_token") apitoken: String?,
+    ):Call<MakeCallResponse>
 
 }

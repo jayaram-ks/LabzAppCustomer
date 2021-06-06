@@ -7,3 +7,5 @@ data class SaveCustomerResponse(val code : Int, val status : String, val message
 data class SubmitBookingResponse(val code : Int, val status : String, val message : Any?)
 
 data class MakeCallResponse(val code : Int, val status : String, val message : Any?)
+
+data class EditProfileResponse(val code : Int, val status : String, val message : Any?)

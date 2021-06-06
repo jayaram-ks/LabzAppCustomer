@@ -1,5 +1,6 @@
 package com.labzapp.customer.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,6 +11,7 @@ import com.labzapp.customer.fragments.HomeFragment
 import com.labzapp.customer.fragments.LabsFragment
 import com.labzapp.customer.fragments.ProfileFragment
 import com.labzapp.customer.fragments.ReportsFragment
+import com.labzapp.customer.storage.SharedPrefManager
 
 class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
@@ -44,4 +46,13 @@ class HomeActivity : AppCompatActivity() {
             setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
             commit()
         }
+
+    override fun onStart() {
+        super.onStart()
+        if(!SharedPrefManager.getInstance(this).isLoggedIn){
+            val intent = Intent(applicationContext, RegisterActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+        }
+    }
 }

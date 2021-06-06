@@ -14,18 +14,15 @@ import androidx.recyclerview.selection.SelectionTracker
 import androidx.recyclerview.selection.StableIdKeyProvider
 import androidx.recyclerview.selection.StorageStrategy
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.gson.Gson
 import com.labzapp.customer.adapters.BookLabsAdapter
 import com.labzapp.customer.adapters.MyLabsLookup
 import com.labzapp.customer.databinding.FragmentBookingLabsBinding
 import com.labzapp.customer.models.BookingLabsResponse
 import com.labzapp.customer.models.Labswithtest
-import com.labzapp.customer.models.Tests
 import com.labzapp.customer.services.ApiService
 import com.labzapp.customer.services.ServiceBuilder
 import com.labzapp.customer.storage.SharedPrefManager
 import com.labzapp.customer.utilities.toastz
-import com.labzapp.customer.utilities.toastzs
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -42,12 +39,10 @@ class BookingLabsFragment : DialogFragment() {
 
     private var _binding: FragmentBookingLabsBinding? = null
     private val binding get() = _binding!!
-
     private var param1: String? = null
     private var param2: String? = null
     private var param3: String? = null
     private var param4: String? = null
-
     private var patientLat : Double = 0.00
     private var patientLong : Double = 0.00
     private var testArr: MutableList<String> = ArrayList()
@@ -68,7 +63,6 @@ class BookingLabsFragment : DialogFragment() {
         testArr = param1?.let { Json.decodeFromString(it) }!!
         patientLat = param2?.toDouble() ?: 0.00
         patientLong = param3?.toDouble() ?:0.00
-
     }
 
     override fun onCreateView(
@@ -91,26 +85,18 @@ class BookingLabsFragment : DialogFragment() {
 
         binding.labzContinue.setOnClickListener{
             dialog?.dismiss()
-
             val selPositions = Json.encodeToString(posArr)
-
-           var labarray: ArrayList<Labswithtest> = ArrayList()
-
+            var labarray: ArrayList<Labswithtest> = ArrayList()
             for( (index, row) in labmodel.withIndex()){
                 for(t in posArr){
                     if(index.toLong() == t){
                         labarray.add(Labswithtest(row.lab_id,row.name,row.address,row.thumbnail,row.test_amount,row.service_charge,row.total_to_pay))
                     }
                 }
-
             }
-
             val labString: String = Json.encodeToString(labarray)
-
             setFragmentResult("labKey", bundleOf("selpos" to selPositions, "sel_labs" to labString ))
-
         }
-
     }
 
     override fun onStart() {
@@ -187,12 +173,9 @@ class BookingLabsFragment : DialogFragment() {
                             posArr.remove(index.toLong())
                         }
                     }
-
                     if(nItems!=null && nItems > 0) {
 
-
                     } else {
-
                     }
                 }
             })
@@ -211,7 +194,6 @@ class BookingLabsFragment : DialogFragment() {
                 posArr.remove(index.toLong())
             }
         }
-
     }
 
     companion object {

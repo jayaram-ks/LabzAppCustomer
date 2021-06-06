@@ -368,8 +368,13 @@ ActivityCompat.OnRequestPermissionsResultCallback{
 
                             val geocoder = Geocoder(requireContext())
                             val list = geocoder.getFromLocation(lastKnownLocation!!.latitude, lastKnownLocation!!.longitude, 1)
-                            val fullAddress = list[0].getAddressLine(0)
+                            var fullAddress = "Location address not Available"
+                            if(list.size > 0)
+                            {
+                                fullAddress = list[0].getAddressLine(0)
+                            }
                             binding.locationAddress.text = fullAddress
+
                         }
                         else {
                             binding.locationAddress.text = "Location not available."
@@ -410,11 +415,14 @@ ActivityCompat.OnRequestPermissionsResultCallback{
                 map?.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(actualLatLng!!.latitude, actualLatLng!!.longitude), ZOOM_LEVEL))
                 val geocoder = Geocoder(requireActivity())
                 val list = geocoder.getFromLocation(actualLatLng!!.latitude, actualLatLng!!.longitude, 1)
-                val fullAddress = list[0].getAddressLine(0)
                 binding.usrLat.text = actualLatLng!!.latitude.toString()
                 binding.usrLong.text = actualLatLng!!.longitude.toString()
+                var fullAddress = "Location address not Available"
+                if(list.size > 0)
+                {
+                    fullAddress = list[0].getAddressLine(0)
+                }
                 binding.locationAddress.text = fullAddress
-                //on map drag force reset and reselect new  labs based on location
                 clearLabdata()
             }
         })
@@ -464,7 +472,7 @@ ActivityCompat.OnRequestPermissionsResultCallback{
                         if (!isAdded) return
                         val clatitude  = it.customer.latitude!!
                         val clongitude   = it.customer.longitude!!
-
+                        map.clear()
                         map.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(clatitude,clongitude), ZOOM_LEVEL))
                         map.addMarker(MarkerOptions().draggable(true).position( LatLng(clatitude,clongitude)).icon(
                             BitmapDescriptorFactory.defaultMarker(
@@ -473,7 +481,11 @@ ActivityCompat.OnRequestPermissionsResultCallback{
 
                         val geocoder = Geocoder(requireContext())
                         val list = geocoder.getFromLocation(clatitude, clongitude, 1)
-                        val fullAddress = list[0].getAddressLine(0)
+                        var fullAddress = "Location address not Available"
+                        if(list.size > 0)
+                        {
+                            fullAddress = list[0].getAddressLine(0)
+                        }
                         binding.locationAddress.text = fullAddress
                         binding.usrLat.text = clatitude.toString()
                         binding.usrLong.text = clongitude.toString()

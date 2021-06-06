@@ -112,4 +112,19 @@ interface ApiService {
         @Field("api_token") apitoken: String?,
     ):Call<MakeCallResponse>
 
+    @FormUrlEncoded
+    @POST(EDIT_LOC_PROFILE)
+    fun updateProfile(
+        @Header("Authorization") authtoken: String?,
+        @Field("api_token") apitoken: String?,
+        @Field("customer_name") cname: String?,
+        @Field("age") custage: String?,
+        @Field("gender") cgender: String?,
+        @Field("customer_address") caddress: String?,
+        @Field("customer_pincode") cpincode: String?,
+        @Field("customer_district") cdist: String?,
+        @Field("customer_latitude") clat: String?,
+        @Field("customer_longitude") clong: String?,
+    ): Call<EditProfileResponse>
+
 }

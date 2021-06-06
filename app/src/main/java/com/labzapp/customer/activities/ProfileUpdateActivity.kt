@@ -63,10 +63,11 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
     private var districtid = 0
     private lateinit var map: GoogleMap
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
-    val DEF_LOCATION = LatLng(9.9312, 76.2673)
+    private val DEF_LOCATION = LatLng(9.3475, 76.7638)
     val ZOOM_LEVEL = 16f
 
     private var custGender: Int = 1
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,8 +81,7 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(this)
 
-        lastKnownLocation?.latitude  = DEF_LOCATION.latitude
-        lastKnownLocation?.longitude = DEF_LOCATION.longitude
+
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
 
@@ -104,6 +104,13 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
                     map.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(lastKnownLocation!!.latitude, lastKnownLocation!!.longitude), ZOOM_LEVEL))
                     map.addMarker(MarkerOptions().draggable(true).position( LatLng(lastKnownLocation!!.latitude,
                     lastKnownLocation!!.longitude)))
+                    setMarkerDragListener(map)
+                }
+                else
+                {
+
+                    map.animateCamera(CameraUpdateFactory.newLatLngZoom(DEF_LOCATION, 7f))
+                    map.addMarker(MarkerOptions().draggable(true).position( DEF_LOCATION))
                     setMarkerDragListener(map)
                 }
 
@@ -329,7 +336,11 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
 
                             val geocoder = Geocoder(this)
                             val list = geocoder.getFromLocation(lastKnownLocation!!.latitude, lastKnownLocation!!.longitude, 1)
-                            val fullAddress = list[0].getAddressLine(0)
+                            var fullAddress = "Location address not Available"
+                            if(list.size > 0)
+                            {
+                                fullAddress = list[0].getAddressLine(0)
+                            }
                             binding.locationAddress.text = fullAddress
 
                         }
@@ -371,9 +382,13 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
                 map?.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(actualLatLng!!.latitude, actualLatLng!!.longitude), ZOOM_LEVEL))
                 val geocoder = Geocoder(this@ProfileUpdateActivity)
                 val list = geocoder.getFromLocation(actualLatLng!!.latitude, actualLatLng!!.longitude, 1)
-                val fullAddress = list[0].getAddressLine(0)
                 binding.usrLat.text = actualLatLng!!.latitude.toString()
                 binding.usrLong.text = actualLatLng!!.longitude.toString()
+                var fullAddress = "Location address not Available"
+                if(list.size > 0)
+                {
+                    fullAddress = list[0].getAddressLine(0)
+                }
                 binding.locationAddress.text = fullAddress
             }
         })

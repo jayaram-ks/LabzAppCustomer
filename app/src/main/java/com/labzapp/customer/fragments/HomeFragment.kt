@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.lifecycleScope
+import com.labzapp.customer.R
 import com.labzapp.customer.activities.BookingActivity
 import com.labzapp.customer.adapters.BannersAdapter
 import com.labzapp.customer.databinding.FragmentHomeBinding
@@ -62,6 +64,15 @@ class HomeFragment : Fragment() {
 
         binding.reqACall.setOnClickListener {
             requestACall()
+        }
+
+        binding.viewLabshome.setOnClickListener {
+            val succFragment = LabsFragment()
+            val trans = parentFragmentManager.beginTransaction()
+            trans.replace(R.id.frame_container,succFragment)
+            trans.addToBackStack(null)
+            trans.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+            trans.commit()
         }
     }
 

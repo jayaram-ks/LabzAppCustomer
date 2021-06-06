@@ -26,6 +26,7 @@ class ProfileFragment : Fragment() {
     private val homeF = HomeFragment()
     private val aboutF = AboutFragment()
     private val myprofileF = MyprofileFragment()
+    private val editmyprofileF = EditMyProfileFragment()
     private val mybookingsF = MybookingsFragment()
     private val myresultsF = MyresultsFragment()
     private val termsF  = TermsFragment()
@@ -51,6 +52,7 @@ class ProfileFragment : Fragment() {
         binding.goHome.setOnClickListener { view -> menuClick(view) }
         binding.goAbout.setOnClickListener { view -> menuClick(view) }
         binding.goProfile.setOnClickListener { view -> menuClick(view) }
+        binding.goeditProfile.setOnClickListener { view -> menuClick(view) }
         binding.goBookings.setOnClickListener { view -> menuClick(view) }
         binding.goResults.setOnClickListener { view -> menuClick(view) }
         binding.goTerms.setOnClickListener { view -> menuClick(view) }
@@ -63,6 +65,7 @@ class ProfileFragment : Fragment() {
             binding.goHome.id -> { setCurrentFragment(homeF) }
             binding.goAbout.id -> { setCurrentFragment(aboutF) }
             binding.goProfile.id -> { setCurrentFragment(myprofileF) }
+            binding.goeditProfile.id -> { setCurrentFragment(editmyprofileF) }
             binding.goBookings.id -> { setCurrentFragment(mybookingsF) }
             binding.goResults.id -> { setCurrentFragment(myresultsF) }
             binding.goTerms.id -> { setCurrentFragment(termsF) }

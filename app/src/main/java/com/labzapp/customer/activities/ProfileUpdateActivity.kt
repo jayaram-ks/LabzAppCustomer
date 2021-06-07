@@ -41,8 +41,8 @@ import com.labzapp.customer.utilities.districtz
 import com.labzapp.customer.utilities.maps.PermissionUtils.PermissionDeniedDialog.Companion.newInstance
 import com.labzapp.customer.utilities.maps.PermissionUtils.isPermissionGranted
 import com.labzapp.customer.utilities.maps.PermissionUtils.requestPermission
+import com.labzapp.customer.utilities.snackze
 import com.labzapp.customer.utilities.toastz
-import com.labzapp.customer.utilities.toastzs
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -149,12 +149,12 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
                    }
 
                 } else {
-                    toastz(this@ProfileUpdateActivity,resp?.message.toString())
+                    snackze(view, resp?.message.toString(), binding.custAge.id)
                 }
             }
 
             override fun onFailure(call: Call<ProfileResponse>, t: Throwable) {
-                toastz(this@ProfileUpdateActivity,t.message.toString())
+                snackze(view, t.message.toString(), binding.custAge.id)
             }
         })
 
@@ -176,7 +176,7 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
             }
 
             if(errmsg != null){
-                toastzs(context,errmsg)
+                snackze(view,errmsg, binding.custAge.id)
                 return@setOnClickListener
             }
 
@@ -196,12 +196,12 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
                         startActivity(intent)
 
                     } else {
-                        toastz(this@ProfileUpdateActivity,resp?.message.toString())
+                        snackze(view,resp?.message.toString(), binding.custAge.id)
                     }
                 }
 
                 override fun onFailure(call: Call<SaveCustomerResponse>, t: Throwable) {
-                    toastz(this@ProfileUpdateActivity,t.message.toString())
+                    snackze(view,t.message.toString(), binding.custAge.id)
                 }
             })
 
@@ -398,7 +398,7 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
         locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         gpsStatus = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
         if (gpsStatus) {
-            //toastz(this,"GPS is Enabled")
+
         } else {
             toastz(this,"Please enable Location service(GPS) on your Device")
             gpsStatus()

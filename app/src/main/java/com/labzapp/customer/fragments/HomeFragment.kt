@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.lifecycleScope
@@ -18,7 +19,8 @@ import com.labzapp.customer.models.MakeCallResponse
 import com.labzapp.customer.services.ApiService
 import com.labzapp.customer.services.ServiceBuilder
 import com.labzapp.customer.storage.SharedPrefManager
-import com.labzapp.customer.utilities.toastz
+import com.labzapp.customer.utilities.snackze
+import com.labzapp.customer.utilities.snackzsucc
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import retrofit2.Call
@@ -57,15 +59,16 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         fetchBanners()
+        //----BOOK A TEST----
         binding.bookNewTest.setOnClickListener{
             val intent = Intent(requireActivity(), BookingActivity::class.java)
             startActivity(intent)
         }
-
+        //----REQUEST A CALL---
         binding.reqACall.setOnClickListener {
             requestACall()
         }
-
+        //----VIEW LABS----
         binding.viewLabshome.setOnClickListener {
             val succFragment = LabsFragment()
             val trans = parentFragmentManager.beginTransaction()
@@ -73,6 +76,12 @@ class HomeFragment : Fragment() {
             trans.addToBackStack(null)
             trans.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
             trans.commit()
+        }
+        //----UPLOAD PRESCRIPTION----
+        binding.uploadPrescription.setOnClickListener {
+            val frUploadtyp = PrescFileTypeDialog()
+            val transPresc = childFragmentManager.beginTransaction()
+            frUploadtyp.show(transPresc,null)
         }
     }
 
@@ -90,12 +99,12 @@ class HomeFragment : Fragment() {
                 if (resp?.code == 200) {
                     showBanners(resp.banner)
                 } else {
-                    activity?.let { toastz(it,resp?.message.toString()) }
+                    view?.let{snackze(it,resp?.message.toString(),binding.viewLabshome.id) }
                 }
             }
 
             override fun onFailure(call: Call<BannerResponse>, t: Throwable) {
-                activity?.let { toastz(it,t.message.toString()) }
+                view?.let{snackze(it,t.message.toString(),binding.viewLabshome.id) }
             }
         })
     }
@@ -103,6 +112,8 @@ class HomeFragment : Fragment() {
     private fun showBanners(bannerlist: List<BannerData>)
     {
         if (!isAdded) return
+        val progBar: ProgressBar = binding.progressBar
+        progBar.visibility = View.GONE
         binding.viewPager2.adapter = BannersAdapter(requireContext(),bannerlist)
 
         lifecycleScope.launch {
@@ -131,15 +142,15 @@ class HomeFragment : Fragment() {
             override fun onResponse(call: Call<MakeCallResponse>, response: Response<MakeCallResponse>) {
                 val resp = response.body()
                 if (resp?.code == 200) {
-                    activity?.let { toastz(it,resp?.message.toString()) }
+                    view?.let{mss -> snackzsucc(mss,resp?.message.toString(),binding.viewLabshome.id) }
                     binding.reqACall.isClickable = false
                 } else {
-                    activity?.let { toastz(it,resp?.message.toString()) }
+                    view?.let{snackze(it,resp?.message.toString(),binding.viewLabshome.id) }
                 }
             }
 
             override fun onFailure(call: Call<MakeCallResponse>, t: Throwable) {
-                activity?.let { toastz(it,t.message.toString()) }
+                view?.let{snackze(it,t.message.toString(),binding.viewLabshome.id) }
             }
         })
     }

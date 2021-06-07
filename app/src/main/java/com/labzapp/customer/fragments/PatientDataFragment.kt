@@ -9,19 +9,16 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.RadioButton
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.Fragment
 import com.labzapp.customer.R
 import com.labzapp.customer.databinding.FragmentPatientDataBinding
 import com.labzapp.customer.models.BookingDataTransfer
 import com.labzapp.customer.models.Labswithtest
-import com.labzapp.customer.models.ProfileResponse
 import com.labzapp.customer.models.SubmitBookingResponse
 import com.labzapp.customer.services.ApiService
 import com.labzapp.customer.services.ServiceBuilder
 import com.labzapp.customer.storage.SharedPrefManager
 import com.labzapp.customer.utilities.districtz
-import com.labzapp.customer.utilities.toastz
-import com.labzapp.customer.utilities.toastzs
+import com.labzapp.customer.utilities.snackze
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import retrofit2.Call
@@ -164,19 +161,20 @@ class PatientDataFragment : DialogFragment(), AdapterView.OnItemSelectedListener
                         fragmentbookFinish.show(transFinish,BookFinishDialogFragment.TAG)
 
                     } else {
-                        activity?.let {err -> toastz(err,resp?.message.toString()) }
+
+                        view?.let{err -> snackze(err,resp?.message.toString(),binding.patAddress.id) }
                         binding.submitOthrBookingBtn.isClickable = true
                     }
                 }
 
                 override fun onFailure(call: Call<SubmitBookingResponse>, t: Throwable) {
-                    activity?.let { err-> toastz(err,t.message.toString()) }
+                    view?.let{err -> snackze(err,t.message.toString(),binding.patAddress.id) }
                 }
             })
         }
         else
         {
-            activity?.let { err -> toastzs(err,"Please fill all Patient Details Fields") }
+            view?.let{err -> snackze(err,"Please fill all Patient Details Fields",binding.patAddress.id) }
             binding.submitOthrBookingBtn.isClickable = true
         }
     }

@@ -13,6 +13,7 @@ import com.labzapp.customer.models.ProfileResponse
 import com.labzapp.customer.services.ApiService
 import com.labzapp.customer.services.ServiceBuilder
 import com.labzapp.customer.storage.SharedPrefManager
+import com.labzapp.customer.utilities.snackze
 import com.labzapp.customer.utilities.toastz
 import retrofit2.Call
 import retrofit2.Callback
@@ -100,12 +101,14 @@ class ProfileFragment : Fragment() {
                     }
 
                 } else {
-                    toastz(requireActivity(),resp?.message.toString())
+
+                    view?.let{ snackze(it,resp?.message.toString(),binding.goeditProfile.id) }
                 }
             }
 
             override fun onFailure(call: Call<ProfileResponse>, t: Throwable) {
-                toastz(requireActivity(),t.message.toString())
+
+                view?.let{ snackze(it,t.message.toString(),binding.goeditProfile.id) }
             }
         })
     }

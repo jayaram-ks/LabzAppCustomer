@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.core.os.bundleOf
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.DialogFragment
@@ -23,7 +24,7 @@ import com.labzapp.customer.models.Tests
 import com.labzapp.customer.services.ApiService
 import com.labzapp.customer.services.ServiceBuilder
 import com.labzapp.customer.storage.SharedPrefManager
-import com.labzapp.customer.utilities.toastz
+import com.labzapp.customer.utilities.snackze
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -116,11 +117,12 @@ class BookingTestsFragment : DialogFragment() {
                         }
                     }
                 } else {
-                    activity?.let { toastz(it,resp?.message.toString()) }
+
+                    view?.let{err -> snackze(err,resp?.message.toString(),binding.testContinue.id) }
                 }
             }
             override fun onFailure(call: Call<BookingTestsResponse>, t: Throwable) {
-                activity?.let { toastz(it,t.message.toString()) }
+                view?.let{err -> snackze(err,t.message.toString(),binding.testContinue.id) }
             }
         })
     }
@@ -128,6 +130,10 @@ class BookingTestsFragment : DialogFragment() {
 
     private fun showTests(testlist: ArrayList<Tests>) {
         if (!isAdded) return
+
+        val progBar: ProgressBar = binding.progressBar
+        progBar.visibility = View.GONE
+
         val layoutManager = LinearLayoutManager(activity)
         layoutManager.orientation = LinearLayoutManager.VERTICAL
         binding.alltestsRecycler.layoutManager = layoutManager

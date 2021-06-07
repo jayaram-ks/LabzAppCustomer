@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:textColor="@color/white"
+        android:background="@color/green"
+        android:paddingHorizontal="15dp"
+        android:textSize="17sp"
+        android:text="Upload Prescription Image From"
+        android:textStyle="bold"
+        />
+
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="40dp"
+        android:paddingVertical="40dp"
+
+        android:gravity="center">
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="200dp"
+            android:id="@+id/pres_gallery"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingHorizontal="20dp"
+            android:layout_height="80dp"
+            app:drawableLeftCompat="@drawable/ic_gallery"
+            android:textColor="@color/white"
+            android:text="Photo Gallery"
+            android:backgroundTint="@color/green"
+            android:textAllCaps="false"
+            android:textSize="15sp"
+            android:letterSpacing=".01"
+            android:drawablePadding="10dp"
+
+           />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="200dp"
+            android:id="@+id/pres_camera"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textAllCaps="false"
+            android:paddingHorizontal="20dp"
+            android:layout_height="80dp"
+            android:backgroundTint="@color/green"
+            app:drawableLeftCompat="@drawable/ic_camera"
+            android:text="Camera"
+            android:textSize="15sp"
+            android:letterSpacing=".01"
+            android:drawablePadding="10dp"
+
+            />
+    </LinearLayout>
+
+
+</LinearLayout>

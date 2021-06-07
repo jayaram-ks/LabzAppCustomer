@@ -16,11 +16,17 @@
     <color name="textBlack">#DD222222</color>
     <color name="title_black">#BB222222</color>
     <color name="orange">#FFFF6600</color>
+    <color name="snackbar_color">#FFC46210</color>
+
     <color name="green">#FF3CBFB8</color>
     <color name="gray5">#FF555555</color>
     <color name="gray">#FFDAD8D8</color>
     <color name="violet">#FF000E88</color>
     <color name="red">#F33535</color>
+    <color name="success_green">#FF28A745</color>
+    <color name="fail_red">#FFDC3545</color>
+
+
     <color name="txtShadow">#DD000000</color>
     <color name="green_border">#553CBFB8</color>
     <color name="transp_black">#19000000</color>

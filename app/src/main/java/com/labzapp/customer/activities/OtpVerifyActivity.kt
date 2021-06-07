@@ -9,7 +9,7 @@ import com.labzapp.customer.models.OtpResponse
 import com.labzapp.customer.services.ApiService
 import com.labzapp.customer.services.ServiceBuilder
 import com.labzapp.customer.storage.SharedPrefManager
-import com.labzapp.customer.utilities.toastz
+import com.labzapp.customer.utilities.snackze
 import com.poovam.pinedittextfield.PinField
 import retrofit2.Call
 import retrofit2.Callback
@@ -48,8 +48,6 @@ class OtpVerifyActivity : AppCompatActivity() {
             override fun onResponse(call: Call<OtpResponse>, response: Response<OtpResponse>) {
                 val resp = response.body()
                 if (resp?.code == 200) {
-
-                    toastz(this@OtpVerifyActivity,resp?.message.toString())
                     val api_tokn = resp.api_token.toString()
                     val auth_ky  = resp.auth_key.toString()
                     SharedPrefManager.getInstance(applicationContext).saveCredentials(api_tokn,auth_ky)
@@ -58,12 +56,12 @@ class OtpVerifyActivity : AppCompatActivity() {
                     startActivity(intent)
 
                 } else {
-                    toastz(this@OtpVerifyActivity,resp?.message.toString())
+                    snackze(binding.root, resp?.message.toString(), binding.cancelOtp.id)
                 }
             }
 
             override fun onFailure(call: Call<OtpResponse>, t: Throwable) {
-                toastz(this@OtpVerifyActivity,t.message.toString())
+                snackze(binding.root, t.message.toString(), binding.cancelOtp.id)
             }
 
         })

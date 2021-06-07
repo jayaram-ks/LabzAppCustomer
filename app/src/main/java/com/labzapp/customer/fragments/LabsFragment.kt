@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.labzapp.customer.adapters.LabsAdapter
@@ -13,7 +14,7 @@ import com.labzapp.customer.models.LabsResponse
 import com.labzapp.customer.services.ApiService
 import com.labzapp.customer.services.ServiceBuilder
 import com.labzapp.customer.storage.SharedPrefManager
-import com.labzapp.customer.utilities.toastz
+import com.labzapp.customer.utilities.snackze
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -65,12 +66,12 @@ class LabsFragment : Fragment() {
                     }
 
                 } else {
-                    activity?.let { toastz(it,resp?.message.toString()) }
+                    view?.let{ snackze(it,resp?.message.toString(),binding.progressBar.id) }
                 }
             }
 
             override fun onFailure(call: Call<LabsResponse>, t: Throwable) {
-                activity?.let { toastz(it,t.message.toString()) }
+                view?.let{ snackze(it,t.message.toString(),binding.progressBar.id) }
             }
         })
     }
@@ -78,6 +79,8 @@ class LabsFragment : Fragment() {
     private fun showLabs(lablist: List<LabData>)
     {
         if (!isAdded) return
+        val progBar: ProgressBar = binding.progressBar
+        progBar.visibility = View.GONE
         val layoutManager = LinearLayoutManager(activity)
         layoutManager.orientation = LinearLayoutManager.VERTICAL
         binding.labsRecyclerview.layoutManager = layoutManager

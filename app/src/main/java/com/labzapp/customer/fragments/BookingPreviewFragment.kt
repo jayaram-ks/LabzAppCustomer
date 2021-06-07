@@ -1,40 +1,27 @@
 package com.labzapp.customer.fragments
 
-import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.labzapp.customer.R
-import com.labzapp.customer.adapters.LabsAdapter
 import com.labzapp.customer.adapters.TestRateAdapter
 import com.labzapp.customer.databinding.FragmentBookingPreviewBinding
 import com.labzapp.customer.models.*
 import com.labzapp.customer.services.ApiService
 import com.labzapp.customer.services.ServiceBuilder
 import com.labzapp.customer.storage.SharedPrefManager
-import com.labzapp.customer.utilities.districtz
-import com.labzapp.customer.utilities.genderz
-import com.labzapp.customer.utilities.toastz
-import com.labzapp.customer.utilities.toastzs
+import com.labzapp.customer.utilities.snackze
 import com.squareup.picasso.Picasso
 import kotlinx.serialization.decodeFromString
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
-import java.util.*
-import kotlin.collections.ArrayList
 
 
 private const val ARG_PARAM1 = "param1"
@@ -141,11 +128,11 @@ class BookingPreviewFragment : Fragment() {
                 if (resp?.code == 200) {
                     showTestsWithRates(resp.labtestsrates)
                 } else {
-                    activity?.let { toastz(it,resp?.message.toString()) }
+                    view?.let{err -> snackze(err,resp?.message.toString(),binding.previewTestsRecycler.id) }
                 }
             }
             override fun onFailure(call: Call<BookingTestRatesResponse>, t: Throwable) {
-                activity?.let { toastz(it, t.message.toString()) }
+                view?.let{err -> snackze(err,t.message.toString(),binding.previewTestsRecycler.id) }
             }
         })
     }
@@ -190,27 +177,28 @@ class BookingPreviewFragment : Fragment() {
                                                 fragmentbookFinish.show(transFinish,BookFinishDialogFragment.TAG)
 
                                             } else {
-                                                activity?.let {err -> toastz(err,resp?.message.toString()) }
+                                                view?.let{err -> snackze(err,resp?.message.toString(),binding.previewTestsRecycler.id) }
                                             }
                                         }
 
                                         override fun onFailure(call: Call<SubmitBookingResponse>, t: Throwable) {
-                                            activity?.let { err-> toastz(err,t.message.toString()) }
+                                            view?.let{err -> snackze(err,t.message.toString(),binding.previewTestsRecycler.id) }
                                         }
                                     })
                         }
                         else
                         {
-                            activity?.let { err -> toastz(err,"There was an error processing your request") }
+
+                            view?.let{err -> snackze(err,"There was an error processing your request",binding.previewTestsRecycler.id) }
                         }
                     }
 
                 } else {
-                    activity?.let { toastz(it,resp?.message.toString()) }
+                    view?.let{errz -> snackze(errz,resp?.message.toString(),binding.previewTestsRecycler.id) }
                 }
             }
             override fun onFailure(call: Call<ProfileResponse>, t: Throwable) {
-                activity?.let { toastz(it,t.message.toString()) }
+                view?.let{snackze(it,t.message.toString(),binding.previewTestsRecycler.id) }
             }
         })
     }

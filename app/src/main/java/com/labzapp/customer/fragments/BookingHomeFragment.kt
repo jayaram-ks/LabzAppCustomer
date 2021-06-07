@@ -14,12 +14,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.DatePicker
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -39,9 +39,10 @@ import com.labzapp.customer.services.ApiService
 import com.labzapp.customer.services.ServiceBuilder
 import com.labzapp.customer.storage.SharedPrefManager
 import com.labzapp.customer.utilities.maps.PermissionUtils
-import com.labzapp.customer.utilities.toastz
-import com.labzapp.customer.utilities.toastzs
+import com.labzapp.customer.utilities.snackze
 import com.squareup.picasso.Picasso
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -93,19 +94,18 @@ ActivityCompat.OnRequestPermissionsResultCallback{
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        //---SELF / OTHER pop up
         val frgment = SelfDialogFragment()
-        frgment.isCancelable = false
+        frgment.isCancelable = true
         val transaction = childFragmentManager.beginTransaction()
-        transaction.addToBackStack(null)
         frgment.show(transaction, SelfDialogFragment.TAG)
 
         childFragmentManager.setFragmentResultListener("bookingKey", this) { key, bundle ->
             bookingFor = bundle.getString("booking_for")
             if(bookingFor == "1"){ //self
-                checkGpsStatus()
+                //checkGpsStatus()
                 fillMyData()
-            }else{
+            }else if(bookingFor == "2"){
                 checkGpsStatus()
                 getDeviceLocation()
             }
@@ -172,16 +172,20 @@ ActivityCompat.OnRequestPermissionsResultCallback{
         }
         //----LABS POPUP-----
         binding.selectedLab.setOnClickListener{
-
+            val selatitude = binding.usrLat.text.toString()
+            val selongitude = binding.usrLong.text.toString()
             if(tIdArray.size < 1){
-                toastzs(requireContext(),"Please select required tests")
+                snackze(requireView(),"Please select required tests",binding.homeTestCount.id)
+                return@setOnClickListener
+            }else if((selatitude == "") or (selongitude == "")){
+                snackze(requireView(),"Please enable Location and select Location to search for nearest labs",binding.homeTestCount.id)
                 return@setOnClickListener
             }
 
             val bundle = Bundle()
             bundle.putString("param1", Json.encodeToString(tIdArray))
-            bundle.putString("param2", binding.usrLat.text.toString())
-            bundle.putString("param3", binding.usrLong.text.toString())
+            bundle.putString("param2", selatitude)
+            bundle.putString("param3", selongitude)
             bundle.putString("param4", bookedLabpos)
             val fragmentSelectLab = BookingLabsFragment()
             fragmentSelectLab.arguments = bundle
@@ -242,7 +246,7 @@ ActivityCompat.OnRequestPermissionsResultCallback{
             }
 
             if(errmessage != null) {
-                toastzs(requireContext(),errmessage.toString())
+                snackze(requireView(),errmessage.toString(),binding.continueBookBtn.id)
                 return@setOnClickListener
             } else{
 
@@ -338,6 +342,15 @@ ActivityCompat.OnRequestPermissionsResultCallback{
             showMissingPermissionError()
             permissionDenied = false
         }
+        if(bookingFor == "2")
+        {
+            lifecycleScope.launch {
+                delay(3000)
+                checkGpsStatus()
+                getDeviceLocation()
+            }
+        }
+
     }
 
     /**
@@ -441,10 +454,13 @@ ActivityCompat.OnRequestPermissionsResultCallback{
         locationManager = context?.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         gpsStatus = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
         if (gpsStatus) {
-            //toastz(this,"GPS is Enabled")
+
         } else {
-            toastz(requireContext(),"Please enable Location service(GPS) on your Device")
-            gpsStatus()
+            snackze(requireView(),"Please enable Location service(GPS) on your Device",binding.homeTestCount.id)
+            lifecycleScope.launch {
+                delay(2000)
+                gpsStatus()
+            }
         }
     }
 
@@ -492,11 +508,11 @@ ActivityCompat.OnRequestPermissionsResultCallback{
                     }
 
                 } else {
-                    activity?.let { toastz(it,resp?.message.toString()) }
+                    view?.let{ snackze(it,resp?.message.toString(),binding.homeTestCount.id)}
                 }
             }
             override fun onFailure(call: Call<ProfileResponse>, t: Throwable) {
-                activity?.let { toastz(it,t?.message.toString()) }
+                view?.let{ snackze(it,t.message.toString(),binding.homeTestCount.id)}
             }
         })
     }

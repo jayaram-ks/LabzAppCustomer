@@ -37,8 +37,8 @@ import com.labzapp.customer.services.ServiceBuilder
 import com.labzapp.customer.storage.SharedPrefManager
 import com.labzapp.customer.utilities.districtz
 import com.labzapp.customer.utilities.maps.PermissionUtils
-import com.labzapp.customer.utilities.toastz
-import com.labzapp.customer.utilities.toastzs
+import com.labzapp.customer.utilities.snackze
+import com.labzapp.customer.utilities.snackzsucc
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -194,11 +194,11 @@ class EditMyProfileFragment : Fragment(), AdapterView.OnItemSelectedListener, Go
                     }
 
                 } else {
-                    toastz(requireActivity(),resp?.message.toString())
+                    view?.let{ snackze(it,resp?.message.toString(),binding.myName.id)}
                 }
             }
             override fun onFailure(call: Call<ProfileResponse>, t: Throwable) {
-                toastz(requireActivity(),t.message.toString())
+                view?.let{ snackze(it,t.message.toString(),binding.myName.id)}
             }
         })
     }
@@ -227,25 +227,25 @@ class EditMyProfileFragment : Fragment(), AdapterView.OnItemSelectedListener, Go
                 override fun onResponse(call: Call<EditProfileResponse>, response: Response<EditProfileResponse>) {
                     val resp = response.body()
                     if (resp?.code == 200) {
-                        activity?.let {mss -> toastz(mss,resp?.message.toString()) }
+                        view?.let{mss -> snackzsucc(mss,resp?.message.toString(),binding.myName.id) }
                         val succFragment = MyprofileFragment()
                         val trans = parentFragmentManager.beginTransaction()
                         trans.replace(R.id.frame_container,succFragment)
                         trans.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                         trans.commit()
                     } else {
-                        activity?.let {err -> toastz(err,resp?.message.toString()) }
+                        view?.let{err -> snackze(err,resp?.message.toString(),binding.myName.id) }
                         binding.updateProfileBtn.isClickable = true
                     }
                 }
                 override fun onFailure(call: Call<EditProfileResponse>, t: Throwable) {
-                    activity?.let { err-> toastz(err,t.message.toString()) }
+                    view?.let{err -> snackze(err,t.message.toString(),binding.myName.id) }
                 }
             })
         }
         else
         {
-            activity?.let { err -> toastzs(err,"Please fill all Patient Details Fields") }
+            view?.let{err -> snackze(err,"Please fill all Patient Details Fields",binding.myName.id) }
             binding.updateProfileBtn.isClickable = true
         }
     }

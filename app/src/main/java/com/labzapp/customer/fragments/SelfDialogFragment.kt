@@ -1,6 +1,8 @@
 package com.labzapp.customer.fragments
 
 import android.app.Dialog
+import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +10,9 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
+import com.labzapp.customer.activities.BookingActivity
+import com.labzapp.customer.activities.HomeActivity
+import com.labzapp.customer.activities.ProfileUpdateActivity
 import com.labzapp.customer.databinding.FragmentSelfDialogBinding
 
 
@@ -35,6 +40,7 @@ class SelfDialogFragment : DialogFragment() {
     /** The system calls this only when creating the layout in a dialog. */
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState)
+        dialog.setCanceledOnTouchOutside(false)
         return dialog
     }
 
@@ -53,6 +59,15 @@ class SelfDialogFragment : DialogFragment() {
             setFragmentResult("bookingKey", bundleOf("booking_for" to forSelf))
         }
     }
+
+
+    override fun onCancel(dialog: DialogInterface) {
+        super.onCancel(dialog)
+        val intent = Intent(requireActivity(), HomeActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

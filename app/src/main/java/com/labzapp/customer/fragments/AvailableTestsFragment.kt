@@ -4,20 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.labzapp.customer.R
 import com.labzapp.customer.adapters.AvailTestsAdapter
-import com.labzapp.customer.adapters.LabsAdapter
-import com.labzapp.customer.databinding.AvailTestListItemBinding
 import com.labzapp.customer.databinding.FragmentAvailableTestsBinding
 import com.labzapp.customer.models.AvailTestResponse
 import com.labzapp.customer.models.Laballtests
 import com.labzapp.customer.services.ApiService
 import com.labzapp.customer.services.ServiceBuilder
 import com.labzapp.customer.storage.SharedPrefManager
-import com.labzapp.customer.utilities.toastz
+import com.labzapp.customer.utilities.snackze
 import com.squareup.picasso.Picasso
 import retrofit2.Call
 import retrofit2.Callback
@@ -91,17 +90,20 @@ class AvailableTestsFragment : Fragment() {
                         showTests(it)
                     }
                 } else {
-                    activity?.let { toastz(it,resp?.message.toString()) }
+
+                    view?.let{ snackze(it,resp?.message.toString(),binding.availtestsRecycler.id) }
                 }
             }
             override fun onFailure(call: Call<AvailTestResponse>, t: Throwable) {
-                activity?.let { toastz(it,t.message.toString()) }
+                view?.let{ snackze(it,t.message.toString(),binding.availtestsRecycler.id) }
             }
         })
     }
 
     private fun showTests(testlist: ArrayList<Laballtests>) {
         if (!isAdded) return
+        val progBar: ProgressBar = binding.progressBar
+        progBar.visibility = View.GONE
         val layoutManager = LinearLayoutManager(activity)
         layoutManager.orientation = LinearLayoutManager.VERTICAL
         binding.availtestsRecycler.layoutManager = layoutManager

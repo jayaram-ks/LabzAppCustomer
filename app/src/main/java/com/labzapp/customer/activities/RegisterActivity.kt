@@ -13,7 +13,7 @@ import com.labzapp.customer.services.ServiceBuilder
 import com.labzapp.customer.storage.SharedPrefManager
 import com.labzapp.customer.utilities.network.ConnectionType
 import com.labzapp.customer.utilities.network.NetworkMonitorUtil
-import com.labzapp.customer.utilities.toastz
+import com.labzapp.customer.utilities.snackze
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -43,7 +43,7 @@ class RegisterActivity : AppCompatActivity() {
                         }
                     }
                     false -> {
-                        toastz(this,"No Network Connection")
+                        snackze(view, "No Network Connection", binding.fullName.id)
                     }
                 }
             }
@@ -72,12 +72,12 @@ class RegisterActivity : AppCompatActivity() {
                     startActivity(intent)
 
                 } else {
-                    toastz(this@RegisterActivity,resp?.message.toString())
+                    snackze(binding.root, resp?.message.toString(), binding.fullName.id)
                 }
             }
 
             override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
-                toastz(this@RegisterActivity,t.message.toString())
+                snackze(binding.root, t.message.toString(), binding.fullName.id)
             }
         })
     }

@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
@@ -22,7 +23,7 @@ import com.labzapp.customer.models.Labswithtest
 import com.labzapp.customer.services.ApiService
 import com.labzapp.customer.services.ServiceBuilder
 import com.labzapp.customer.storage.SharedPrefManager
-import com.labzapp.customer.utilities.toastz
+import com.labzapp.customer.utilities.snackze
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -63,6 +64,7 @@ class BookingLabsFragment : DialogFragment() {
         testArr = param1?.let { Json.decodeFromString(it) }!!
         patientLat = param2?.toDouble() ?: 0.00
         patientLong = param3?.toDouble() ?:0.00
+
     }
 
     override fun onCreateView(
@@ -122,23 +124,23 @@ class BookingLabsFragment : DialogFragment() {
                     showLabs(resp.labswithtest)
                     labmodel = resp.labswithtest
                 } else {
-                    activity?.let { toastz(it,resp?.message.toString()) }
+                    view?.let{err -> snackze(err,resp?.message.toString(),binding.labzContinue.id) }
                 }
             }
             override fun onFailure(call: Call<BookingLabsResponse>, t: Throwable) {
-                activity?.let { toastz(it, t.message.toString()) }
+                view?.let{err -> snackze(err,t.message.toString(),binding.labzContinue.id) }
             }
         })
     }
 
     private fun showLabs(lablist: ArrayList<Labswithtest>) {
         if (!isAdded) return
-
+        val progBar: ProgressBar = binding.progressBar
+        progBar.visibility = View.GONE
         if(lablist.size < 1 ){
-            context?.let { toastz(it,"No labs available based on your tests selection and location") }
+            view?.let{err -> snackze(err,"No labs available based on your tests selection and location",binding.progressBar.id) }
             return
         }
-
         val layoutManager = LinearLayoutManager(activity)
         layoutManager.orientation = LinearLayoutManager.VERTICAL
         binding.selectLabsRecycler.layoutManager = layoutManager

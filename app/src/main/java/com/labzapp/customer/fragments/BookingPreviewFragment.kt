@@ -56,9 +56,6 @@ class BookingPreviewFragment : Fragment() {
         patlong = bookingDataModel.patlongitude
         patprefdate = bookingDataModel.patprefdate
 
-
-
-
         pattests = bookingDataModel.pattests
         val patlab:ArrayList<Labswithtest> = bookingDataModel.patlab
         selectlabdata = patlab[0]
@@ -157,8 +154,6 @@ class BookingPreviewFragment : Fragment() {
 
                         if ((userName != "") and (userAge != "") and (userPhone != "") and (userGender != "")
                             and (userAddress != "") and (userPincode != "") and (userDistrict != "")) {
-
-
 
                                     val apibookService = ServiceBuilder.buildService(ApiService::class.java)
                                     val bookrequestCall = apibookService.submitBooking(authTokn, apiTokn,userName,userPhone,userAge,userGender,userAddress,

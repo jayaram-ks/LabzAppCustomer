@@ -127,6 +127,16 @@ interface ApiService {
         @Field("customer_longitude") clong: String?,
     ): Call<EditProfileResponse>
 
+    @GET(GET_MYBOOKINGS)
+    fun getMyBook(
+        @Header("Authorization") authtoken: String?,
+        @Query("api_token") apitoken: String?,
+    ):Call<MyBookResponse>
 
-
+    @GET(BOOK_SINGLE_DETAILS)
+    fun getMyBookDetails(
+        @Header("Authorization") authtoken: String?,
+        @Query("api_token") apitoken: String?,
+        @Query("booking_id") bookingid: String?,
+    ):Call<MyBookSingleResponse>
 }

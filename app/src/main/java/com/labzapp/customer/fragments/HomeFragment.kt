@@ -93,7 +93,6 @@ class HomeFragment : Fragment() {
         val apiService = ServiceBuilder.buildService(ApiService::class.java)
         val requestCall = apiService.getBanners(authTokn, apiTokn)
         requestCall.enqueue(object : Callback<BannerResponse> {
-
             override fun onResponse(call: Call<BannerResponse>, response: Response<BannerResponse>) {
                 val resp = response.body()
                 if (resp?.code == 200) {
@@ -134,11 +133,9 @@ class HomeFragment : Fragment() {
 
         val authTokn: String? = "Bearer "+ SharedPrefManager.getInstance(requireContext()).authKey
         val apiTokn: String? = SharedPrefManager.getInstance(requireContext()).apiToken
-
         val apiService = ServiceBuilder.buildService(ApiService::class.java)
         val requestCall = apiService.registerCustomerCall(authTokn, apiTokn)
         requestCall.enqueue(object : Callback<MakeCallResponse> {
-
             override fun onResponse(call: Call<MakeCallResponse>, response: Response<MakeCallResponse>) {
                 val resp = response.body()
                 if (resp?.code == 200) {

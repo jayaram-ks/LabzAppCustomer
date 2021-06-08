@@ -1,0 +1,134 @@
+package com.labzapp.customer.fragments
+
+import android.annotation.SuppressLint
+import android.os.Bundle
+import android.util.Log
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ProgressBar
+import com.labzapp.customer.R
+import com.labzapp.customer.databinding.FragmentMyBookingSingleBinding
+import com.labzapp.customer.databinding.FragmentMyprofileBinding
+import com.labzapp.customer.databinding.FragmentProfileBinding
+import com.labzapp.customer.models.MyBookResponse
+import com.labzapp.customer.models.MyBookSingleResponse
+import com.labzapp.customer.services.ApiService
+import com.labzapp.customer.services.ServiceBuilder
+import com.labzapp.customer.storage.SharedPrefManager
+import com.labzapp.customer.utilities.districtz
+import com.labzapp.customer.utilities.genderz
+import com.labzapp.customer.utilities.snackze
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.util.*
+
+
+private const val ARG_PARAM1 = "param1"
+private const val ARG_PARAM2 = "param2"
+
+class MyBookingSingle : Fragment() {
+
+    private var _binding: FragmentMyBookingSingleBinding? = null
+    private val binding get() = _binding!!
+    private var param1: String? = null
+    private var param2: String? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            param1 = it.getString(ARG_PARAM1)
+            param2 = it.getString(ARG_PARAM2)
+        }
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentMyBookingSingleBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        fetchBookingDetails()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+    private fun fetchBookingDetails(){
+
+        val authTokn: String? = "Bearer "+ SharedPrefManager.getInstance(requireContext()).authKey
+        val apiTokn: String? = SharedPrefManager.getInstance(requireContext()).apiToken
+
+        val apiService = ServiceBuilder.buildService(ApiService::class.java)
+        val requestCall = apiService.getMyBookDetails(authTokn, apiTokn,param1)
+        requestCall.enqueue(object : Callback<MyBookSingleResponse> {
+            @SuppressLint("SetTextI18n")
+            override fun onResponse(call: Call<MyBookSingleResponse>, response: Response<MyBookSingleResponse>) {
+                val resp = response.body()
+                if (resp?.code == 200) {
+                    if (!isAdded) return
+                    val progBar: ProgressBar = binding.progressBar
+                    val rupee = context?.getString(R.string.rupee)
+                    progBar.visibility = View.GONE
+
+                    resp.booking.let{
+                        binding.patName.text = "Name : "+it.patient_name
+                        binding.patAddress.text = "Address : "+it.patient_address
+                        binding.patAgeGender.text = "Age : "+it.age +"  Gender : " + genderz[it.gender.toInt()]
+                        binding.patPincodeDistrict.text = "Pincode : "+ it.patient_pincode + " District : " + districtz[it.patient_district.toInt()]
+                        binding.patPhone.text = "Phone : "+it.mobile
+
+                        binding.bookId.text = "Booking ID : "+it.id.toString()
+                        binding.bookingDate.text = "Booking Date : "+ it.booking_date
+                        binding.sampleCollDate.text = "Sample Collection Date : "+it.pref_date
+
+                        binding.labAddress.text = "Address : " + it.lab_address
+                        binding.labName.text ="Name : " + it.lab_name
+                        binding.labPinDistrict.text = "Pincode : "+ it.lab_pincode
+
+                        binding.testTotal.text = "Tests Charges : "+ rupee +  it.booking_total
+                        binding.serviceCharges.text = "Service Charge : "+ rupee +  it.service_charge
+                        binding.grandTotal.text = "Grand Total : "+ rupee + it.grand_total
+                    }
+
+                    var teststring:String = ""
+
+                    resp.tests.let{
+                        for( (index, row) in it.withIndex()){
+
+                                teststring += row.test_name +"     "+ rupee +row.booking_test_rate + "\n"
+                        }
+                        binding.testslist.text = teststring
+                    }
+
+                } else {
+                    view?.let{ snackze(it,resp?.message.toString(),binding.progressBar.id) }
+                }
+            }
+
+            override fun onFailure(call: Call<MyBookSingleResponse>, t: Throwable) {
+                view?.let{ snackze(it,t.message.toString(),binding.progressBar.id) }
+            }
+        })
+    }
+
+
+
+    companion object {
+        @JvmStatic
+        fun newInstance(param1: String, param2: String) =
+            MyBookingSingle().apply {
+                arguments = Bundle().apply {
+                    putString(ARG_PARAM1, param1)
+                    putString(ARG_PARAM2, param2)
+                }
+            }
+    }
+}

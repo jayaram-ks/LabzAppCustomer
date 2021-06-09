@@ -2,17 +2,15 @@ package com.labzapp.customer.fragments
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.labzapp.customer.R
+import com.labzapp.customer.adapters.BookTestRateAdapter
 import com.labzapp.customer.databinding.FragmentMyBookingSingleBinding
-import com.labzapp.customer.databinding.FragmentMyprofileBinding
-import com.labzapp.customer.databinding.FragmentProfileBinding
-import com.labzapp.customer.models.MyBookResponse
 import com.labzapp.customer.models.MyBookSingleResponse
 import com.labzapp.customer.services.ApiService
 import com.labzapp.customer.services.ServiceBuilder
@@ -23,7 +21,8 @@ import com.labzapp.customer.utilities.snackze
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.*
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 
 private const val ARG_PARAM1 = "param1"
@@ -75,7 +74,7 @@ class MyBookingSingle : Fragment() {
                 if (resp?.code == 200) {
                     if (!isAdded) return
                     val progBar: ProgressBar = binding.progressBar
-                    val rupee = context?.getString(R.string.rupee)
+                    val rupee = context?.getString(R.string.rupee) + " "
                     progBar.visibility = View.GONE
 
                     resp.booking.let{
@@ -85,27 +84,33 @@ class MyBookingSingle : Fragment() {
                         binding.patPincodeDistrict.text = "Pincode : "+ it.patient_pincode + " District : " + districtz[it.patient_district.toInt()]
                         binding.patPhone.text = "Phone : "+it.mobile
 
+                        val datFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+
+                        val datb =  LocalDate.parse(it.booking_date , datFormat)
+                        val bookdate = datb.dayOfMonth.toString() +" "+datb.month.toString()+" "+datb.year.toString()
+
+                        val datp =  LocalDate.parse(it.pref_date , datFormat)
+                        val prefdate = datp.dayOfMonth.toString() +" "+datp.month.toString()+" "+datp.year.toString()
+
                         binding.bookId.text = "Booking ID : "+it.id.toString()
-                        binding.bookingDate.text = "Booking Date : "+ it.booking_date
-                        binding.sampleCollDate.text = "Sample Collection Date : "+it.pref_date
+                        binding.bookingDate.text = "Booking Date : "+ bookdate
+                        binding.sampleCollDate.text = "Sample Collection Date : "+prefdate
 
                         binding.labAddress.text = "Address : " + it.lab_address
                         binding.labName.text ="Name : " + it.lab_name
                         binding.labPinDistrict.text = "Pincode : "+ it.lab_pincode
 
-                        binding.testTotal.text = "Tests Charges : "+ rupee +  it.booking_total
-                        binding.serviceCharges.text = "Service Charge : "+ rupee +  it.service_charge
-                        binding.grandTotal.text = "Grand Total : "+ rupee + it.grand_total
+                        binding.testTotal.text = rupee +  it.booking_total
+                        binding.serviceCharges.text = rupee +  it.service_charge
+                        binding.grandTotal.text = rupee + it.grand_total
                     }
 
-                    var teststring:String = ""
 
                     resp.tests.let{
-                        for( (index, row) in it.withIndex()){
-
-                                teststring += row.test_name +"     "+ rupee +row.booking_test_rate + "\n"
-                        }
-                        binding.testslist.text = teststring
+                        val layoutManager = LinearLayoutManager(activity)
+                        layoutManager.orientation = LinearLayoutManager.VERTICAL
+                        binding.testListView.layoutManager = layoutManager
+                        binding.testListView.adapter = BookTestRateAdapter(requireContext(),it)
                     }
 
                 } else {
@@ -132,3 +137,6 @@ class MyBookingSingle : Fragment() {
             }
     }
 }
+
+
+

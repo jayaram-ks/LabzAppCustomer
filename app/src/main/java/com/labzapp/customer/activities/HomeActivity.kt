@@ -26,9 +26,7 @@ class HomeActivity : AppCompatActivity() {
         val labsFragment = LabsFragment()
         val reportsFragment = ReportsFragment()
         val profileFragment = ProfileFragment()
-
-
-
+        
         binding.bottomNavigationView.setOnNavigationItemSelectedListener {
             when(it.itemId){
                 R.id.navhome->setCurrentFragment(homeFragment)

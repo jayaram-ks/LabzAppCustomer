@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/transp_black"
     android:orientation="vertical">
 
     <TextView
@@ -14,22 +12,25 @@
         android:gravity="center|start"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
-        android:text="@string/test_reports"
+        android:text="My Lab Test Reports"
         android:textColor="@color/white"
         android:textSize="20sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_marginBottom="5dp"/>
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="10dp"
-        android:layout_weight="1"
-        android:paddingTop="20dp"
-        app:spanCount="4"
-        tools:listitem="@layout/d16_r1" />
-
+        android:layout_marginHorizontal="8dp"
+        android:id="@+id/myreport_recyclerview"
+        android:layout_height="match_parent"
+        />
 
 </LinearLayout>

@@ -139,4 +139,10 @@ interface ApiService {
         @Query("api_token") apitoken: String?,
         @Query("booking_id") bookingid: String?,
     ):Call<MyBookSingleResponse>
+
+    @GET(GET_MYREPORTS)
+    fun getMyReports(
+        @Header("Authorization") authtoken: String?,
+        @Query("api_token") apitoken: String?,
+    ):Call<MyReportResponse>
 }

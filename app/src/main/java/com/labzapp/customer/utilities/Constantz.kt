@@ -16,7 +16,9 @@ const val REGISTER_CALL = "callregistration"
 const val EDIT_LOC_PROFILE = "editcustomerprofile"
 const val GET_MYBOOKINGS = "mybookings"
 const val BOOK_SINGLE_DETAILS = "bookingdetails"
+const val GET_MYREPORTS = "getmyreports"
 const val PRESC_FILE_UPLOAD = "uploadprescription"
+
 
 val districtz = linkedMapOf(0 to "--Select District--", 1 to "Thiruvananthapuram", 2 to "Kollam", 3 to "Pathanamthitta", 4 to "Alappuzha", 5 to "Kottayam", 6 to "Idukki",
     7 to "Ernakulam", 8 to "Thrissur", 9 to "Palakkad", 10 to "Malappuram", 11 to "Kozhikode", 12 to "Wayanad", 13 to "Kannur", 14 to "Kasaragod")

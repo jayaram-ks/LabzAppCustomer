@@ -29,7 +29,7 @@ class ProfileFragment : Fragment() {
     private val myprofileF = MyprofileFragment()
     private val editmyprofileF = EditMyProfileFragment()
     private val mybookingsF = MybookingsFragment()
-    private val myresultsF = MyresultsFragment()
+    private val myresultsF = ReportsFragment()
     private val termsF  = TermsFragment()
     private val contactF = ContactFragment()
 

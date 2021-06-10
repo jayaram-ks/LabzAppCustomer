@@ -46,9 +46,6 @@ class MyReportAdapter( val context: Context,private val reports: ArrayList<Repor
             report?.let {
                 binding.patientName.text = "Patient : "+ it.patient_name
                 binding.bookLabName.text = "Lab : "+ it.lab_name
-                binding.bookTotal.text = "Grand Total : "+rupee+ it.total_to_pay.toString()
-                binding.bkId.text = "Booking ID : "+it.id
-
                 if(it.report_file == null){
                     binding.downReport.text = "Report not uploaded"
                 }else{
@@ -56,8 +53,10 @@ class MyReportAdapter( val context: Context,private val reports: ArrayList<Repor
                 }
                 val datFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
                 val dat =  LocalDate.parse(it.booking_date , datFormat)
-                val bookdate = dat.dayOfMonth.toString() +" "+dat.month.toString()+" "+dat.year.toString()
-                binding.bookDate.text = "Booking Date : " +bookdate
+                val bookdate = dat.dayOfMonth.toString() +"-"+dat.monthValue.toString()+"-"+dat.year.toString()
+                binding.bookTotal.text = "Grand Total : "+rupee+ it.total_to_pay.toString()
+                binding.bkId.text = "Booking ID : "+it.id + "\nBooked On : $bookdate"
+
             }
             this.currentReport = report
             this.currentPosition = pos

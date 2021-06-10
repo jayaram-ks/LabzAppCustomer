@@ -23,13 +23,9 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.GoogleMap.OnMarkerDragListener
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
-import com.google.android.gms.maps.model.MarkerOptions
 import com.labzapp.customer.R
 import com.labzapp.customer.databinding.ActivityProfileUpdateBinding
 import com.labzapp.customer.models.ProfileResponse
@@ -102,16 +98,13 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
                 map.clear()
                 if (lastKnownLocation != null) {
                     map.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(lastKnownLocation!!.latitude, lastKnownLocation!!.longitude), ZOOM_LEVEL))
-                    map.addMarker(MarkerOptions().draggable(true).position( LatLng(lastKnownLocation!!.latitude,
-                    lastKnownLocation!!.longitude)))
-                    setMarkerDragListener(map)
+                    setCameraIdleListener(map)
                 }
                 else
                 {
 
                     map.animateCamera(CameraUpdateFactory.newLatLngZoom(DEF_LOCATION, 7f))
-                    map.addMarker(MarkerOptions().draggable(true).position( DEF_LOCATION))
-                    setMarkerDragListener(map)
+                    setCameraIdleListener(map)
                 }
 
             } else {
@@ -245,10 +238,11 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
         googleMap.setOnMyLocationButtonClickListener(this)
         googleMap.setOnMyLocationClickListener(this)
 
+
         map.mapType = GoogleMap.MAP_TYPE_HYBRID
         enableMyLocation()
         with(map.uiSettings) {
-            isZoomControlsEnabled = true
+            isZoomControlsEnabled = false
             isMyLocationButtonEnabled = true
         }
         getDeviceLocation()
@@ -351,9 +345,7 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
                             map.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(lastKnownLocation!!.latitude,
                                 lastKnownLocation!!.longitude), ZOOM_LEVEL))
 
-                            map.addMarker(MarkerOptions().draggable(true).position( LatLng(lastKnownLocation!!.latitude,
-                                lastKnownLocation!!.longitude)).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)))
-                            setMarkerDragListener(map)
+                            setCameraIdleListener(map)
                         }
 
                     } else {
@@ -368,18 +360,11 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
         }
     }
 
-    private fun setMarkerDragListener(map: GoogleMap) {
-        map.setOnMarkerDragListener(object : OnMarkerDragListener {
-            override fun onMarkerDragStart(marker: Marker) {
-            }
 
-            override fun onMarkerDrag(marker: Marker) {
-                //val p = marker.position
-            }
-
-            override fun onMarkerDragEnd(marker: Marker) {
-                val actualLatLng: LatLng = marker.position
-                map?.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(actualLatLng!!.latitude, actualLatLng!!.longitude), ZOOM_LEVEL))
+    private fun setCameraIdleListener(map: GoogleMap) {
+        map.setOnCameraIdleListener(object : GoogleMap.OnCameraIdleListener {
+            override fun onCameraIdle() {
+                val actualLatLng: LatLng = map.cameraPosition.target
                 val geocoder = Geocoder(this@ProfileUpdateActivity)
                 val list = geocoder.getFromLocation(actualLatLng!!.latitude, actualLatLng!!.longitude, 1)
                 binding.usrLat.text = actualLatLng!!.latitude.toString()
@@ -391,8 +376,10 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
                 }
                 binding.locationAddress.text = fullAddress
             }
+
         })
     }
+
 
     private fun checkGpsStatus() {
         locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager

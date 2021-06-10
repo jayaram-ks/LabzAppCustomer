@@ -24,10 +24,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
-import com.google.android.gms.maps.model.MarkerOptions
 import com.labzapp.customer.R
 import com.labzapp.customer.databinding.FragmentEditMyProfileBinding
 import com.labzapp.customer.models.EditProfileResponse
@@ -175,11 +172,8 @@ class EditMyProfileFragment : Fragment(), AdapterView.OnItemSelectedListener, Go
                         val clongitude   = it.customer.longitude!!
                         map.clear()
                         map.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(clatitude,clongitude), ZOOM_LEVEL))
-                        map.addMarker(
-                            MarkerOptions().draggable(true).position( LatLng(clatitude,clongitude)).icon(
-                            BitmapDescriptorFactory.defaultMarker(
-                                BitmapDescriptorFactory.HUE_VIOLET)))
-                        setMarkerDragListener(map)
+
+                        setCameraIdleListener(map)
 
                         val geocoder = Geocoder(requireContext())
                         val list = geocoder.getFromLocation(clatitude, clongitude, 1)
@@ -259,7 +253,7 @@ class EditMyProfileFragment : Fragment(), AdapterView.OnItemSelectedListener, Go
         map = googleMap ?: return
         map.mapType = GoogleMap.MAP_TYPE_HYBRID
         with(map.uiSettings) {
-            isZoomControlsEnabled = true
+            isZoomControlsEnabled = false
             isMyLocationButtonEnabled = false
         }
     }
@@ -329,19 +323,10 @@ class EditMyProfileFragment : Fragment(), AdapterView.OnItemSelectedListener, Go
         PermissionUtils.PermissionDeniedDialog.newInstance(true).show(childFragmentManager, "dialog")
     }
 
-
-    private fun setMarkerDragListener(map: GoogleMap) {
-        map.setOnMarkerDragListener(object : GoogleMap.OnMarkerDragListener {
-            override fun onMarkerDragStart(marker: Marker) {
-            }
-
-            override fun onMarkerDrag(marker: Marker) {
-                //val p = marker.position
-            }
-            override fun onMarkerDragEnd(marker: Marker) {
-
-                val actualLatLng: LatLng = marker.position
-                map?.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(actualLatLng!!.latitude, actualLatLng!!.longitude), ZOOM_LEVEL))
+    private fun setCameraIdleListener(map: GoogleMap) {
+        map.setOnCameraIdleListener(object : GoogleMap.OnCameraIdleListener {
+            override fun onCameraIdle() {
+                val actualLatLng: LatLng = map.cameraPosition.target
                 val geocoder = Geocoder(requireActivity())
                 val list = geocoder.getFromLocation(actualLatLng!!.latitude, actualLatLng!!.longitude, 1)
                 binding.usrLat.text = actualLatLng!!.latitude.toString()
@@ -352,9 +337,8 @@ class EditMyProfileFragment : Fragment(), AdapterView.OnItemSelectedListener, Go
                     fullAddress = list[0].getAddressLine(0)
                 }
                 binding.locationAddress.text = fullAddress
-                //on map drag force reset and reselect new  labs based on location
-
             }
+
         })
     }
 

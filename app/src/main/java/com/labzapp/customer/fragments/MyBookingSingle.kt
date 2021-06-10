@@ -88,13 +88,13 @@ class MyBookingSingle : Fragment() {
 
                         val datb =  LocalDate.parse(it.booking_date , datFormat)
                         val bookdate = datb.dayOfMonth.toString() +" "+datb.month.toString()+" "+datb.year.toString()
-
-                        val datp =  LocalDate.parse(it.pref_date , datFormat)
-                        val prefdate = datp.dayOfMonth.toString() +" "+datp.month.toString()+" "+datp.year.toString()
-
+                        if(it.pref_date != null) {
+                            val datp = LocalDate.parse(it.pref_date, datFormat)
+                            val prefdate = datp.dayOfMonth.toString() + " " + datp.month.toString() + " " + datp.year.toString()
+                            binding.sampleCollDate.text = "Sample Collection Date : $prefdate"
+                        }
                         binding.bookId.text = "Booking ID : "+it.id.toString()
-                        binding.bookingDate.text = "Booking Date : "+ bookdate
-                        binding.sampleCollDate.text = "Sample Collection Date : "+prefdate
+                        binding.bookingDate.text = "Booking Date : $bookdate"
 
                         binding.labAddress.text = "Address : " + it.lab_address
                         binding.labName.text ="Name : " + it.lab_name

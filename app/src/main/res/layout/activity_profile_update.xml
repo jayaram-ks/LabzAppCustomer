@@ -91,7 +91,7 @@
                         android:fontFamily="@font/roboto_condensed_regular"/>
                 </LinearLayout>
 
-            <FrameLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -100,7 +100,15 @@
                         class="com.google.android.gms.maps.SupportMapFragment"
                         android:layout_width="match_parent"
                         android:layout_height="180dp" />
-            </FrameLayout>
+
+                <ImageView
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_google_maps"
+                    />
+            </RelativeLayout>
 
 
                 <LinearLayout

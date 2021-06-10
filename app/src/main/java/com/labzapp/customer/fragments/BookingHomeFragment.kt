@@ -26,10 +26,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
-import com.google.android.gms.maps.model.MarkerOptions
 import com.labzapp.customer.R
 import com.labzapp.customer.databinding.FragmentBookingHomeBinding
 import com.labzapp.customer.models.BookingDataTransfer
@@ -280,7 +277,7 @@ ActivityCompat.OnRequestPermissionsResultCallback{
         map.mapType = GoogleMap.MAP_TYPE_HYBRID
         enableMyLocation()
         with(map.uiSettings) {
-            isZoomControlsEnabled = true
+            isZoomControlsEnabled = false
             isMyLocationButtonEnabled = false
         }
        // getDeviceLocation()
@@ -395,12 +392,7 @@ ActivityCompat.OnRequestPermissionsResultCallback{
                         if (lastKnownLocation != null) {
                             map.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(lastKnownLocation!!.latitude,
                                 lastKnownLocation!!.longitude), ZOOM_LEVEL))
-
-                            map.addMarker(MarkerOptions().draggable(true).position( LatLng(lastKnownLocation!!.latitude,
-                                lastKnownLocation!!.longitude)).icon(
-                                BitmapDescriptorFactory.defaultMarker(
-                                    BitmapDescriptorFactory.HUE_AZURE)))
-                            setMarkerDragListener(map)
+                            setCameraIdleListener(map)
                         }
 
                     } else {
@@ -415,17 +407,10 @@ ActivityCompat.OnRequestPermissionsResultCallback{
         }
     }
 
-    private fun setMarkerDragListener(map: GoogleMap) {
-        map.setOnMarkerDragListener(object : GoogleMap.OnMarkerDragListener {
-            override fun onMarkerDragStart(marker: Marker) {
-            }
-
-            override fun onMarkerDrag(marker: Marker) {
-                //val p = marker.position
-            }
-            override fun onMarkerDragEnd(marker: Marker) {
-                val actualLatLng: LatLng = marker.position
-                map?.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(actualLatLng!!.latitude, actualLatLng!!.longitude), ZOOM_LEVEL))
+    private fun setCameraIdleListener(map: GoogleMap) {
+        map.setOnCameraIdleListener(object : GoogleMap.OnCameraIdleListener {
+            override fun onCameraIdle() {
+                val actualLatLng: LatLng = map.cameraPosition.target
                 val geocoder = Geocoder(requireActivity())
                 val list = geocoder.getFromLocation(actualLatLng!!.latitude, actualLatLng!!.longitude, 1)
                 binding.usrLat.text = actualLatLng!!.latitude.toString()
@@ -438,8 +423,11 @@ ActivityCompat.OnRequestPermissionsResultCallback{
                 binding.locationAddress.text = fullAddress
                 clearLabdata()
             }
+
         })
     }
+
+
 
     private fun clearLabdata(){
         bookedLabpos = null
@@ -490,11 +478,7 @@ ActivityCompat.OnRequestPermissionsResultCallback{
                         val clongitude   = it.customer.longitude!!
                         map.clear()
                         map.animateCamera(CameraUpdateFactory.newLatLngZoom(LatLng(clatitude,clongitude), ZOOM_LEVEL))
-                        map.addMarker(MarkerOptions().draggable(true).position( LatLng(clatitude,clongitude)).icon(
-                            BitmapDescriptorFactory.defaultMarker(
-                                BitmapDescriptorFactory.HUE_GREEN)))
-                        setMarkerDragListener(map)
-
+                        setCameraIdleListener(map)
                         val geocoder = Geocoder(requireContext())
                         val list = geocoder.getFromLocation(clatitude, clongitude, 1)
                         var fullAddress = "Location address not Available"

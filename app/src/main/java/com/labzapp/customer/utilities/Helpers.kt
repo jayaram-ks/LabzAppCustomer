@@ -27,5 +27,10 @@ fun snackzsucc(cnxtv: View, messg: String,idz:Int){
     Snackbar.make(cnxtv,messg,Snackbar.LENGTH_LONG).setTextColor(Color.WHITE).setAnchorView(idz).setBackgroundTint(Color.parseColor("#FF228B22")).show()
 }
 
+fun snackzcolor(cnxtv: View, messg: String,idz:Int,colorstring:String,sduration:Int){
+    Snackbar.make(cnxtv,messg,Snackbar.LENGTH_LONG).setTextColor(Color.WHITE).
+    setAnchorView(idz).setBackgroundTint(Color.parseColor(colorstring)).setDuration(sduration).show()
+}
+
 
 

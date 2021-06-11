@@ -26,6 +26,10 @@
     <color name="success_green">#FF28A745</color>
     <color name="fail_red">#FFDC3545</color>
     <color name="maroon">#BBB03060</color>
+    <color name="bluish">#77003580</color>
+    <color name="maroon_border">#77B03060</color>
+    <color name="bluish_border">#22003580</color>
+
 
 
 

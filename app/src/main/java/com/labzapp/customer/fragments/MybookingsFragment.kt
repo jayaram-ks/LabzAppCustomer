@@ -89,13 +89,13 @@ class MybookingsFragment : Fragment() {
 
     private fun showMyBookings(booklist: ArrayList<Bookings>)
     {
+        if (!isAdded) return
         val progBar: ProgressBar = binding.progressBar
         progBar.visibility = View.GONE
         if(booklist.isEmpty()){
             view?.let{er -> snackze(er,"No Bookings Available.",binding.progressBar.id) }
             return
         }
-        if (!isAdded) return
 
         val layoutManager = LinearLayoutManager(activity)
         layoutManager.orientation = LinearLayoutManager.VERTICAL

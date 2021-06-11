@@ -1,5 +1,6 @@
 package com.labzapp.customer.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -57,21 +58,29 @@ class MyBookAdapter( val context: Context,private val bookings: ArrayList<Bookin
             }
         }
 
+        @SuppressLint("SetTextI18n")
         fun setData(booking: Bookings?, pos: Int) {
             booking?.let {
                 binding.patientName.text = "Patient : "+ it.patient_name
                 binding.bookLabName.text = "Lab : "+ it.lab_name
                 binding.bookTotal.text = "Booking ID : "+it.id +"   Grand Total : "+rupee+ it.total_to_pay.toString()
 
-                if(it.report_file == null){
-                    binding.downReport.text = "Report not uploaded"
-                }else{
-                    binding.downReport.text = "Download Report"
-                }
+
                 val datFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
                 val dat =  LocalDate.parse(it.booking_date , datFormat)
                 val bookdate = dat.dayOfMonth.toString() +" "+dat.month.toString()+" "+dat.year.toString()
                 binding.bookDate.text = "Booking Date : " +bookdate
+                var prefdate = ""
+                if(it.pref_date != null) {
+                    val datp = LocalDate.parse(it.pref_date, datFormat)
+                    prefdate = datp.dayOfMonth.toString() + " " + datp.month.toString() + " " + datp.year.toString()
+                }
+
+                if(it.report_file == null){
+                    binding.downReport.text = "Preferred Date : $prefdate\nTest Report : Not uploaded"
+                }else{
+                    binding.downReport.text = "Preferred Date : $prefdate\nTest Report : Uploaded"
+                }
             }
             this.currentBook = booking
             this.currentPosition = pos

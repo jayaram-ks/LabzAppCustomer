@@ -7,10 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.labzapp.customer.R
 import com.labzapp.customer.databinding.ActivityHomeBinding
-import com.labzapp.customer.fragments.HomeFragment
-import com.labzapp.customer.fragments.LabsFragment
-import com.labzapp.customer.fragments.ProfileFragment
-import com.labzapp.customer.fragments.ReportsFragment
+import com.labzapp.customer.fragments.*
 import com.labzapp.customer.storage.SharedPrefManager
 
 class HomeActivity : AppCompatActivity() {
@@ -31,6 +28,7 @@ class HomeActivity : AppCompatActivity() {
             when(it.itemId){
                 R.id.navhome->setCurrentFragment(homeFragment)
                 R.id.navlabs->setCurrentFragment(labsFragment)
+                R.id.navsearch->goToBooking()
                 R.id.navreports->setCurrentFragment(reportsFragment)
                 R.id.navprofile->setCurrentFragment(profileFragment)
             }
@@ -44,6 +42,11 @@ class HomeActivity : AppCompatActivity() {
             setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
             commit()
         }
+
+    private fun goToBooking(){
+        val intent = Intent(this, BookingActivity::class.java)
+        startActivity(intent)
+    }
 
     override fun onStart() {
         super.onStart()

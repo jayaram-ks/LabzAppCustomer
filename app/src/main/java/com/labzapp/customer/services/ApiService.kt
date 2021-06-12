@@ -2,6 +2,8 @@ package com.labzapp.customer.services
 
 import com.labzapp.customer.models.*
 import com.labzapp.customer.utilities.*
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -145,5 +147,14 @@ interface ApiService {
         @Header("Authorization") authtoken: String?,
         @Query("api_token") apitoken: String?,
     ):Call<MyReportResponse>
+
+    @Multipart
+    @POST(PRESC_FILE_UPLOAD)
+    fun uploadPrescription(
+        @Header("Authorization") authtoken : String?,
+        @Part("api_token") apitoken : RequestBody,
+        @Part prescrImage :MultipartBody.Part,
+    ):Call<UploadPresResponse>
+
 
 }

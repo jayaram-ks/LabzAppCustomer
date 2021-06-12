@@ -171,9 +171,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:paddingStart="15dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -190,6 +189,12 @@
                     android:text="@string/view_all" />
 
             </LinearLayout>
+
+            <ImageView
+                android:id="@+id/upload_img"
+                android:scaleType = "centerCrop"
+                android:layout_width = "0dp"
+                android:layout_height = "0dp"/>
 
 
             <RelativeLayout
@@ -208,6 +213,7 @@
 
                     <!-- simple image view -->
                     <ImageView
+                        android:id="@+id/ddrcim"
                         android:scaleType = "centerCrop"
                         android:padding="15dp"
                         android:src = "@drawable/ddrc"

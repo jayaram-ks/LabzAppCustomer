@@ -69,9 +69,8 @@
                     <TextView
                         android:id="@+id/down_report"
                         android:gravity="center_vertical"
-                        android:layout_marginRight="5dp"
+                        android:layout_marginRight="3dp"
                         android:layout_width="0dp"
-                        android:text="@string/_3_tests_selected_click_to_add_more_or_remove"
                         android:layout_height="40dp"
                         android:layout_weight="3"
                         android:textAllCaps="false"

@@ -1,5 +1,6 @@
 package com.labzapp.customer.fragments
 
+import android.location.Geocoder
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -65,6 +66,21 @@ class MyprofileFragment : Fragment() {
                         binding.userDistrict.text = districtz[it.customer.district]
                         binding.userLat.text = it.customer.latitude.toString()
                         binding.userLong.text = it.customer.longitude.toString()
+
+
+                        val geocoder = Geocoder(requireContext())
+                        val list = it.customer.latitude?.let { it1 -> it.customer.longitude?.let { it2 ->
+                            geocoder.getFromLocation(it1,
+                                it2, 1)
+                        } }
+                        var fullAddress = "Location address not available"
+                        if (list != null) {
+                            if(list.size > 0) {
+                                fullAddress = list[0].getAddressLine(0)
+                            }
+                        }
+                        binding.userGeoLoc.text = fullAddress
+
                     }
 
                 } else {

@@ -36,10 +36,10 @@ import com.labzapp.customer.models.UploadPresResponse
 import com.labzapp.customer.services.ApiService
 import com.labzapp.customer.services.ServiceBuilder
 import com.labzapp.customer.storage.SharedPrefManager
+import com.labzapp.customer.utilities.logoutFromDevice
 import com.labzapp.customer.utilities.snackzcolor
 import com.labzapp.customer.utilities.snackze
 import com.labzapp.customer.utilities.snackzsucc
-import com.labzapp.customer.utilities.toastz
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -59,16 +59,12 @@ private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
 class HomeFragment : Fragment() {
-
     private var param1: String? = null
     private var param2: String? = null
-
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-
     private val REQUEST_PERMISSION = 100
     private var prescImageFrom = 1
-
     lateinit var currentPhotoPath: String
     private var touploadfile:File? = null
 
@@ -121,20 +117,9 @@ class HomeFragment : Fragment() {
         childFragmentManager.setFragmentResultListener("uploadKey", this) { key, bundle ->
             val  uploadFrom = bundle.getString("upload_from")
             if(uploadFrom == "gal"){   //gallery
-                /*val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-                resultLauncher.launch(intent)*/
-
                 openGallery()
-
-
             }else if(uploadFrom == "cam"){
-
                 openCamera()
-            //cam
-                /*val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-                val f = File(Environment.DIRECTORY_DCIM, "presc_temp.jpg")
-                intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(f))
-                resultLauncher.launch(intent)*/
             }
         }
     }
@@ -149,14 +134,12 @@ class HomeFragment : Fragment() {
     }
     private fun openCamera() {
         prescImageFrom = 1
-
         val photoFile: File? = try {
             createCapturedPhoto()
         } catch (ex: IOException) {
             // If there is error while creating the File, it will be null
             null
         }
-
         photoFile?.also {
             val photoURI = FileProvider.getUriForFile(
                 requireContext(),
@@ -164,7 +147,7 @@ class HomeFragment : Fragment() {
                 it
             )
             val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            val f = File(Environment.DIRECTORY_DCIM, "presc_temp.jpg")
+            //val f = File(Environment.DIRECTORY_DCIM, "presc_temp.jpg")
             intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
             resultLauncher.launch(intent)
         }
@@ -176,34 +159,35 @@ class HomeFragment : Fragment() {
         resultLauncher.launch(intent)
     }
 
-
     var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
-            Log.d("currentdat-a-----",result.data.toString())
             val data: Intent? = result.data
+            touploadfile = null
+            val tempfile = System.currentTimeMillis().toString()+".jpg"
             if (prescImageFrom == 1) {  //CAMERA
                 val uri = Uri.parse(currentPhotoPath)
                 binding.uploadImg.setImageURI(uri)
-
-                val image = (binding.uploadImg.drawable as BitmapDrawable).bitmap
-                touploadfile = convertBitmapToFile("temp.jpg", image)
-                //touploadfile = File(uri.path.toString())
-                Log.d("File----", touploadfile.toString())
+                if(binding.uploadImg.drawable != null) {
+                    val image = (binding.uploadImg.drawable as BitmapDrawable).bitmap
+                    touploadfile = convertBitmapToFile(tempfile, image)
+                }
 
             } //GALLERY ------
             else if (prescImageFrom == 2) {
                 val uri = Uri.parse(data?.data.toString())
                 binding.uploadImg.setImageURI(uri)
-                Log.d("File uri----", uri.toString())
-                val image = (binding.uploadImg.drawable as BitmapDrawable).bitmap
-                touploadfile = convertBitmapToFile("temp.jpg", image)
-
-               // touploadfile = File(uri.path.toString())
-                Log.d("File----", touploadfile.toString())
+                if(binding.uploadImg.drawable != null) {
+                    val image = (binding.uploadImg.drawable as BitmapDrawable).bitmap
+                    touploadfile = convertBitmapToFile(tempfile, image)
+                }
             }
 
             if( touploadfile != null){
                 uploadPrescription()
+                binding.uploadImg.setImageURI(null)
+            }
+            else{
+                view?.let{ snackze(it,"Invalid Image/No Image Selected",binding.bookNewTest.id) }
             }
         }
     }
@@ -235,7 +219,6 @@ class HomeFragment : Fragment() {
         return file
     }
 
-
     private fun uploadPrescription() {
         val authTokn: String? = "Bearer " + SharedPrefManager.getInstance(requireContext()).authKey
         val apiTokn: String? = SharedPrefManager.getInstance(requireContext()).apiToken
@@ -249,34 +232,32 @@ class HomeFragment : Fragment() {
                 touploadfile?.name,
                 uploadFileReq
             )
-
             if(ApTokn != null) {
                 val requestCall = apiService.uploadPrescription(authTokn, ApTokn, uploadFileMulti)
-                view?.let{ snackzcolor(it,"Uploading...",binding.ddrcim.id,"#0000FF",18000) }
+                view?.let{ snackzcolor(it,"Uploading Image....",binding.bookNewTest.id,"#0000FF",50000) }
                 requestCall.enqueue(object : Callback<UploadPresResponse> {
                     override fun onResponse(
                         call: Call<UploadPresResponse>,
                         response: Response<UploadPresResponse>
                     ) {
                         val resp = response.body()
+
                         if (resp?.code == 200) {
                             resp.let {
-                                view?.let{ snackzcolor(it,resp?.message.toString(),binding.ddrcim.id,"#00FF00",18000) }
+                                view?.let{ snackzsucc(it,resp?.message.toString(),binding.bookNewTest.id) }
                             }
 
                         } else {
-                            view?.let{ snackzcolor(it,resp?.message.toString(),binding.ddrcim.id,"#000000",18000) }
+                            view?.let{ snackze(it,resp?.message.toString(),binding.bookNewTest.id) }
                         }
                     }
-
                     override fun onFailure(call: Call<UploadPresResponse>, t: Throwable) {
-                       toastz(requireContext(),t.message.toString())
+                        view?.let{ snackze(it,t?.message.toString(),binding.bookNewTest.id) }
                     }
                 })
             }
         }
     }
-
 
     @Throws(IOException::class)
     private fun createCapturedPhoto(): File {
@@ -297,7 +278,15 @@ class HomeFragment : Fragment() {
         requestCall.enqueue(object : Callback<BannerResponse> {
             override fun onResponse(call: Call<BannerResponse>, response: Response<BannerResponse>) {
                 val resp = response.body()
-                if (resp?.code == 200) {
+
+                if (resp?.code == 401) {  // for API token mismatch with server on home page load - when user register in another device
+                    view?.let{ emsg-> snackze(emsg ,"Your Authentication with this device Failed",binding.bookNewTest.id) }
+                    lifecycleScope.launch{
+                        delay(3000)
+                        logoutFromDevice(requireContext())
+                    }
+
+                }else if (resp?.code == 200) {
                     showBanners(resp.banner)
                 } else {
                     view?.let{snackze(it,resp?.message.toString(),binding.viewLabshome.id) }
@@ -354,14 +343,12 @@ class HomeFragment : Fragment() {
         })
     }
 
-
     override fun onResume() {
         super.onResume()
         checkCameraPermission()
     }
 
     companion object {
-
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             HomeFragment().apply {

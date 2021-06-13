@@ -77,9 +77,9 @@ class MyBookAdapter( val context: Context,private val bookings: ArrayList<Bookin
                 }
 
                 if(it.report_file == null){
-                    binding.downReport.text = "Preferred Date : $prefdate\nTest Report : Not uploaded"
+                    binding.downReport.text = "Pref Date : $prefdate\nTest Report : Not uploaded"
                 }else{
-                    binding.downReport.text = "Preferred Date : $prefdate\nTest Report : Uploaded"
+                    binding.downReport.text = "Pref Date : $prefdate\nTest Report : Uploaded"
                 }
             }
             this.currentBook = booking

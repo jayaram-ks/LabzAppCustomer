@@ -1,20 +1,22 @@
 package com.labzapp.customer.fragments
 
+import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.labzapp.customer.R
+import com.labzapp.customer.activities.RegisterActivity
 import com.labzapp.customer.databinding.FragmentProfileBinding
 import com.labzapp.customer.models.ProfileResponse
 import com.labzapp.customer.services.ApiService
 import com.labzapp.customer.services.ServiceBuilder
 import com.labzapp.customer.storage.SharedPrefManager
+import com.labzapp.customer.utilities.logoutFromDevice
 import com.labzapp.customer.utilities.snackze
-import com.labzapp.customer.utilities.toastz
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -71,9 +73,7 @@ class ProfileFragment : Fragment() {
             binding.goResults.id -> { setCurrentFragment(myresultsF) }
             binding.goTerms.id -> { setCurrentFragment(termsF) }
             binding.goContact.id -> { setCurrentFragment(contactF) }
-            binding.goLogout.id -> {
-                //TODO
-            }
+            binding.goLogout.id -> { performLogout() }
             else -> {
                 //TODO
             }
@@ -85,7 +85,23 @@ class ProfileFragment : Fragment() {
         _binding = null
     }
 
+    private fun performLogout(){
+
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle("Confirm Logout")
+        builder.setMessage("Are you Sure?")
+        builder.setPositiveButton("Yes") { dialog, which ->
+            dialog.dismiss()
+            logoutFromDevice(requireContext())
+        }
+        builder.setNegativeButton("No") { dialog, which ->
+            dialog.dismiss()
+        }
+        builder.show()
+    }
+
     private fun fetchProfile(){
+        if (!isAdded) return
         val authTokn: String? = "Bearer "+ SharedPrefManager.getInstance(requireContext()).authKey
         val apiTokn: String? = SharedPrefManager.getInstance(requireContext()).apiToken
         val apiService = ServiceBuilder.buildService(ApiService::class.java)
@@ -95,7 +111,7 @@ class ProfileFragment : Fragment() {
                 val resp = response.body()
                 if (resp?.code == 200) {
                     resp.let {
-                        if (!isAdded) return
+
                         binding.userName.text = it.customer.name
                         binding.userPhone.text = it.customer.phone
                     }

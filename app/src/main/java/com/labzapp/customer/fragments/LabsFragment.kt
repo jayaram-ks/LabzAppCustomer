@@ -56,7 +56,7 @@ class LabsFragment : Fragment() {
     }
 
     private fun fetchLabs(){
-
+        if (!isAdded) return
         val authTokn: String? = "Bearer "+ SharedPrefManager.getInstance(requireContext()).authKey
         val apiTokn: String? = SharedPrefManager.getInstance(requireContext()).apiToken
 

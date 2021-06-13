@@ -50,8 +50,6 @@ class ReportsFragment : Fragment() {
             param2 = it.getString(ARG_PARAM2)
         }
 
-
-
         if (!(ContextCompat.checkSelfPermission(
                 requireContext(),
                 android.Manifest.permission.READ_EXTERNAL_STORAGE
@@ -64,8 +62,6 @@ class ReportsFragment : Fragment() {
             ) requestExternalStoragePermission();
             else requestPermissionAndOpenSettings();
         }
-
-
     }
 
     override fun onCreateView(
@@ -87,6 +83,7 @@ class ReportsFragment : Fragment() {
     }
 
     private fun fetchMyReports(){
+        if (!isAdded) return
         val authTokn: String? = "Bearer "+ SharedPrefManager.getInstance(requireContext()).authKey
         val apiTokn: String? = SharedPrefManager.getInstance(requireContext()).apiToken
         val apiService = ServiceBuilder.buildService(ApiService::class.java)

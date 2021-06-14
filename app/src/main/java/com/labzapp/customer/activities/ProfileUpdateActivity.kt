@@ -37,6 +37,8 @@ import com.labzapp.customer.utilities.districtz
 import com.labzapp.customer.utilities.maps.PermissionUtils.PermissionDeniedDialog.Companion.newInstance
 import com.labzapp.customer.utilities.maps.PermissionUtils.isPermissionGranted
 import com.labzapp.customer.utilities.maps.PermissionUtils.requestPermission
+import com.labzapp.customer.utilities.network.ConnectionType
+import com.labzapp.customer.utilities.network.NetworkMonitorUtil
 import com.labzapp.customer.utilities.snackze
 import com.labzapp.customer.utilities.toastz
 import retrofit2.Call
@@ -48,7 +50,7 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
     GoogleMap.OnMyLocationClickListener, OnMapReadyCallback,
     ActivityCompat.OnRequestPermissionsResultCallback,AdapterView.OnItemSelectedListener{
     private  lateinit var  binding:ActivityProfileUpdateBinding
-
+    private val networkMonitor = NetworkMonitorUtil(this)
     private lateinit var locationManager: LocationManager
     var gpsStatus = false
     private lateinit var context: Context
@@ -70,6 +72,30 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
         binding = ActivityProfileUpdateBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+
+        networkMonitor.result = { isAvailable, type ->
+            runOnUiThread {
+                when (isAvailable) {
+                    true -> {
+                        when (type) {
+                            ConnectionType.Wifi -> {
+                                //internet_status.text = "Wifi Connection"
+                            }
+                            ConnectionType.Cellular -> {
+                                // internet_status.text = "Cellular Connection"
+                            }
+                            else -> { }
+                        }
+                    }
+                    false -> {
+                        val intent = Intent(this, NoNetworkActivity ::class.java)
+                        startActivity(intent)
+                    }
+                }
+            }
+        }
+
 
         context = applicationContext
         checkGpsStatus()
@@ -404,6 +430,17 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        networkMonitor.register()
+    }
+
+
+    override fun onStop() {
+        super.onStop()
+        networkMonitor.unregister()
     }
 
     companion object {

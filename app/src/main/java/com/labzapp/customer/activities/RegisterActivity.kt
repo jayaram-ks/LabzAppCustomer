@@ -43,7 +43,8 @@ class RegisterActivity : AppCompatActivity() {
                         }
                     }
                     false -> {
-                        snackze(view, "No Network Connection", binding.fullName.id)
+                        val intent = Intent(this, NoNetworkActivity ::class.java)
+                        startActivity(intent)
                     }
                 }
             }

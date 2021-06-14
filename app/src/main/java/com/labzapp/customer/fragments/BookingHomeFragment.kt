@@ -109,7 +109,6 @@ ActivityCompat.OnRequestPermissionsResultCallback{
         }
 
         // create an OnDateSetListener
-
         val dateSetListener =
             DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
                 cal.set(Calendar.YEAR, year)
@@ -427,8 +426,6 @@ ActivityCompat.OnRequestPermissionsResultCallback{
         })
     }
 
-
-
     private fun clearLabdata(){
         bookedLabpos = null
         bookLabstring = null
@@ -456,7 +453,6 @@ ActivityCompat.OnRequestPermissionsResultCallback{
         intentgps = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
         startActivity(intentgps);
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -510,5 +506,4 @@ ActivityCompat.OnRequestPermissionsResultCallback{
         private const val LOCATION_PERMISSION_REQUEST_CODE = 1
         const val TAG = "BookingHomeFragment"
     }
-
 }

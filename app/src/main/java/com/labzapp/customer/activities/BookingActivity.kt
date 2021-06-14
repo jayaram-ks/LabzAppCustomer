@@ -9,14 +9,42 @@ import com.labzapp.customer.R
 import com.labzapp.customer.databinding.ActivityBookingBinding
 import com.labzapp.customer.fragments.BookingHomeFragment
 import com.labzapp.customer.storage.SharedPrefManager
+import com.labzapp.customer.utilities.network.ConnectionType
+import com.labzapp.customer.utilities.network.NetworkMonitorUtil
 
 class BookingActivity : AppCompatActivity() {
     private lateinit var binding: ActivityBookingBinding
+    private val networkMonitor = NetworkMonitorUtil(this)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityBookingBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+
+        networkMonitor.result = { isAvailable, type ->
+            runOnUiThread {
+                when (isAvailable) {
+                    true -> {
+                        when (type) {
+                            ConnectionType.Wifi -> {
+                                //internet_status.text = "Wifi Connection"
+                            }
+                            ConnectionType.Cellular -> {
+                                // internet_status.text = "Cellular Connection"
+                            }
+                            else -> { }
+                        }
+                    }
+                    false -> {
+                        val intent = Intent(this, NoNetworkActivity ::class.java)
+                        startActivity(intent)
+                    }
+                }
+            }
+        }
+
+
         val homeFragment = BookingHomeFragment()
         setCurrentFragment(homeFragment)
     }
@@ -35,5 +63,16 @@ class BookingActivity : AppCompatActivity() {
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        networkMonitor.register()
+    }
+
+
+    override fun onStop() {
+        super.onStop()
+        networkMonitor.unregister()
     }
 }

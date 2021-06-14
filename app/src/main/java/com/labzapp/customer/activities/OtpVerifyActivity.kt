@@ -9,6 +9,8 @@ import com.labzapp.customer.models.OtpResponse
 import com.labzapp.customer.services.ApiService
 import com.labzapp.customer.services.ServiceBuilder
 import com.labzapp.customer.storage.SharedPrefManager
+import com.labzapp.customer.utilities.network.ConnectionType
+import com.labzapp.customer.utilities.network.NetworkMonitorUtil
 import com.labzapp.customer.utilities.snackze
 import com.poovam.pinedittextfield.PinField
 import retrofit2.Call
@@ -17,11 +19,35 @@ import retrofit2.Response
 
 class OtpVerifyActivity : AppCompatActivity() {
     private lateinit var  binding: ActivityOtpVerifyBinding
+    private val networkMonitor = NetworkMonitorUtil(this)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityOtpVerifyBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        networkMonitor.result = { isAvailable, type ->
+            runOnUiThread {
+                when (isAvailable) {
+                    true -> {
+                        when (type) {
+                            ConnectionType.Wifi -> {
+                                //internet_status.text = "Wifi Connection"
+                            }
+                            ConnectionType.Cellular -> {
+                                // internet_status.text = "Cellular Connection"
+                            }
+                            else -> { }
+                        }
+                    }
+                    false -> {
+                        val intent = Intent(this, NoNetworkActivity ::class.java)
+                        startActivity(intent)
+                    }
+                }
+            }
+        }
+
         val otpmessage:String = intent.getStringExtra("otp_message").toString()
         val custmobile:String = intent.getStringExtra("customermobile").toString()
         binding.otpMessg.text = otpmessage
@@ -65,5 +91,16 @@ class OtpVerifyActivity : AppCompatActivity() {
             }
 
         })
+    }
+
+    override fun onResume() {
+        super.onResume()
+        networkMonitor.register()
+    }
+
+
+    override fun onStop() {
+        super.onStop()
+        networkMonitor.unregister()
     }
 }

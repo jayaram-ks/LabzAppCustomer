@@ -1,6 +1,6 @@
 package com.labzapp.customer.fragments
 
-import android.Manifest
+import android.Manifest.permission.CAMERA
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -18,7 +18,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
@@ -57,16 +56,18 @@ import java.util.*
 
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
+private const val PERMISSION_REQUEST_CODE = 200
 
 class HomeFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-    private val REQUEST_PERMISSION = 100
     private var prescImageFrom = 1
     lateinit var currentPhotoPath: String
     private var touploadfile:File? = null
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -119,19 +120,45 @@ class HomeFragment : Fragment() {
             if(uploadFrom == "gal"){   //gallery
                 openGallery()
             }else if(uploadFrom == "cam"){
-                openCamera()
+                checkPermissions()
+
+
+
             }
         }
     }
 
-    private fun checkCameraPermission() {
-        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA)
-            != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(requireActivity(),
-                arrayOf(Manifest.permission.CAMERA),
-                REQUEST_PERMISSION)
+
+    private fun checkPermissions() {
+        if (context?.let { ContextCompat.checkSelfPermission(it, CAMERA) } != PackageManager.PERMISSION_GRANTED) {
+
+            view?.let { snackze(it,"Please enable permission for Camera",binding.uploadPrescription.id) }
+            requestMultiplePermissions.launch(arrayOf(CAMERA))
+        } else {
+           // Log.d("ghg", "Permission Already Granted")
+            openCamera()
         }
     }
+
+    private val requestMultiplePermissions =
+        registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
+            permissions.entries.forEach {
+                //Log.d("dsf", "${it.key} = ${it.value}")
+            }
+            if (permissions[CAMERA] == true ) {
+                //Log.d("DSF", "Permission granted cam")
+                openCamera()
+            } else {
+                view?.let { snackze(it,"Permission not granted for Camera",binding.uploadPrescription.id) }
+                //Log.d("TAG", "Permission not granted cam")
+            }
+        }
+
+
+
+
+
+
     private fun openCamera() {
         prescImageFrom = 1
         val photoFile: File? = try {
@@ -343,10 +370,7 @@ class HomeFragment : Fragment() {
         })
     }
 
-    override fun onResume() {
-        super.onResume()
-        checkCameraPermission()
-    }
+
 
     companion object {
         @JvmStatic

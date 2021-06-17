@@ -156,5 +156,13 @@ interface ApiService {
         @Part prescrImage :MultipartBody.Part,
     ):Call<UploadPresResponse>
 
+    @FormUrlEncoded
+    @POST(UPDATE_DEVICE_ID)
+    fun updateFBDeviceID(
+        @Header("Authorization") authtoken: String?,
+        @Field("api_token") apitoken: String?,
+        @Field("device_token") fbtoken: String?,
+    ): Call<FbIdUpdateResponse>
+
 
 }

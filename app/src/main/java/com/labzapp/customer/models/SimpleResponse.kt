@@ -12,3 +12,6 @@ data class EditProfileResponse(val code : Int, val status : String, val message 
 
 data class UploadPresResponse(val code : Int, val status : String, val message : Any?)
 
+data class FbIdUpdateResponse(val code : Int, val status : String, val message : Any?)
+
+

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "629276789493",
+    "project_id": "labzapp-656cd",
+    "storage_bucket": "labzapp-656cd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:629276789493:android:b68ab1e0f203085ab593bc",
+        "android_client_info": {
+          "package_name": "com.labzapp.customer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "629276789493-mk6n14c6odosmj7tippmp87tm9v73umc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXtoNV_xfqHUalByg7lvQdYQASCWy2T8M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "629276789493-mk6n14c6odosmj7tippmp87tm9v73umc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -27,9 +27,6 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 
-private const val BUFFER_SIZE = 4 * 1024
-const val PICK_PDF_FILE = 2
-
 class MyReportAdapter( val context: Context,rbinding:FragmentReportsBinding,private val reports: ArrayList<Reports>,reportUrl:String?) : RecyclerView.Adapter<MyReportAdapter.ReportViewHolder>() {
     val rupee = context.getString(R.string.rupee)
     val repUrl = reportUrl.toString()
@@ -102,6 +99,7 @@ class MyReportAdapter( val context: Context,rbinding:FragmentReportsBinding,priv
                 .setAllowedOverRoaming(false)
                 .setTitle(url.substring(url.lastIndexOf("/") + 1))
                 .setDescription("")
+                .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
                 .setDestinationInExternalPublicDir(directory.toString(),
                     url.substring(url.lastIndexOf("/") + 1)
                 )
@@ -124,7 +122,7 @@ class MyReportAdapter( val context: Context,rbinding:FragmentReportsBinding,priv
 
 
                         if(status == DownloadManager.STATUS_SUCCESSFUL  ){
-                            snackzcolor(parentbind.root,msg.toString(),parentbind.progressBar.id,"#FF228B22",3000)
+                            snackzcolor(parentbind.root,msg.toString(),parentbind.progressBar.id,"#FF228B22",7000)
                         }else if(status == DownloadManager.STATUS_FAILED ){
                             snackzcolor(parentbind.root,msg.toString(),parentbind.progressBar.id,"#FF3333",3000)
                         }else if(status == DownloadManager.STATUS_PENDING ){

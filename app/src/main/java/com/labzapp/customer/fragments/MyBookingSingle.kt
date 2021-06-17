@@ -23,6 +23,8 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import kotlin.math.floor
+import kotlin.math.round
 
 
 private const val ARG_PARAM1 = "param1"
@@ -102,9 +104,8 @@ class MyBookingSingle : Fragment() {
 
                         binding.testTotal.text = rupee +  it.booking_total
                         binding.serviceCharges.text = rupee +  it.service_charge
-                        binding.grandTotal.text = rupee + it.grand_total
+                        binding.grandTotal.text = rupee + it.grand_total.toFloat().toString()
                     }
-
 
                     resp.tests.let{
                         val layoutManager = LinearLayoutManager(activity)

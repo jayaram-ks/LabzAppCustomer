@@ -59,6 +59,7 @@ private const val ARG_PARAM2 = "param2"
 private const val PERMISSION_REQUEST_CODE = 200
 
 class HomeFragment : Fragment() {
+
     private var param1: String? = null
     private var param2: String? = null
     private var _binding: FragmentHomeBinding? = null
@@ -371,6 +372,10 @@ class HomeFragment : Fragment() {
     }
 
 
+    override fun onResume() {
+        super.onResume()
+        fetchBanners()
+    }
 
     companion object {
         @JvmStatic

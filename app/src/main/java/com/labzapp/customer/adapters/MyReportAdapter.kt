@@ -7,18 +7,20 @@ import android.content.Intent
 import android.content.Intent.CATEGORY_OPENABLE
 import android.database.Cursor
 import android.net.Uri
+import android.os.Bundle
 import android.os.Environment
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat.startActivity
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import com.labzapp.customer.R
 import com.labzapp.customer.databinding.FragmentReportsBinding
 import com.labzapp.customer.databinding.MyreportListItemBinding
+import com.labzapp.customer.fragments.ReportWebview
 import com.labzapp.customer.models.Reports
 import com.labzapp.customer.utilities.snackzcolor
-import com.labzapp.customer.utilities.snackze
-import com.labzapp.customer.utilities.toastz
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -33,6 +35,7 @@ class MyReportAdapter( val context: Context,rbinding:FragmentReportsBinding,priv
     val parentbind:FragmentReportsBinding = rbinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReportViewHolder {
+
         val binding = MyreportListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ReportViewHolder(binding)
     }
@@ -58,6 +61,22 @@ class MyReportAdapter( val context: Context,rbinding:FragmentReportsBinding,priv
                 val labreport = repUrl +"/"+ (currentReport?.report_file)
                 loadpdf(labreport,binding)
             }
+
+            binding.viewReport.setOnClickListener {
+                val labreporturl = repUrl +"/"+ (currentReport?.report_file)
+
+                val bundle = Bundle()
+                bundle.putString("param1", labreporturl)
+                val appCompatActivity = context as AppCompatActivity
+                val transaction = appCompatActivity.supportFragmentManager.beginTransaction()
+                val openfragmt = ReportWebview()
+                openfragmt.arguments = bundle
+                transaction.replace(R.id.frame_container, openfragmt)
+                transaction.addToBackStack(null)
+                transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                transaction.commit()
+
+            }
         }
 
 
@@ -75,7 +94,7 @@ class MyReportAdapter( val context: Context,rbinding:FragmentReportsBinding,priv
                 val dat =  LocalDate.parse(it.booking_date , datFormat)
                 val bookdate = dat.dayOfMonth.toString() +"-"+dat.monthValue.toString()+"-"+dat.year.toString()
                 binding.bookTotal.text = "Grand Total : "+rupee+ it.total_to_pay.toString()
-                binding.bkId.text = "Booking ID : "+it.id + "\nBooked On : $bookdate"
+                binding.bkId.text = "Booking ID : "+it.id + "   Booked On : $bookdate"
 
             }
             this.currentReport = report
@@ -145,6 +164,7 @@ class MyReportAdapter( val context: Context,rbinding:FragmentReportsBinding,priv
             }
         }
     }
+
 
     private fun statusMessage(url: String, directory: File, status: Int): String? {
         var msg = ""

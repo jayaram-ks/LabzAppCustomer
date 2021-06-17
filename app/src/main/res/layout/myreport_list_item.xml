@@ -48,6 +48,20 @@
                 android:letterSpacing=".01"
                 android:textColor="@color/black"
                 android:textSize="13sp" />
+            <TextView
+                android:paddingHorizontal="5dp"
+                android:id="@+id/bk_id"
+                android:gravity="start|center"
+                android:paddingTop="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:fontFamily="@font/lato_regular"
+                android:textSize="13sp"
+                android:letterSpacing=".01"
+                />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -55,26 +69,31 @@
                 android:orientation="horizontal"
                 android:paddingHorizontal="5dp"
                 android:gravity="center">
-                <TextView
-                    android:id="@+id/bk_id"
-                    android:gravity="start|center"
-                    android:layout_marginRight="5dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:textAllCaps="false"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/lato_regular"
-                    android:textSize="12sp"
-                    android:letterSpacing=".01"
-                    />
+
                 <Button
                     android:id="@+id/down_report"
                     android:layout_gravity="end"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_weight="1"
+                    android:layout_marginEnd="4dp"
                     android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/lato_black"
+                    android:textSize="12sp"
+                    android:letterSpacing=".01"
+                    android:lineHeight="10sp"
+                    android:backgroundTint="@color/success_green"
+                    />
+                <Button
+                    android:id="@+id/view_report"
+                    android:layout_gravity="end"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="4dp"
+                    android:textAllCaps="false"
+                    android:text="View Report"
                     android:textColor="@color/white"
                     android:fontFamily="@font/lato_black"
                     android:textSize="12sp"

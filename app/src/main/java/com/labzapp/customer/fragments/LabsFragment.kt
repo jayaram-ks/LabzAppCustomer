@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -20,6 +21,7 @@ import com.labzapp.customer.models.ProfileResponse
 import com.labzapp.customer.services.ApiService
 import com.labzapp.customer.services.ServiceBuilder
 import com.labzapp.customer.storage.SharedPrefManager
+import com.labzapp.customer.utilities.gotoHome
 import com.labzapp.customer.utilities.snackze
 import retrofit2.Call
 import retrofit2.Callback
@@ -36,6 +38,12 @@ class LabsFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val onBackPressedCallback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                gotoHome(requireActivity())
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -65,9 +73,7 @@ class LabsFragment : Fragment() {
         requestCall.enqueue(object : Callback<LabsResponse> {
             override fun onResponse(call: Call<LabsResponse>, response: Response<LabsResponse>) {
                 val resp = response.body()
-
                 if (resp?.code == 200) {
-
                     resp.labs?.let{
                         showLabs(it)
                     }

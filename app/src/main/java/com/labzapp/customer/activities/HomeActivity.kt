@@ -88,10 +88,10 @@ class HomeActivity : AppCompatActivity() {
         binding.bottomNavigationView.setOnNavigationItemSelectedListener {
             when(it.itemId){
                 R.id.navhome->setCurrentFragment(homeFragment,false)
-                R.id.navlabs->setCurrentFragment(labsFragment,true)
+                R.id.navlabs->setCurrentFragment(labsFragment,false)
                 R.id.navsearch->goToBooking()
-                R.id.navreports->setCurrentFragment(reportsFragment,true)
-                R.id.navprofile->setCurrentFragment(profileFragment,true)
+                R.id.navreports->setCurrentFragment(reportsFragment,false)
+                R.id.navprofile->setCurrentFragment(profileFragment,false)
             }
             true
         }

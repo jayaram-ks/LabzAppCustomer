@@ -1,20 +1,20 @@
 package com.labzapp.customer.fragments
 
 import android.app.AlertDialog
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.labzapp.customer.R
-import com.labzapp.customer.activities.RegisterActivity
 import com.labzapp.customer.databinding.FragmentProfileBinding
 import com.labzapp.customer.models.ProfileResponse
 import com.labzapp.customer.services.ApiService
 import com.labzapp.customer.services.ServiceBuilder
 import com.labzapp.customer.storage.SharedPrefManager
+import com.labzapp.customer.utilities.gotoHome
 import com.labzapp.customer.utilities.logoutFromDevice
 import com.labzapp.customer.utilities.snackze
 import retrofit2.Call
@@ -37,6 +37,13 @@ class ProfileFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val onBackPressedCallback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                gotoHome(requireActivity())
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
     }
 
     override fun onCreateView(
@@ -47,11 +54,16 @@ class ProfileFragment : Fragment() {
         return binding.root
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        fetchProfile()
 
+        if (!isAdded) return
         binding.goHome.setOnClickListener { view -> menuClick(view) }
         binding.goAbout.setOnClickListener { view -> menuClick(view) }
         binding.goProfile.setOnClickListener { view -> menuClick(view) }
@@ -61,18 +73,19 @@ class ProfileFragment : Fragment() {
         binding.goTerms.setOnClickListener { view -> menuClick(view) }
         binding.goContact.setOnClickListener { view -> menuClick(view) }
         binding.goLogout.setOnClickListener { view -> menuClick(view) }
+        fetchProfile()
     }
 
     private fun menuClick(v: View?) {
         when (v?.id) {
-            binding.goHome.id -> { setCurrentFragment(homeF) }
-            binding.goAbout.id -> { setCurrentFragment(aboutF) }
-            binding.goProfile.id -> { setCurrentFragment(myprofileF) }
-            binding.goeditProfile.id -> { setCurrentFragment(editmyprofileF) }
-            binding.goBookings.id -> { setCurrentFragment(mybookingsF) }
-            binding.goResults.id -> { setCurrentFragment(myresultsF) }
-            binding.goTerms.id -> { setCurrentFragment(termsF) }
-            binding.goContact.id -> { setCurrentFragment(contactF) }
+            binding.goHome.id -> { setCurrentFragment(homeF,false) }
+            binding.goAbout.id -> { setCurrentFragment(aboutF,true) }
+            binding.goProfile.id -> { setCurrentFragment(myprofileF,true) }
+            binding.goeditProfile.id -> { setCurrentFragment(editmyprofileF,true) }
+            binding.goBookings.id -> { setCurrentFragment(mybookingsF,true) }
+            binding.goResults.id -> { setCurrentFragment(myresultsF,true) }
+            binding.goTerms.id -> { setCurrentFragment(termsF,true) }
+            binding.goContact.id -> { setCurrentFragment(contactF,true) }
             binding.goLogout.id -> { performLogout() }
             else -> {
                 //TODO
@@ -80,9 +93,16 @@ class ProfileFragment : Fragment() {
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+
+    private fun setCurrentFragment(openfragmt: Fragment,addtoBackStck:Boolean){
+
+        val transaction = parentFragmentManager.beginTransaction()
+        transaction.replace(R.id.frame_container, openfragmt)
+        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+        if(addtoBackStck){
+            transaction.addToBackStack(null)
+        }
+        transaction.commit()
     }
 
     private fun performLogout(){
@@ -101,7 +121,6 @@ class ProfileFragment : Fragment() {
     }
 
     private fun fetchProfile(){
-        if (!isAdded) return
         val authTokn: String? = "Bearer "+ SharedPrefManager.getInstance(requireContext()).authKey
         val apiTokn: String? = SharedPrefManager.getInstance(requireContext()).apiToken
         val apiService = ServiceBuilder.buildService(ApiService::class.java)
@@ -111,7 +130,7 @@ class ProfileFragment : Fragment() {
                 val resp = response.body()
                 if (resp?.code == 200) {
                     resp.let {
-
+                        if (!isAdded) return
                         binding.userName.text = it.customer.name
                         binding.userPhone.text = it.customer.phone
                     }
@@ -129,13 +148,6 @@ class ProfileFragment : Fragment() {
         })
     }
 
-    private fun setCurrentFragment(openfragmt: Fragment){
 
-        val transaction = parentFragmentManager.beginTransaction()
-        transaction.replace(R.id.frame_container, openfragmt)
-        transaction.addToBackStack(null)
-        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-        transaction.commit()
-    }
 
 }

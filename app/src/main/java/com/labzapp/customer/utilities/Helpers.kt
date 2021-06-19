@@ -8,8 +8,11 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
 import com.google.android.material.snackbar.Snackbar
+import com.labzapp.customer.activities.HomeActivity
+import com.labzapp.customer.activities.ProfileUpdateActivity
 import com.labzapp.customer.activities.RegisterActivity
 import com.labzapp.customer.storage.SharedPrefManager
+
 
 fun toastz(cnxt: Context, messg: String)
 {
@@ -37,6 +40,12 @@ fun logoutFromDevice(mcontext: Context){
     val intent = Intent(mcontext, RegisterActivity::class.java)
     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
     startActivity(mcontext,intent,null)
+}
+
+fun gotoHome(cntxt:Context){
+    val intent = Intent(cntxt, HomeActivity::class.java)
+    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+    startActivity(cntxt,intent,null)
 }
 
 

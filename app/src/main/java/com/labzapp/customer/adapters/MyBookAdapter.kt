@@ -65,7 +65,6 @@ class MyBookAdapter( val context: Context,private val bookings: ArrayList<Bookin
                 binding.bookLabName.text = "Lab : "+ it.lab_name
                 binding.bookTotal.text = "Booking ID : "+it.id +"   Grand Total : "+rupee+ it.total_to_pay.toString()
 
-
                 val datFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
                 val dat =  LocalDate.parse(it.booking_date , datFormat)
                 val bookdate = dat.dayOfMonth.toString() +" "+dat.month.toString()+" "+dat.year.toString()

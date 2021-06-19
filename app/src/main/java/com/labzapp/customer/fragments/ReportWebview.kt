@@ -39,12 +39,15 @@ class ReportWebview : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        updateWebContent()
+        binding.refreshButton.setOnClickListener { updateWebContent() }
+    }
 
+    private fun updateWebContent(){
         val webview: WebView = binding.repWebview
         webview.getSettings().setJavaScriptEnabled(true)
         webview.clearHistory()
         webview.loadUrl("https://drive.google.com/viewerng/viewer?embedded=true&url=$param1")
-
     }
 
     override fun onDestroyView() {

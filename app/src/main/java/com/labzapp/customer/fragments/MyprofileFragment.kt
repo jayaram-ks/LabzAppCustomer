@@ -67,7 +67,6 @@ class MyprofileFragment : Fragment() {
                         binding.userLat.text = it.customer.latitude.toString()
                         binding.userLong.text = it.customer.longitude.toString()
 
-
                         val geocoder = Geocoder(requireContext())
                         val list = it.customer.latitude?.let { it1 -> it.customer.longitude?.let { it2 ->
                             geocoder.getFromLocation(it1,

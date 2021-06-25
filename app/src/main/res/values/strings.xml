@@ -32,21 +32,20 @@
     <string name="self">Self</string>
     <string name="ok">Ok</string>
     <string name="another_person">Another person</string>
-    <string name="your_call_has_been_registered_our_representative_will_contact_you_shortly">Your call has been registered. Our representative will contact you shortly.</string>
     <string name="upload_images_of_your_prescription">Upload images of your prescription</string>
     <string name="camera">Camera</string>
     <string name="gallery">Gallery</string>
     <string name="_31_05_2021">31-05-2021</string>
     <string name="select_text">Select text</string>
     <string name="_3_tests_selected_click_to_add_more_or_remove">3 Tests selected Click to add more or remove</string>
-    <string name="biovision_clinical_laboratory_near_ksrtc_bus_stand_ayur">Biovision Clinical Laboratory Near KSRTC bus stand, Ayur</string>
+
     <string name="_continue">Continue</string>
-    <string name="ayur_anchal_road_sh1_kollam_691532">Ayur- Anchal road , Sh1, Kollam 691532</string>
+
     <string name="select_a_test">Select a Test</string>
     <string name="search_by_test_name">Search by Test Name</string>
     <string name="click">Click</string>
     <string name="select">Select</string>
-    <string name="abc_clinical_laboratory_near_ksrtc_bus_stand_ayur">Abc Clinical Laboratory Near KSRTC bus stand ,Ayur</string>
+
     <string name="seleced_lab">Seleced Lab</string>
     <string name="selected_tests">Selected Tests</string>
     <string name="total_test_charge">Total test charge</string>
@@ -76,7 +75,7 @@
     <string name="phone_number_">Phone number :</string>
     <string name="lab_details">Lab details</string>
     <string name="roganidan">Roganidan</string>
-    <string name="ayur_kollam_691533">Ayur , Kollam -691533</string>
+
     <string name="sample_collection_date_and_time">Sample collection date and time</string>
     <string name="_11_11_2021_11_am">11/11/2021, 11 am</string>
     <string name="tests_booked">Tests booked</string>
@@ -93,13 +92,12 @@
     <string name="_25_off">25% off</string>
     <string name="book_package">Book Package</string>
     <string name="tests_description">Tests Description</string>
-    <string name="diabetes_care_package_advanced_which_can_be_conducted_at_the_convenience_of_your_home_diabetes_care_maxi_is_one_such_comprehensive_package_to_screen_for_diabetes_the_tests_includes_blood_sugar_fasting_creatinine_hba1c_glycosylated_haemoglobin_lipid_profile_urine_for_microalbuminuria_and_urine_routine">Diabetes Care Package - Advanced which can be conducted at the convenience of your home. diabetes Care (Maxi) is one such comprehensive package to screen for diabetes the tests includes blood sugar fasting, creatinine, Hba1c (glycosylated haemoglobin) , lipid profile, urine for microalbuminuria and urine routine.</string>
-    <string name="do_not_eat_or_drink_anything_other_than_water_for_12_hours_before_the_test">Do not eat or drink anything other than water for 12 hours before the test</string>
+
     <string name="test_requirements">Test Requirements</string>
     <string name="tests_included">Tests included</string>
     <string name="test_name">Test name</string>
     <string name="complete_blood_count_cbc">Complete blood count (CBC)</string>
-    <string name="a_complete_blood_count_cbc_test_is_a_group_of_tests_that_provides_information_about_blood_cells_like_red_blood_cells_rbc_white_blood_cells_wbc_and_platelets_it_is_routinely_performed_to_provide_an_overview_of_a_patient_s_general_health_status">A complete blood count (CBC) test is a group of tests that provides information about blood cells like Red Blood Cells (RBC), White Blood Cells (WBC) and platelets. It is routinely performed to provide an overview of a patient\'s general health status.</string>
+
     <string name="reload">Reload</string>
     <string name="you_re_offline">You’re offline</string>
     <string name="check_your_connection_and_try_again">Check your connection and try again</string>

@@ -1,5 +1,6 @@
 package com.labzapp.customer.fragments
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -71,6 +72,7 @@ class BookingPreviewFragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         fetchTestRates()
@@ -86,9 +88,9 @@ class BookingPreviewFragment : Fragment() {
                 .into(binding.selLabLogo)
         }
 
-        binding.totalTestCharge.text = requireContext().getString(R.string.rupee)+" "+selectlabdata.test_amount.toString()
-        binding.labServiceCharge.text = requireContext().getString(R.string.rupee)+" "+selectlabdata.service_charge.toString()
-        binding.grandTotal.text = requireContext().getString(R.string.rupee)+" "+selectlabdata.total_to_pay.toString()
+        binding.totalTestCharge.text = requireContext().getString(R.string.rupee)+" "+selectlabdata.test_amount.toFloat().toString()
+        binding.labServiceCharge.text = requireContext().getString(R.string.rupee)+" "+selectlabdata.service_charge.toFloat().toString()
+        binding.grandTotal.text = requireContext().getString(R.string.rupee)+" "+selectlabdata.total_to_pay.toFloat().toString()
 
         val datFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd")
         val dat =  LocalDate.parse(patprefdate , datFormat)

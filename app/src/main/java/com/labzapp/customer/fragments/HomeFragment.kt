@@ -154,11 +154,6 @@ class HomeFragment : Fragment() {
             }
         }
 
-
-
-
-
-
     private fun openCamera() {
         prescImageFrom = 1
         val photoFile: File? = try {

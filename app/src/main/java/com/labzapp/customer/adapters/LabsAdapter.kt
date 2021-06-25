@@ -1,5 +1,6 @@
 package com.labzapp.customer.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -62,6 +63,7 @@ class LabsAdapter( val context: Context,private val labs: List<LabData>) : Recyc
             }
         }
 
+        @SuppressLint("SetTextI18n")
         fun setData(lab: LabData?, pos: Int) {
             lab?.let {
                 binding.labTitle.text = it.name.toString()

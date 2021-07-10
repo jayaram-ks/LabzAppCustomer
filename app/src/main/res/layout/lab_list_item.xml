@@ -68,10 +68,11 @@
             <Button
                 android:id="@+id/avl_tests"
                 android:layout_gravity="end"
+                android:paddingHorizontal="0dp"
                 android:paddingBottom="0dp"
                 android:paddingTop="0dp"
                 android:layout_marginRight="7dp"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_weight="1"
                 android:text="@string/available_tests"
@@ -85,11 +86,12 @@
             <Button
                 android:id="@+id/avl_packs"
                 android:paddingBottom="0dp"
+                android:paddingHorizontal="0dp"
                 android:layout_gravity="end"
                 android:paddingTop="0dp"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="40dp"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:text="Available Packages"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
@@ -97,7 +99,7 @@
                 android:textSize="12sp"
                 android:letterSpacing=".01"
                 android:lineHeight="10sp"
-                android:backgroundTint="@color/orange"
+                android:backgroundTint="@color/pack_col"
                 />
             </LinearLayout>
         </LinearLayout>

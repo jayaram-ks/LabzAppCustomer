@@ -164,5 +164,11 @@ interface ApiService {
         @Field("device_token") fbtoken: String?,
     ): Call<FbIdUpdateResponse>
 
+    @GET(GET_PACKS_AVAILABLE)
+    fun getAvailPacks(
+        @Header("Authorization") authtoken: String?,
+        @Query("api_token") apitoken: String?,
+        @Query("lab_id") labid: Int?,
+    ): Call<AvailPackResponse>
 
 }

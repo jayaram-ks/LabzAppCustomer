@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.RecyclerView
 import com.labzapp.customer.R
 import com.labzapp.customer.databinding.LabListItemBinding
+import com.labzapp.customer.fragments.AvailablePacksFragment
 import com.labzapp.customer.fragments.AvailableTestsFragment
 import com.labzapp.customer.models.LabData
 import com.labzapp.customer.utilities.districtz
@@ -58,6 +59,25 @@ class LabsAdapter( val context: Context,private val labs: List<LabData>) : Recyc
                    transaction.addToBackStack(null)
                    transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                    transaction.commit()
+
+                }
+            }
+
+            binding.avlPacks.setOnClickListener {
+                currentLab?.let {
+                    val bundlepk = Bundle()
+                    bundlepk.putInt("lab_id", it.lab_id)
+                    bundlepk.putString("lab_title", it.name)
+                    bundlepk.putString("lab_logo", it.thumbnail)
+                    bundlepk.putString("lab_address", it.address)
+                    val appCompatActivity = context as AppCompatActivity
+                    val transactionpk = appCompatActivity.supportFragmentManager.beginTransaction()
+                    val openfragmtpk = AvailablePacksFragment()
+                    openfragmtpk.arguments = bundlepk
+                    transactionpk.replace(R.id.frame_container, openfragmtpk)
+                    transactionpk.addToBackStack(null)
+                    transactionpk.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                    transactionpk.commit()
 
                 }
             }

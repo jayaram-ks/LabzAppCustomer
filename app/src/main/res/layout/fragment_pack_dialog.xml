@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minWidth="300dp">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:background="@color/pack_col"
+        android:paddingVertical="4dp"
+        android:paddingHorizontal="10dp"
+        android:textSize="14sp"
+        android:id="@+id/pack_title"
+        android:shadowColor = "@color/txtShadow"
+        android:shadowDx = "2"
+        android:shadowDy = "2"
+        android:shadowRadius = "2"
+        />
+    <ImageView
+        android:id="@+id/pack_img"
+        android:layout_height="170dp"
+        android:layout_width="300dp"
+        android:scaleType="fitXY"
+        android:padding="5dp"
+        />
+
+    <TextView
+        android:id="@+id/pack_details"
+        android:gravity="top"
+        android:paddingHorizontal="8dp"
+        android:paddingTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="25"
+        android:letterSpacing=".01"
+        android:textColor="@color/black"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/pack_precaution"
+        android:gravity="center_vertical"
+        android:paddingTop="5dp"
+        android:paddingHorizontal="8dp"
+        android:paddingBottom="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="25"
+        android:letterSpacing=".01"
+        android:textStyle="italic"
+        android:textColor="@color/black"
+        android:textSize="12sp" />
+
+
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="10dp">
+        <Button
+            android:layout_width="0dp"
+            android:id="@+id/closedialg"
+            android:layout_weight="1"
+            android:layout_marginRight="5dp"
+            android:layout_height="40dp"
+            android:textAllCaps="false"
+            android:layout_marginVertical="4dp"
+            android:text="@string/close"
+            android:textSize="12sp"
+            app:backgroundTint="@color/green" />
+
+        <Button
+            android:layout_width="0dp"
+            android:id="@+id/bookapack"
+            android:layout_weight="1"
+            android:layout_height="40dp"
+            android:layout_marginLeft="5dp"
+            android:textAllCaps="false"
+            android:letterSpacing=".01"
+            android:layout_marginVertical="4dp"
+            android:text="Book A Package"
+            android:textSize="12sp"
+            app:backgroundTint="@color/green" />
+    </LinearLayout>
+
+
+</LinearLayout>

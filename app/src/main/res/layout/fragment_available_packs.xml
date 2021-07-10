@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/transp_black"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="@color/orange"
+        android:gravity="center|start"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:text="Available Packages"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:id="@+id/lab_head"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/green"
+        android:gravity="center|start"
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="4dp"
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        android:shadowColor = "@color/txtShadow"
+        android:shadowDx = "2"
+        android:shadowDy = "2"
+        android:shadowRadius = "2"
+        />
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:paddingBottom="5dp">
+        <ImageView
+            android:id="@+id/lablogo"
+            android:padding="5dp"
+            android:background="@color/white"
+            android:layout_width="70dp"
+            android:layout_height="70dp"/>
+        <TextView
+            android:paddingVertical="5dp"
+            android:paddingRight="5dp"
+            android:gravity="start"
+            android:textSize="13sp"
+            android:lineHeight="15sp"
+            android:maxLines="4"
+            android:textColor="@color/textBlack"
+            android:id="@+id/labaddress"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/pack_search"
+        android:layout_marginHorizontal="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/round_button_white"
+        android:textCursorDrawable="@null"
+        app:iconifiedByDefault="false"
+        app:queryBackground="@null" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="120dp"
+        />
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="8dp"
+        android:id="@+id/availpacks_recycler"
+        android:layout_height="match_parent"
+        />
+
+</LinearLayout>

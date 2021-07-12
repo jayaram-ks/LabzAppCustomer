@@ -20,6 +20,8 @@ const val GET_MYREPORTS = "getmyreports"
 const val PRESC_FILE_UPLOAD = "uploadprescription"
 const val UPDATE_DEVICE_ID = "updatefbdeviceid"
 const val GET_PACKS_AVAILABLE = "labspackagedetails"
+const val GET_PACKS_BANNER = "listpackagesbanner"
+const val GET_SINGLE_PACK_DET = "singlepackdetails"
 
 
 val districtz = linkedMapOf(0 to "--Select District--", 1 to "Thiruvananthapuram", 2 to "Kollam", 3 to "Pathanamthitta", 4 to "Alappuzha", 5 to "Kottayam", 6 to "Idukki",

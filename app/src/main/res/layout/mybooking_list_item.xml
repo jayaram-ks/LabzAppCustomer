@@ -103,7 +103,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/white"
             android:background="@color/bluish"
-            android:paddingVertical="5dp"
+            android:paddingVertical="4dp"
             android:paddingHorizontal="10dp"
             android:textSize="13sp"
             android:id="@+id/book_total"

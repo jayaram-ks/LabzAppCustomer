@@ -5,6 +5,7 @@ import android.content.Context
 import android.graphics.Paint
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
@@ -14,6 +15,7 @@ import com.labzapp.customer.R
 import com.labzapp.customer.databinding.AvailPackListItemBinding
 import com.labzapp.customer.fragments.PackDialogFragment
 import com.labzapp.customer.models.PackDetails
+import com.squareup.picasso.Picasso
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -67,6 +69,16 @@ class AvailPacksAdapter( val context: Context,private val packs: ArrayList<PackD
         @SuppressLint("SetTextI18n")
         fun setData(pack: PackDetails?, pos: Int) {
             pack?.let {
+
+                if( it.pack_has_image != "") {
+                    Picasso.with(context).load(it.pack_image).fit().into(binding.listPackImg)
+                    binding.listPackImg.visibility = View.VISIBLE
+                }
+                else
+                {
+                    binding.listPackImg.visibility = View.GONE
+                }
+
                 binding.packTitle.text = it.pack_name
                 binding.packRate1.text = "Package Price : " +context.getString(R.string.rupee)+" "+it.rate_final
                 binding.packRate2.text =  " Actual Price : " +context.getString(R.string.rupee)+" "+it.rate_initial

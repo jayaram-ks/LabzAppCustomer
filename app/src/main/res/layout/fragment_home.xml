@@ -67,7 +67,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="10dp">
+            android:padding="8dp">
 
 
 
@@ -82,8 +82,8 @@
                     android:id="@+id/req_a_call"
                     android:layout_width="0dp"
                     android:layout_height="90dp"
-                    android:layout_marginEnd="5dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginBottom="8dp"
                     android:layout_weight="1"
                     android:background="@drawable/round_button_15dp"
                     android:drawableTop="@drawable/ic_telephone"
@@ -102,8 +102,8 @@
                     android:id="@+id/upload_prescription"
                     android:layout_width="0dp"
                     android:layout_height="90dp"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginBottom="8dp"
                     android:layout_weight="1"
                     android:maxLines="1"
                     android:background="@drawable/round_button_15dp"
@@ -130,8 +130,8 @@
                     android:id="@+id/view_labshome"
                     android:layout_width="0dp"
                     android:layout_height="90dp"
-                    android:layout_marginEnd="5dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginBottom="8dp"
                     android:layout_weight="1"
                     android:background="@drawable/round_button_15dp"
                     android:drawableTop="@drawable/ic_lab_2"
@@ -150,8 +150,8 @@
                     android:id="@+id/book_new_test"
                     android:layout_width="0dp"
                     android:layout_height="90dp"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginBottom="8dp"
                     android:layout_weight="1"
                     android:background="@drawable/round_button_15dp"
                     android:drawableTop="@drawable/ic_book"
@@ -170,23 +170,25 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingBottom="3dp">
                 <TextView
                     android:layout_width="0dp"
-                    android:paddingStart="15dp"
+                    android:paddingLeft="8dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textSize="15dp"
-                    android:textColor="@color/green"
+                    android:textSize="16sp"
+                    android:textColor="@color/success_green"
                     android:text="@string/health_packages"
-                    android:textFontWeight="700"/>
+                    android:textStyle="bold"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingStart="10dp"
                     android:paddingEnd="15dp"
-                    android:textColor="@color/green"
-                    android:text="@string/view_all" />
+                    android:textSize="15sp"
+                    android:textColor="@color/success_green"
+                    />
 
             </LinearLayout>
 
@@ -197,32 +199,44 @@
                 android:layout_height = "0dp"/>
 
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width = "match_parent"
-                android:layout_height = "200dp">
-
-                <!-- Card View -->
+                android:layout_height = "200dp"
+                android:layout_marginTop="4dp"
+                android:orientation="horizontal">
                 <androidx.cardview.widget.CardView
-                    app:cardElevation ="4dp"
+                    app:cardElevation ="0dp"
                     app:cardCornerRadius = "10dp"
                     android:foregroundGravity = "center"
-                    android:layout_centerInParent = "true"
                     android:layout_width = "match_parent"
                     android:layout_height = "wrap_content"
-                    app:cardUseCompatPadding="true">
+                    >
 
-                    <!-- simple image view -->
-                    <ImageView
-                        android:id="@+id/ddrcim"
-                        android:scaleType = "centerCrop"
-                        android:padding="15dp"
-                        android:src = "@drawable/ddrc"
-                        android:layout_width = "match_parent"
-                        android:layout_height = "match_parent"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+                        <ProgressBar
+                            android:id="@+id/progress_bar2"
+                            style="@style/Widget.AppCompat.ProgressBar"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="65dp"
+                            />
+                        <androidx.viewpager2.widget.ViewPager2
+                            android:id="@+id/view_pager3"
+                            android:background="@color/white"
+                            android:nestedScrollingEnabled="false"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+
+                    </LinearLayout>
+
+
 
                 </androidx.cardview.widget.CardView>
 
-            </RelativeLayout>
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>

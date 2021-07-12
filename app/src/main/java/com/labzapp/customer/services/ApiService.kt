@@ -171,4 +171,21 @@ interface ApiService {
         @Query("lab_id") labid: Int?,
     ): Call<AvailPackResponse>
 
+    @GET(GET_PACKS_BANNER)
+    fun getPackagesBanner(
+        @Header("Authorization") authtoken: String?,
+        @Query("api_token") apitoken: String?,
+        @Query("latitude") latitude: Double?,
+        @Query("longitude") longitude: Double?,
+    ):Call<PackageBannerResponse>
+
+    @GET(GET_SINGLE_PACK_DET)
+    fun getSinglePackDetail(
+        @Header("Authorization") authtoken: String?,
+        @Query("api_token") apitoken: String?,
+        @Query("pack_id") packid: String?,
+    ):Call<SinglePackResponse>
+
+
+
 }

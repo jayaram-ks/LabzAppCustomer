@@ -46,7 +46,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/white"
             android:background="@color/green"
-            android:paddingVertical="5dp"
+            android:paddingVertical="4dp"
             android:paddingHorizontal="10dp"
             android:textSize="14sp"
             android:id="@+id/tst_footer"

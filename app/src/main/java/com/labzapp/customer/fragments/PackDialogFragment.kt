@@ -1,5 +1,6 @@
 package com.labzapp.customer.fragments
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
@@ -60,11 +61,12 @@ class PackDialogFragment : DialogFragment() {
         return dialog
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.packTitle.text = param1
-        binding.packDetails.text = param2
-        binding.packPrecaution.text = param3
+        binding.packDetails.text = "Description : "+ param2
+        binding.packPrecaution.text = "Precautions : "+ param3
 
         if( param5 != "") {
             Picasso.with(context).load(param4).fit().into(binding.packImg)
@@ -91,7 +93,7 @@ class PackDialogFragment : DialogFragment() {
     companion object {
         @JvmStatic
         fun newInstance(param1: String, param2: String, param3: String,param4: String,param5: String) =
-            HomeFragment().apply {
+            PackDialogFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

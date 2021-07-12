@@ -12,6 +12,7 @@ import android.os.Environment
 import android.os.StrictMode
 import android.os.StrictMode.VmPolicy
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,11 +27,9 @@ import com.labzapp.customer.BuildConfig
 import com.labzapp.customer.R
 import com.labzapp.customer.activities.BookingActivity
 import com.labzapp.customer.adapters.BannersAdapter
+import com.labzapp.customer.adapters.PackBannerAdapter
 import com.labzapp.customer.databinding.FragmentHomeBinding
-import com.labzapp.customer.models.BannerData
-import com.labzapp.customer.models.BannerResponse
-import com.labzapp.customer.models.MakeCallResponse
-import com.labzapp.customer.models.UploadPresResponse
+import com.labzapp.customer.models.*
 import com.labzapp.customer.services.ApiService
 import com.labzapp.customer.services.ServiceBuilder
 import com.labzapp.customer.storage.SharedPrefManager
@@ -66,7 +65,8 @@ class HomeFragment : Fragment() {
     private var prescImageFrom = 1
     lateinit var currentPhotoPath: String
     private var touploadfile:File? = null
-
+    private var myLat : Double = 0.00
+    private var myLong : Double = 0.00
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -90,6 +90,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        getMyData() //for latLong to fetch package
         fetchBanners()
         //----BOOK A TEST----
         binding.bookNewTest.setOnClickListener{
@@ -121,9 +122,6 @@ class HomeFragment : Fragment() {
                 openGallery()
             }else if(uploadFrom == "cam"){
                 checkPermissions()
-
-
-
             }
         }
     }
@@ -342,6 +340,79 @@ class HomeFragment : Fragment() {
         }
     }
 
+
+
+    private fun fetchPackBanners() {
+
+        val authTokn: String? = "Bearer "+ SharedPrefManager.getInstance(requireContext()).authKey
+        val apiTokn: String? = SharedPrefManager.getInstance(requireContext()).apiToken
+
+        val apiService = ServiceBuilder.buildService(ApiService::class.java)
+        val requestCall = apiService.getPackagesBanner(authTokn, apiTokn,myLat,myLong)
+        requestCall.enqueue(object : Callback<PackageBannerResponse> {
+            override fun onResponse(call: Call<PackageBannerResponse>, response: Response<PackageBannerResponse>) {
+                val resp = response.body()
+
+              if (resp?.code == 200) {
+                  showPackBanners(resp.packbanner)
+                } else {
+                    view?.let{snackze(it,resp?.message.toString(),binding.viewLabshome.id) }
+                }
+            }
+
+            override fun onFailure(call: Call<PackageBannerResponse>, t: Throwable) {
+                view?.let{snackze(it,t.message.toString(),binding.viewLabshome.id) }
+            }
+        })
+    }
+
+    private fun showPackBanners(packbannerlist: List<PackBannerData>)
+    {
+        if (!isAdded) return
+        val progBar2: ProgressBar = binding.progressBar2
+        progBar2.visibility = View.GONE
+        binding.viewPager3.adapter = PackBannerAdapter(requireContext(),packbannerlist)
+        val packsize = packbannerlist.size
+        lifecycleScope.launch {
+            while(true) {
+                for (p in 0..packsize) {
+                    delay(10000)
+                        binding.viewPager3.setCurrentItem(p,true)
+                }
+            }
+        }
+    }
+
+    private fun getMyData(){
+        val authTokn: String? = "Bearer "+ SharedPrefManager.getInstance(requireContext()).authKey
+        val apiTokn: String? = SharedPrefManager.getInstance(requireContext()).apiToken
+        val apiService = ServiceBuilder.buildService(ApiService::class.java)
+        val requestCall = apiService.getProfile(authTokn, apiTokn)
+        requestCall.enqueue(object : Callback<ProfileResponse> {
+            override fun onResponse(call: Call<ProfileResponse>, response: Response<ProfileResponse>) {
+                val resp = response.body()
+                if (resp?.code == 200) {
+                    resp.customer.let {
+                        myLat = it.latitude!!
+                        myLong = it.longitude!!
+                        if( (myLat.toString() != "") and (myLong.toString() != "") )
+                        {
+                            fetchPackBanners()
+                        }
+                    }
+
+                } else {
+                    view?.let{ snackze(it,resp?.message.toString(),binding.viewLabshome.id)}
+                }
+            }
+            override fun onFailure(call: Call<ProfileResponse>, t: Throwable) {
+                view?.let{ snackze(it,t.message.toString(),binding.viewLabshome.id)}
+            }
+        })
+    }
+
+
+
     private fun requestACall() {
 
         val authTokn: String? = "Bearer "+ SharedPrefManager.getInstance(requireContext()).authKey
@@ -369,6 +440,7 @@ class HomeFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         fetchBanners()
+        getMyData()
     }
 
     companion object {

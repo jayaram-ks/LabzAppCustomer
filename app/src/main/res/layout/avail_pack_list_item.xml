@@ -30,6 +30,17 @@
             android:shadowRadius = "2"
             />
 
+        <ImageView
+            android:id="@+id/list_pack_img"
+            android:layout_height="170dp"
+            android:layout_width="match_parent"
+            android:scaleType="fitXY"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/transp_black"
+            />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -46,7 +57,7 @@
                     android:id="@+id/pack_rate1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
+                    android:textColor="@color/textBlack"
                     android:textStyle="bold"
                     android:textSize="15sp" />
                 <TextView
@@ -55,7 +66,7 @@
                     android:paddingStart="6dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
+                    android:textColor="@color/textBlack"
                     android:textSize="14sp" />
 
             </LinearLayout>
@@ -72,7 +83,7 @@
                 android:ellipsize="end"
                 android:letterSpacing=".01"
                 android:layout_weight="1"
-                android:textColor="@color/black"
+                android:textColor="@color/textBlack"
                 android:textSize="13sp" />
 
         </LinearLayout>

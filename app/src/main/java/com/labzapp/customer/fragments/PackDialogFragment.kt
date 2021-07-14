@@ -19,6 +19,8 @@ private const val ARG_PARAM2 = "param2"
 private const val ARG_PARAM3 =  "param3"
 private const val ARG_PARAM4 =  "param4"
 private const val ARG_PARAM5 =  "param5"
+private const val ARG_PARAM6 =  "param6"
+
 
 
 class PackDialogFragment : DialogFragment() {
@@ -31,6 +33,7 @@ class PackDialogFragment : DialogFragment() {
     private var param3: String? = null
     private var param4: String? = null
     private var param5: String? = null
+    private var param6: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +43,7 @@ class PackDialogFragment : DialogFragment() {
             param3 = it.getString(ARG_PARAM3)
             param4 = it.getString(ARG_PARAM4)
             param5 = it.getString(ARG_PARAM5)
+            param6 = it.getString(ARG_PARAM6)
         }
     }
 
@@ -80,7 +84,12 @@ class PackDialogFragment : DialogFragment() {
         }
         binding.bookapack.setOnClickListener{
             val intent = Intent(requireActivity(), BookingActivity::class.java)
-            startActivity(intent)
+            intent.putExtra("pack_or_test", "2") //Package booking
+            intent.putExtra("pack_id",param6)
+            if(param6 != null) {
+                startActivity(intent)
+            }
+
         }
     }
 
@@ -92,7 +101,7 @@ class PackDialogFragment : DialogFragment() {
 
     companion object {
         @JvmStatic
-        fun newInstance(param1: String, param2: String, param3: String,param4: String,param5: String) =
+        fun newInstance(param1: String, param2: String, param3: String,param4: String,param5: String,param6: String) =
             PackDialogFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
@@ -100,6 +109,7 @@ class PackDialogFragment : DialogFragment() {
                     putString(ARG_PARAM3, param3)
                     putString(ARG_PARAM4, param4)
                     putString(ARG_PARAM5, param5)
+                    putString(ARG_PARAM6, param6)
                 }
             }
     }

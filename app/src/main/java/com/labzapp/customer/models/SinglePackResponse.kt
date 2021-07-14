@@ -16,5 +16,6 @@ data class SinglePackDetails (
     val rate_final : String?,
     val test_count : String?,
     val lab_name : String?,
-    val lab_address : String?
+    val lab_address : String?,
+    val service_charge : String?,
 )

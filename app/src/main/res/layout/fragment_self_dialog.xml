@@ -12,7 +12,7 @@
         android:background="@color/green"
         android:paddingHorizontal="15dp"
         android:textSize="17sp"
-        android:text="You are booking a test for"
+        android:text="You are booking for"
         android:textStyle="bold"
         />
 

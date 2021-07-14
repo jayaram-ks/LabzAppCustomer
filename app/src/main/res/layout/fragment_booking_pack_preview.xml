@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="@color/orange"
+            android:gravity="center|start"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"
+            android:text="Booking Preview"
+            android:textColor="@color/white"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="10dp"/>
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="15dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:background="@color/pack_col"
+                    android:paddingVertical="4dp"
+                    android:paddingHorizontal="10dp"
+                    android:textSize="14sp"
+                    android:id="@+id/pack_title"
+                    android:shadowColor = "@color/txtShadow"
+                    android:shadowDx = "2"
+                    android:shadowDy = "2"
+                    android:shadowRadius = "2"
+                    />
+                <ImageView
+                    android:id="@+id/pack_img"
+                    android:layout_height="180dp"
+                    android:layout_width="match_parent"
+                    android:scaleType="fitXY"
+                    />
+
+                <TextView
+                    android:id="@+id/tests_details"
+                    android:gravity="top"
+                    android:paddingHorizontal="8dp"
+                    android:paddingTop="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="25"
+                    android:lineHeight="12sp"
+                    android:letterSpacing=".01"
+                    android:textColor="@color/textBlack"
+                    android:textSize="12sp" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="2dp">
+                    <TextView
+                        android:id="@+id/pack_rate1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/textBlack"
+                        android:textStyle="bold"
+                        android:textSize="13sp" />
+                    <TextView
+                        android:id="@+id/pack_rate2"
+                        android:textStyle="bold"
+                        android:paddingStart="6dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/textBlack"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/lab_name"
+                    android:gravity="top"
+                    android:paddingHorizontal="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="25"
+                    android:lineHeight="12sp"
+                    android:letterSpacing=".01"
+                    android:textColor="@color/textBlack"
+                    android:textSize="12sp" />
+                <TextView
+                    android:id="@+id/lab_address"
+                    android:gravity="top"
+                    android:paddingHorizontal="8dp"
+                    android:paddingBottom="7dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="25"
+                    android:lineHeight="12sp"
+                    android:letterSpacing=".01"
+                    android:textColor="@color/textBlack"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="15dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:foreground="?android:attr/selectableItemBackground">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:background="@color/green"
+                    android:paddingVertical="4dp"
+                    android:paddingHorizontal="10dp"
+                    android:textSize="14sp"
+                    android:text="Charges"
+                    android:shadowColor = "@color/txtShadow"
+                    android:shadowDx="2"
+                    android:shadowDy="2"
+                    android:shadowRadius="2"
+                    />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/golden"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="3"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:background="@color/green"
+                            android:paddingTop="4dp"
+                            android:paddingHorizontal="11dp"
+                            android:textSize="13sp"
+                            android:text="Total Test Charge"
+                            />
+                        <TextView
+                            android:id="@+id/total_test_charge"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:background="@color/green"
+                            android:paddingTop="4dp"
+                            android:paddingHorizontal="10dp"
+                            android:textSize="13sp"
+                            />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="3"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:background="@color/green"
+                            android:paddingVertical="4dp"
+                            android:paddingHorizontal="11dp"
+                            android:textSize="13sp"
+                            android:text="Service Charge"
+                            />
+                        <TextView
+                            android:id="@+id/lab_service_charge"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/white"
+                            android:background="@color/green"
+                            android:paddingVertical="4dp"
+                            android:paddingHorizontal="10dp"
+                            android:textSize="13sp"
+                            />
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/golden"
+                        />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:textColor="@color/white"
+                            android:background="@color/orange"
+                            android:paddingBottom="5dp"
+                            android:paddingTop="3dp"
+                            android:paddingHorizontal="11dp"
+                            android:textSize="13sp"
+                            android:text="Grand Total"/>
+                        <TextView
+                            android:id="@+id/grand_total"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="@color/white"
+                            android:background="@color/orange"
+                            android:paddingBottom="5dp"
+                            android:paddingTop="3dp"
+                            android:paddingHorizontal="10dp"
+                            android:textSize="13sp"
+                            />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="15dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="15dp">
+
+            <LinearLayout android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingVertical="8dp"
+                android:paddingHorizontal="5dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textColor="@color/textBlack"
+                    android:text="No need to pay now"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="12sp"
+                    android:textColor="@color/textBlack"
+                    android:text="Payment will be collected at the time of sample collection"/>
+                <TextView
+                    android:id="@+id/sample_pref_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textSize="12sp"
+                    android:layout_marginBottom="5dp"
+                    android:textColor="@color/textBlack"
+                    android:text=""/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/golden"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="5dp"
+                    android:gravity="center"
+                    android:letterSpacing=".01"
+                    android:textStyle="bold"
+                    android:textSize="12sp"
+                    android:textColor="@color/textBlack"
+                    android:text="You will get an intimation when the reports are ready"/>
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/continue_preview_btn"
+            android:layout_width="170dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/round_button_white"
+            android:backgroundTint="@color/orange"
+            android:elevation="5dp"
+            android:text="@string/_continue"
+            android:textAllCaps="false"
+            android:textColor="@color/white" />
+    </LinearLayout>
+</ScrollView>

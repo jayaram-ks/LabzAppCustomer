@@ -6,6 +6,7 @@ data class AvailPackResponse(val code : Int,
                             val laballpacks : ArrayList<PackDetails>)
 
 data class PackDetails (
+    val pack_id : String,
     val pack_name : String,
     val pack_desc : String?,
     val pack_tests : String?,

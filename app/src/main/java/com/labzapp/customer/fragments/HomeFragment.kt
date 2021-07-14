@@ -343,7 +343,7 @@ class HomeFragment : Fragment() {
 
 
     private fun fetchPackBanners() {
-
+        if (!isAdded) return
         val authTokn: String? = "Bearer "+ SharedPrefManager.getInstance(requireContext()).authKey
         val apiTokn: String? = SharedPrefManager.getInstance(requireContext()).apiToken
 

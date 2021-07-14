@@ -69,7 +69,11 @@ class PackBannerDialogFragment : DialogFragment() {
         }
         binding.bookapack.setOnClickListener{
             val intent = Intent(requireActivity(), BookingActivity::class.java)
-            startActivity(intent)
+            intent.putExtra("pack_or_test", "2") //Package booking
+            intent.putExtra("pack_id",param1)
+            if(param1 != null) {
+                startActivity(intent)
+            }
         }
     }
 

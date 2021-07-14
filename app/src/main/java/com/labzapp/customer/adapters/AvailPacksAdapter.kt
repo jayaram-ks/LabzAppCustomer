@@ -55,6 +55,7 @@ class AvailPacksAdapter( val context: Context,private val packs: ArrayList<PackD
                     bundle.putString("param3", it.pack_precautions.toString())
                     bundle.putString("param4", it.pack_image.toString())
                     bundle.putString("param5", it.pack_has_image.toString())
+                    bundle.putString("param6", it.pack_id)
 
                     val appCompatActivity = context as AppCompatActivity
                     val fragmentManager =  appCompatActivity.supportFragmentManager

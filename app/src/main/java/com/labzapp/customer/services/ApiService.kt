@@ -186,6 +186,23 @@ interface ApiService {
         @Query("pack_id") packid: String?,
     ):Call<SinglePackResponse>
 
-
+    @FormUrlEncoded
+    @POST(SUBMIT_PACKAGE_BOOKING)
+    fun submitPackBooking(
+        @Header("Authorization") authtoken: String?,
+        @Field("api_token") apitoken: String?,
+        @Field("patient_name") pname: String?,
+        @Field("patient_mobile") pmobile: String?,
+        @Field("age") patntage: String?,
+        @Field("gender") pgender: String?,
+        @Field("patient_address") paddress: String?,
+        @Field("patient_pincode") pincode: String?,
+        @Field("patient_latitude") plat: String?,
+        @Field("patient_longitude") plong: String?,
+        @Field("patient_district") pdist: String?,
+        @Field("pack_id") packid: String?,
+        @Field("paper_bill_needed") paperbill: String?,
+        @Field("pref_date") prefdate: String?,
+    ): Call<SubmitBookingResponse>
 
 }

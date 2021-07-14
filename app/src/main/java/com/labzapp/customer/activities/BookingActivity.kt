@@ -8,19 +8,25 @@ import androidx.fragment.app.FragmentTransaction
 import com.labzapp.customer.R
 import com.labzapp.customer.databinding.ActivityBookingBinding
 import com.labzapp.customer.fragments.BookingHomeFragment
+import com.labzapp.customer.fragments.BookingPackHomeFragment
+import com.labzapp.customer.fragments.PackBannerDialogFragment
 import com.labzapp.customer.storage.SharedPrefManager
 import com.labzapp.customer.utilities.network.ConnectionType
 import com.labzapp.customer.utilities.network.NetworkMonitorUtil
+import com.labzapp.customer.utilities.toastz
 
 class BookingActivity : AppCompatActivity() {
     private lateinit var binding: ActivityBookingBinding
     private val networkMonitor = NetworkMonitorUtil(this)
+    private var packOrTest : String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityBookingBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-
+        var packageID:String? = null
+        packOrTest = intent?.getStringExtra("pack_or_test")
+        packageID = intent?.getStringExtra("pack_id")
 
         networkMonitor.result = { isAvailable, type ->
             runOnUiThread {
@@ -44,9 +50,24 @@ class BookingActivity : AppCompatActivity() {
             }
         }
 
+       if(packOrTest == "2"){  //is package booking
+           if(packageID != ""){
+               val bundle = Bundle()
+               bundle.putString("param1", packageID)
+               val packFragment = BookingPackHomeFragment()
+               packFragment.arguments = bundle
+               val transaction = supportFragmentManager.beginTransaction()
+               transaction.replace(R.id.booking_container, packFragment)
+               transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+               transaction.commit()
+           }
 
-        val homeFragment = BookingHomeFragment()
-        setCurrentFragment(homeFragment)
+
+        }else{  //Tests booking
+            val homeFragment = BookingHomeFragment()
+            setCurrentFragment(homeFragment)
+        }
+
     }
 
     private fun setCurrentFragment(fragment: Fragment)=

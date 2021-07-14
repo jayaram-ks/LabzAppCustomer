@@ -23,7 +23,7 @@
         />
     <ImageView
         android:id="@+id/pack_img"
-        android:layout_height="180dp"
+        android:layout_height="160dp"
         android:layout_width="320dp"
         android:scaleType="fitXY"
         />

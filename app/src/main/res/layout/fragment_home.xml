@@ -97,7 +97,7 @@
                     android:paddingTop="10dp"
                     android:textColor="@color/textBlack"
                     android:fontFamily="@font/lato_bold"
-                    android:text="@string/request_a_call"
+                    android:text="Book on Call"
                     android:letterSpacing=".01"
                     android:textAllCaps="false" />
 

@@ -41,7 +41,7 @@ class BookTestRateAdapter(val context: Context, private val testrates: ArrayList
         fun setData(testrate: BookedTests?, pos: Int) {
             testrate?.let {
                 binding.testzTitle.text = it.test_name
-                binding.testzRate.text = context.getString(R.string.rupee)+" "+it.booking_test_rate.toString()
+                binding.testzRate.text = context.getString(R.string.rupee)+" "+it.booking_test_rate.toFloat().toString()
             }
             this.currentTestRate = testrate
             this.currentPosition = pos

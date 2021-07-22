@@ -180,7 +180,7 @@ class BookingPackPreviewFragment : Fragment() {
                         binding.labName.text = "Lab Name : "+ it.lab_name
                         binding.labAddress.text = "Lab Address : "+ it.lab_address
                         binding.packRate1.text = "Package Price : " +rupee+" "+it.rate_final
-                        binding.packRate2.text =  " Actual Price : " +rupee+" "+it.rate_initial
+                        binding.packRate2.text =  rupee+" "+it.rate_initial
                         binding.packRate2.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
                         val servcharge = it.service_charge?.toFloat()
                         val packtotal = it.rate_final?.toFloat()

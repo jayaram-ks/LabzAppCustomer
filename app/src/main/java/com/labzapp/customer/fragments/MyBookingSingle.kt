@@ -109,7 +109,7 @@ class MyBookingSingle : Fragment() {
                         binding.labName.text ="Name : " + it.lab_name
                         binding.labPinDistrict.text = "Pincode : "+ it.lab_pincode
 
-                        binding.testTotal.text = rupee +  it.booking_total
+                        binding.testTotal.text = rupee +  it.booking_total.toFloat().toString()
                         binding.serviceCharges.text = rupee +  it.service_charge.toFloat().toString()
                         binding.grandTotal.text = rupee + it.grand_total.toFloat().toString()
 

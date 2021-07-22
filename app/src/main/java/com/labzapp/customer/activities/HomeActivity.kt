@@ -16,7 +16,6 @@ import com.labzapp.customer.fragments.HomeFragment
 import com.labzapp.customer.fragments.LabsFragment
 import com.labzapp.customer.fragments.ProfileFragment
 import com.labzapp.customer.fragments.ReportsFragment
-import com.labzapp.customer.models.BannerResponse
 import com.labzapp.customer.models.FbIdUpdateResponse
 import com.labzapp.customer.services.ApiService
 import com.labzapp.customer.services.ServiceBuilder

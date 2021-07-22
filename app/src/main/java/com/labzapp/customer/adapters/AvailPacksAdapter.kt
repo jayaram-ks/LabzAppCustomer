@@ -82,7 +82,7 @@ class AvailPacksAdapter( val context: Context,private val packs: ArrayList<PackD
 
                 binding.packTitle.text = it.pack_name
                 binding.packRate1.text = "Package Price : " +context.getString(R.string.rupee)+" "+it.rate_final
-                binding.packRate2.text =  " Actual Price : " +context.getString(R.string.rupee)+" "+it.rate_initial
+                binding.packRate2.text =  context.getString(R.string.rupee)+" "+it.rate_initial
                 binding.packDetails.text = "Tests Included : "+ it.pack_tests
                 binding.packFooter.text = it.test_count+" Tests in this Package"
                 binding.packRate2.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG

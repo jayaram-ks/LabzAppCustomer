@@ -133,9 +133,6 @@ class MyBookingSingle : Fragment() {
                         }
                     }
 
-
-
-
                 } else {
                     view?.let{ snackze(it,resp?.message.toString(),binding.progressBar.id) }
                 }
@@ -172,8 +169,6 @@ class MyBookingSingle : Fragment() {
                             binding.packImg.visibility = View.GONE
                         }
                     }
-
-
 
                 } else {
                     view?.let{ snackze(it,resp?.message.toString(),binding.labName.id) }

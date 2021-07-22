@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
@@ -23,6 +24,7 @@ import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.snackbar.Snackbar
 import com.labzapp.customer.BuildConfig
 import com.labzapp.customer.R
 import com.labzapp.customer.activities.BookingActivity
@@ -264,7 +266,18 @@ class HomeFragment : Fragment() {
 
                         if (resp?.code == 200) {
                             resp.let {
-                                view?.let{ snackzsucc(it,resp?.message.toString(),binding.bookNewTest.id) }
+
+
+                                view?.let {
+
+                                    Snackbar.make(it,resp?.message.toString(),Snackbar.LENGTH_INDEFINITE).setTextColor(Color.WHITE)
+                                        .setActionTextColor(Color.WHITE)
+                                        .setAnchorView(binding.bookNewTest.id).setBackgroundTint(
+                                            Color.parseColor("#FF6600")).setAction("OK") {
+                                            // Responds to click on the action
+                                        }.show()
+                                }
+
                             }
 
                         } else {
@@ -423,7 +436,15 @@ class HomeFragment : Fragment() {
             override fun onResponse(call: Call<MakeCallResponse>, response: Response<MakeCallResponse>) {
                 val resp = response.body()
                 if (resp?.code == 200) {
-                    view?.let{mss -> snackzsucc(mss,resp?.message.toString(),binding.viewLabshome.id) }
+                    view?.let {
+
+                        Snackbar.make(it,resp?.message.toString(),Snackbar.LENGTH_INDEFINITE).setTextColor(Color.WHITE)
+                            .setActionTextColor(Color.WHITE)
+                            .setAnchorView(binding.viewLabshome.id).setBackgroundTint(
+                            Color.parseColor("#FF6600")).setAction("OK") {
+                            // Responds to click on the action
+                        }.show()
+                    }
                     binding.reqACall.isClickable = false
                 } else {
                     view?.let{snackze(it,resp?.message.toString(),binding.viewLabshome.id) }

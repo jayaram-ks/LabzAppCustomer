@@ -34,7 +34,7 @@
         android:paddingEnd="15dp"
         android:fontFamily="@font/roboto_condensed_regular"
         android:text="0 selected"
-        android:textColor="@color/golden"
+        android:textColor="@color/orange"
         android:textSize="16sp"
         />
 </LinearLayout>

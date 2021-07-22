@@ -189,55 +189,7 @@
                     android:textSize="16sp" />
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:text="Latitude"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:paddingHorizontal="10dp"
-                    android:textColor="@color/white"
-                    android:textStyle="bold"
-                    android:textSize="16sp" />
-                <TextView
-                    android:id="@+id/user_lat"
-                    android:layout_width="0dp"
-                    android:layout_weight="2"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:textColor="@color/white"
-                    android:textSize="16sp" />
-            </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:text="Longitude"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:paddingHorizontal="10dp"
-                    android:textColor="@color/white"
-                    android:textStyle="bold"
-                    android:textSize="16sp" />
-                <TextView
-                    android:id="@+id/user_long"
-                    android:layout_width="0dp"
-                    android:layout_weight="2"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:textColor="@color/white"
-                    android:textSize="16sp" />
-            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"

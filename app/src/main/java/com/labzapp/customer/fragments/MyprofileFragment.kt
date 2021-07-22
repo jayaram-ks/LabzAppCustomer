@@ -64,8 +64,8 @@ class MyprofileFragment : Fragment() {
                         binding.userAddress.text = it.customer.address
                         binding.userPincode.text = it.customer.pincode.toString()
                         binding.userDistrict.text = districtz[it.customer.district]
-                        binding.userLat.text = it.customer.latitude.toString()
-                        binding.userLong.text = it.customer.longitude.toString()
+                       // binding.userLat.text = it.customer.latitude.toString()
+                       // binding.userLong.text = it.customer.longitude.toString()
 
                         val geocoder = Geocoder(requireContext())
                         val list = it.customer.latitude?.let { it1 -> it.customer.longitude?.let { it2 ->

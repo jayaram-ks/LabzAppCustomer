@@ -1,5 +1,6 @@
 package com.labzapp.customer.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -35,10 +36,11 @@ class TestRateAdapter( val context: Context,private val testrates: ArrayList<Lab
             }
         }
 
+        @SuppressLint("SetTextI18n")
         fun setData(testrate: Labtestsrates?, pos: Int) {
             testrate?.let {
                 binding.testzTitle.text = it.test_name
-                binding.testzRate.text = context.getString(R.string.rupee)+" "+it.lab_test_rate.toString()
+                binding.testzRate.text = context.getString(R.string.rupee)+" "+it.lab_test_rate.toFloat().toString()
             }
             this.currentTestRate = testrate
             this.currentPosition = pos

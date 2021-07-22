@@ -141,7 +141,7 @@ class MyReportAdapter( val context: Context,rbinding:FragmentReportsBinding,priv
 
 
                         if(status == DownloadManager.STATUS_SUCCESSFUL  ){
-                            snackzcolor(parentbind.root,msg.toString(),parentbind.progressBar.id,"#FF228B22",7000)
+                            snackzcolor(parentbind.root,msg.toString(),parentbind.progressBar.id,"#FF6600",7000)
                         }else if(status == DownloadManager.STATUS_FAILED ){
                             snackzcolor(parentbind.root,msg.toString(),parentbind.progressBar.id,"#FF3333",3000)
                         }else if(status == DownloadManager.STATUS_PENDING ){

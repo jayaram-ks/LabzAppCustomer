@@ -1,4 +1,3 @@
-sbi
 package com.labzapp.customer.fragments
 
 import android.Manifest
@@ -33,7 +32,6 @@ import com.google.android.gms.maps.model.LatLng
 import com.labzapp.customer.R
 import com.labzapp.customer.databinding.FragmentBookingPackHomeBinding
 import com.labzapp.customer.models.BookingDataPackTransfer
-import com.labzapp.customer.models.BookingDataTransfer
 import com.labzapp.customer.models.ProfileResponse
 import com.labzapp.customer.models.SinglePackResponse
 import com.labzapp.customer.services.ApiService
@@ -41,7 +39,6 @@ import com.labzapp.customer.services.ServiceBuilder
 import com.labzapp.customer.storage.SharedPrefManager
 import com.labzapp.customer.utilities.maps.PermissionUtils
 import com.labzapp.customer.utilities.snackze
-import com.labzapp.customer.utilities.toastz
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch

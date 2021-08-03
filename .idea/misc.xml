@@ -5,6 +5,7 @@
       <map>
         <entry key="app/src/main/res/drawable/bulletimage.xml" value="0.35625" />
         <entry key="app/src/main/res/drawable/ic_book.xml" value="0.35625" />
+        <entry key="app/src/main/res/drawable/ic_google_maps.xml" value="0.371875" />
         <entry key="app/src/main/res/drawable/ic_online_support.xml" value="0.35625" />
         <entry key="app/src/main/res/drawable/ic_online_support_595b40b85ba036ed117da75a.xml" value="0.35625" />
         <entry key="app/src/main/res/drawable/ic_terms_cond.xml" value="0.35625" />
@@ -13,6 +14,7 @@
         <entry key="app/src/main/res/layout/activity_otp_verify.xml" value="0.21603260869565216" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.22010869565217392" />
         <entry key="app/src/main/res/layout/fragment_about.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_booking_home.xml" value="0.16927083333333334" />
         <entry key="app/src/main/res/layout/fragment_contact.xml" value="0.22010869565217392" />
         <entry key="app/src/main/res/layout/fragment_edit_my_profile.xml" value="0.21603260869565216" />
         <entry key="app/src/main/res/layout/fragment_my_booking_single.xml" value="0.21603260869565216" />

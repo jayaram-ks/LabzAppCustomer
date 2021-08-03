@@ -16,7 +16,7 @@ object ServiceBuilder {
 
     private const val URL = API_BASEURL
 
-    // Create Logger
+    // Create Logger for debug only
     private val logger = HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
 
     // Create a Custom Interceptor to apply Headers application wide

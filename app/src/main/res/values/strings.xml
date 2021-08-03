@@ -118,5 +118,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <string name="manage_book_txt2">Note: Customers are free to cancel the test prior to home visit, however any customer chooses to cancel the test after the arrival of a technician or phlebotomist at the site, the booking service charge shall be collected as visit charges. You are not allowed to cancel the booking or claim refund after the samples are collected.
+</string>
+
 
 </resources>

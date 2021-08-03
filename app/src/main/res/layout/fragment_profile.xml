@@ -137,6 +137,26 @@
                 android:background="@color/transp_black"/>
 
             <TextView
+                android:id="@+id/go_terms"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:drawablePadding="15dp"
+                android:gravity="center_vertical"
+                android:text="Manage Bookings"
+                android:textColor="@color/green"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:drawableStartCompat="@drawable/ic_terms_cond" />
+
+
+
+            <View android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/transp_black"/>
+
+            <TextView
                 android:id="@+id/go_results"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -149,24 +169,6 @@
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:drawableStartCompat="@drawable/ic_medical_report" />
-
-            <View android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/transp_black"/>
-
-            <TextView
-                android:id="@+id/go_terms"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="12dp"
-                android:background="?android:attr/selectableItemBackground"
-                android:drawablePadding="15dp"
-                android:gravity="center_vertical"
-                android:text="@string/terms_and_conditions"
-                android:textColor="@color/green"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:drawableStartCompat="@drawable/ic_terms_cond" />
 
             <View android:layout_width="match_parent"
                 android:layout_height="1dp"

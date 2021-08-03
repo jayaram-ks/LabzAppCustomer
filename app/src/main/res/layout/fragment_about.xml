@@ -12,7 +12,7 @@
         android:gravity="center|start"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
-        android:text="@string/about_us"
+        android:text="About Us"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -22,20 +22,622 @@
         android:layout_height="wrap_content"
         android:fillViewport="true"
        >
+    <LinearLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+        <ImageView
+            android:id="@+id/lab_logo"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="25dp"
+            android:src="@drawable/squarelogo"
+            />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:gravity="start"
+        android:paddingHorizontal="15dp"
+        android:paddingTop="13dp"
+        android:text="About us"
+        android:textColor="@color/textBlack"
+        android:textSize="18sp"
+        android:textStyle="normal"
+       />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:gravity="center|start"
         android:paddingHorizontal="15dp"
-        android:paddingVertical="12dp"
-        android:text="An About Us page helps your company make a good first impression, and is critical for building customer trust and loyalty. An About Us page should make sure to cover basic information about the store and its founders, explain the company's purpose and how it differs from the competition, and encourage discussion and interaction. Here are some free templates, samples, and example About Us pages to help your ecommerce store stand out from the crowd.
-When it comes to personalizing your online store, nothing is more effective than an About Us page. This is a quick summary of your company's history and purpose, and should provide a clear overview of the company's brand story. A great About Us page can help tell your brand story, establish customer loyalty, and turn your bland ecommerce store into an well-loved brand icon. Most importantly, it will give your customers a reason to shop from your brand.
-In this post, we'll give you three different ways to create a professional about us page for your online store, blog, or other website - use our about us page generator, use the fill-in-the-blank about us template below, or create your own custom page using the about us examples within this article."
+        android:paddingVertical="6dp"
+        android:text="Labzapp is a leading diagnostic test service facilitator providing high quality laboratory testing at the comfort of your home. We ensure secure, convenient and cost-effective solution for all those who have the need for laboratory testing. We partnered with a network of accredited diagnostic centres situated throughout Kerala. You can opt the diagnostic centre of your choice."
         android:textColor="@color/textBlack"
         android:textSize="15sp"
         android:textStyle="normal"
-       />
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center|start"
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="6dp"
+        android:text="Our goal is to enable people in effectively managing their health through unmatched diagnostic experience. We are transforming the way people access diagnostic tests. As we know most of the health-related decisions are taken based on diagnostic results. Apart from treating a disease, blood tests are important for preventing diseases, screening diseases, evaluating treatment or disease progress, and for predicting future risk of diseases."
+        android:textColor="@color/textBlack"
+        android:textSize="15sp"
+        android:textStyle="normal"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center|start"
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="6dp"
+        android:text="We care for your health and provide you with most reliable information to make valuable decisions. Labzapp is an innovative approach to develop creative solutions for healthcare needs of people."
+        android:textColor="@color/textBlack"
+        android:textSize="15sp"
+        android:textStyle="normal"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center|start"
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="6dp"
+        android:text="Our service makes it easier for everyone, regardless of circumstances, to get lab tests quickly, accurately, and affordably. So, we can all stay safe and in control of our own health, always."
+        android:textColor="@color/textBlack"
+        android:textSize="15sp"
+        android:textStyle="normal"
+        />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:paddingHorizontal="15dp"
+            android:paddingTop="13dp"
+            android:text="How it works..."
+            android:textColor="@color/textBlack"
+            android:textSize="18sp"
+            android:textStyle="normal"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="15dp"
+            android:paddingVertical="3dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="&#x25CF;"
+                android:textSize="20sp"
+                android:textColor="@color/textBlack"
+                android:paddingRight="10dp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="Download Labzapp from play store and create profiles for you and your family members."
+                android:layout_marginBottom="5dp"
+                android:textColor="@color/textBlack"
+                android:textSize="15sp"
+                android:textStyle="normal"
+                />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="15dp"
+            android:paddingVertical="3dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="&#x25CF;"
+                android:textSize="20sp"
+                android:textColor="@color/textBlack"
+                android:paddingRight="10dp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="Select a test or packages according to your need."
+                android:layout_marginBottom="5dp"
+                android:textColor="@color/textBlack"
+                android:textSize="15sp"
+                android:textStyle="normal"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="15dp"
+            android:paddingVertical="3dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="&#x25CF;"
+                android:textSize="20sp"
+                android:textColor="@color/textBlack"
+                android:paddingRight="10dp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="Select your favourite diagnostic centre. All accredited laboratories in and around your location will be available for booking."
+                android:layout_marginBottom="5dp"
+                android:textColor="@color/textBlack"
+                android:textSize="15sp"
+                android:textStyle="normal"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="15dp"
+            android:paddingVertical="3dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="&#x25CF;"
+                android:textSize="20sp"
+                android:textColor="@color/textBlack"
+                android:paddingRight="10dp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="You can also book your test either by calling us or upload your prescription and we will do the rest."
+                android:layout_marginBottom="5dp"
+                android:textColor="@color/textBlack"
+                android:textSize="15sp"
+                android:textStyle="normal"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="15dp"
+            android:paddingVertical="3dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="&#x25CF;"
+                android:textSize="20sp"
+                android:textColor="@color/textBlack"
+                android:paddingRight="10dp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="Complete the patient profile and confirm booking."
+                android:layout_marginBottom="5dp"
+                android:textColor="@color/textBlack"
+                android:textSize="15sp"
+                android:textStyle="normal"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="15dp"
+            android:paddingVertical="3dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="&#x25CF;"
+                android:textSize="20sp"
+                android:textColor="@color/textBlack"
+                android:paddingRight="10dp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="No need of any payment at the time of booking. Pay after availing our service."
+                android:layout_marginBottom="5dp"
+                android:textColor="@color/textBlack"
+                android:textSize="15sp"
+                android:textStyle="normal"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="15dp"
+            android:paddingVertical="3dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="&#x25CF;"
+                android:textSize="20sp"
+                android:textColor="@color/textBlack"
+                android:paddingRight="10dp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="After receiving your request our technician will contact you and confirm your tests and time slot."
+                android:layout_marginBottom="5dp"
+                android:textColor="@color/textBlack"
+                android:textSize="15sp"
+                android:textStyle="normal"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="15dp"
+            android:paddingVertical="3dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="&#x25CF;"
+                android:textSize="20sp"
+                android:textColor="@color/textBlack"
+                android:paddingRight="10dp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="A qualified phlebotomist will visit you at your home or office on scheduled date and time and collect the samples."
+                android:layout_marginBottom="5dp"
+                android:textColor="@color/textBlack"
+                android:textSize="15sp"
+                android:textStyle="normal"
+                />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="15dp"
+            android:paddingVertical="3dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="&#x25CF;"
+                android:textSize="20sp"
+                android:textColor="@color/textBlack"
+                android:paddingRight="10dp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="All done! You will get an intimation when reports are ready. You can download it from my report section in the app."
+                android:layout_marginBottom="5dp"
+                android:textColor="@color/textBlack"
+                android:textSize="15sp"
+                android:textStyle="normal"
+                />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:paddingHorizontal="15dp"
+            android:paddingTop="13dp"
+            android:text="Our features"
+            android:textColor="@color/textBlack"
+            android:textSize="18sp"
+            android:textStyle="normal"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="15dp"
+            android:paddingVertical="3dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="&#x25CF;"
+                android:textSize="20sp"
+                android:textColor="@color/textBlack"
+                android:paddingRight="10dp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="Easy booking and home sample collection."
+                android:layout_marginBottom="5dp"
+                android:textColor="@color/textBlack"
+                android:textSize="15sp"
+                android:textStyle="normal"
+                />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="15dp"
+            android:paddingVertical="3dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="&#x25CF;"
+                android:textSize="20sp"
+                android:textColor="@color/textBlack"
+                android:paddingRight="10dp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="Affordable, convenient and cost-effective."
+                android:layout_marginBottom="5dp"
+                android:textColor="@color/textBlack"
+                android:textSize="15sp"
+                android:textStyle="normal"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="15dp"
+            android:paddingVertical="3dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="&#x25CF;"
+                android:textSize="20sp"
+                android:textColor="@color/textBlack"
+                android:paddingRight="10dp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="Can compare prices and get discounts."
+                android:layout_marginBottom="5dp"
+                android:textColor="@color/textBlack"
+                android:textSize="15sp"
+                android:textStyle="normal"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="15dp"
+            android:paddingVertical="3dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="&#x25CF;"
+                android:textSize="20sp"
+                android:textColor="@color/textBlack"
+                android:paddingRight="10dp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="We maintain the confidentiality and security of your health reports."
+                android:layout_marginBottom="5dp"
+                android:textColor="@color/textBlack"
+                android:textSize="15sp"
+                android:textStyle="normal"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="15dp"
+            android:paddingVertical="3dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="&#x25CF;"
+                android:textSize="20sp"
+                android:textColor="@color/textBlack"
+                android:paddingRight="10dp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="We are partnered with accredited labs in your locality."
+                android:layout_marginBottom="5dp"
+                android:textColor="@color/textBlack"
+                android:textSize="15sp"
+                android:textStyle="normal"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="15dp"
+            android:paddingVertical="3dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="&#x25CF;"
+                android:textSize="20sp"
+                android:textColor="@color/textBlack"
+                android:paddingRight="10dp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="Easy in-app access to test reports."
+                android:layout_marginBottom="5dp"
+                android:textColor="@color/textBlack"
+                android:textSize="15sp"
+                android:textStyle="normal"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="15dp"
+            android:paddingVertical="3dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="&#x25CF;"
+                android:textSize="20sp"
+                android:textColor="@color/textBlack"
+                android:paddingRight="10dp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="Highly trained team of phlebotomists."
+                android:layout_marginBottom="5dp"
+                android:textColor="@color/textBlack"
+                android:textSize="15sp"
+                android:textStyle="normal"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="15dp"
+            android:paddingVertical="3dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="&#x25CF;"
+                android:textSize="20sp"
+                android:textColor="@color/textBlack"
+                android:paddingRight="10dp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="Around the clock online customer service."
+                android:layout_marginBottom="5dp"
+                android:textColor="@color/textBlack"
+                android:textSize="15sp"
+                android:textStyle="normal"
+                />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="15dp"
+            android:paddingVertical="3dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="&#x25CF;"
+                android:textSize="20sp"
+                android:textColor="@color/textBlack"
+                android:paddingRight="10dp"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:text="Free doctor consultation regarding your test reports over a call."
+                android:layout_marginBottom="5dp"
+                android:textColor="@color/textBlack"
+                android:textSize="15sp"
+                android:textStyle="normal"
+                />
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center|start"
+            android:paddingHorizontal="15dp"
+            android:paddingVertical="6dp"
+            android:text="No more rushing to the labs… get your blood test done without leaving home, your care is our priority, so we come to you - Labzapp makes it easier for you. Enjoy wellness at your door step."
+            android:textColor="@color/textBlack"
+            android:textSize="15sp"
+            android:textStyle="normal"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:id="@+id/assist_txt"
+            android:layout_height="wrap_content"
+            android:gravity="center|start"
+            android:paddingHorizontal="15dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="20dp"
+            android:text=""
+            android:textColor="@color/textBlack"
+            android:textSize="15sp"
+            android:textStyle="normal"
+            />
+
+
+    </LinearLayout>
     </ScrollView>
+
 </LinearLayout>
 

@@ -2,11 +2,15 @@ package com.labzapp.customer.activities
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Paint
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import com.labzapp.customer.databinding.ActivityRegisterBinding
+import com.labzapp.customer.fragments.PrescFileTypeDialog
+import com.labzapp.customer.fragments.PrivacyDialogFragment
+import com.labzapp.customer.fragments.TermsDialogFragment
 import com.labzapp.customer.models.RegisterResponse
 import com.labzapp.customer.services.ApiService
 import com.labzapp.customer.services.ServiceBuilder
@@ -55,6 +59,18 @@ class RegisterActivity : AppCompatActivity() {
             val fullname = binding.fullName.editText?.text.toString()
             val pincode = binding.pincode.editText?.text.toString()
             getOTP(mobile, fullname, pincode)
+        }
+
+        binding.privPolicy.setOnClickListener {
+            val privPolFrag = PrivacyDialogFragment()
+            val transPriv = supportFragmentManager.beginTransaction()
+            privPolFrag.show(transPriv,null)
+        }
+
+        binding.termUse.setOnClickListener {
+            val termsFrag = TermsDialogFragment()
+            val transtrm = supportFragmentManager.beginTransaction()
+            termsFrag.show(transtrm,null)
         }
     }
 

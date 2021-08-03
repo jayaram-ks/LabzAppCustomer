@@ -1,0 +1,869 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minWidth="300dp">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:background="@color/orange"
+        android:paddingVertical="6dp"
+        android:text="Privacy Policy"
+        android:paddingHorizontal="10dp"
+        android:textSize="17sp"
+        android:shadowColor = "@color/txtShadow"
+        android:shadowDx = "2"
+        android:shadowDy = "2"
+        android:shadowRadius = "2"
+        android:textStyle="bold"
+        />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="5dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="6dp"
+                android:text="Please read this privacy policy carefully by accessing or using our websites or mobile application, you agree to be bound by the terms described herein and all the terms incorporated by reference. If you do not agree to all of these terms, do not use these websites or mobile application."
+                android:textColor="@color/textBlack"
+                android:textSize="13sp"
+                android:textStyle="normal"
+                />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="6dp"
+                android:text="This privacy policy (“Policy”) applies to your use of “Labzapp” a mobile application and websites “www.labzapp.in and www.labzappdiagnostics.in owned and operated by Medinova wellness Solutions Private Limited, a company duly incorporated under the provisions of the Companies Act, 2013 whose registered office is in Kerala, India (hereinafter, referred to as “Labzapp” or “Medinova” or “We” or “Our” or “Us” or “Company”)."
+                android:textColor="@color/textBlack"
+                android:textSize="13sp"
+                android:textStyle="normal"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="6dp"
+                android:text="The Company provides Services through the mobile application(“Labzapp”) and websites (www.labzapp.in and www.labzappdiagnostics.in) as a marketplace and facilitates the Users to avail diagnostic tests /medical advice offered by third-party laboratories or medical doctors/health service providers"
+                android:textColor="@color/textBlack"
+                android:textSize="13sp"
+                android:textStyle="normal"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="6dp"
+                android:text="This Privacy Policy describes how Medinova wellness solutions Pvt. Ltd collects, uses, shares and protects personal information that we collect from you while using our website or mobile applications and its services."
+                android:textColor="@color/textBlack"
+                android:textSize="13sp"
+                android:textStyle="normal"
+                />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="6dp"
+                android:text="While you use and enjoy our services, we want to keep you informed about our privacy policy towards management and security of your personal information. We value the trust you place in us, and hence insist upon the highest level of protection for securing your personal information. We are obligated to protect your personal information in accordance with applicable laws, and regulations."
+                android:textColor="@color/textBlack"
+                android:textSize="13sp"
+                android:textStyle="normal"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="6dp"
+                android:text="This Policy is subject to modification based on changes in the business, legal and regulatory requirements and will be made available to you online. We will make all efforts to communicate about significant changes to this policy. You are encouraged to periodically visit this page to review the policy and any changes."
+                android:textColor="@color/textBlack"
+                android:textSize="13sp"
+                android:textStyle="normal"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:paddingHorizontal="10dp"
+                android:paddingTop="13dp"
+                android:text="This Privacy Policy has been designed and developed to help you understand the following:"
+                android:textColor="@color/textBlack"
+                android:textSize="13sp"
+                android:textStyle="normal"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="3dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:text="&#x25CF;"
+                    android:textSize="20sp"
+                    android:textColor="@color/textBlack"
+                    android:paddingRight="10dp"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:text="The type of Personal Information (including Sensitive Personal Data or Information) that we collect from the Users;"
+                    android:layout_marginBottom="5dp"
+                    android:textColor="@color/textBlack"
+                    android:textSize="13sp"
+                    android:textStyle="normal"
+                    />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="3dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:text="&#x25CF;"
+                    android:textSize="20sp"
+                    android:textColor="@color/textBlack"
+                    android:paddingRight="10dp"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:text="The purpose of collection, means and modes of usage of such Personal Information by us;"
+                    android:layout_marginBottom="5dp"
+                    android:textColor="@color/textBlack"
+                    android:textSize="13sp"
+                    android:textStyle="normal"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="3dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:text="&#x25CF;"
+                    android:textSize="20sp"
+                    android:textColor="@color/textBlack"
+                    android:paddingRight="10dp"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:text="How and to whom we will disclose such information;"
+                    android:layout_marginBottom="5dp"
+                    android:textColor="@color/textBlack"
+                    android:textSize="13sp"
+                    android:textStyle="normal"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="3dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:text="&#x25CF;"
+                    android:textSize="20sp"
+                    android:textColor="@color/textBlack"
+                    android:paddingRight="10dp"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:text="How we will protect the Personal Information including Sensitive Personal Data or Information that is collected from the Users; and"
+                    android:layout_marginBottom="5dp"
+                    android:textColor="@color/textBlack"
+                    android:textSize="13sp"
+                    android:textStyle="normal"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="3dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:text="&#x25CF;"
+                    android:textSize="20sp"
+                    android:textColor="@color/textBlack"
+                    android:paddingRight="10dp"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:text="How Users may access and/ or modify their Personal Information."
+                    android:layout_marginBottom="5dp"
+                    android:textColor="@color/textBlack"
+                    android:textSize="13sp"
+                    android:textStyle="normal"
+                    />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="6dp"
+                android:text="This Privacy Policy shall apply to the use of the Website / mobile application by all Users / Sellers. Any User is required to read and understand the provisions set out herein prior to submitting any Sensitive Personal Data or Information to the website or mobile application, failing which they are required to leave the Website or app immediately."
+                android:textColor="@color/textBlack"
+                android:textSize="13sp"
+                android:textStyle="normal"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="6dp"
+                android:text="This Privacy Policy is published in compliance of the (Indian) Information Technology Act, 2000 and the rules, regulations, guidelines and clarifications framed thereunder, including the (Indian) Information Technology (Reasonable Security Practices and Procedures and Sensitive Personal Data or Information) Rules, 2011."
+                android:textColor="@color/textBlack"
+                android:textSize="13sp"
+                android:textStyle="normal"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="6dp"
+                android:text="1. Types of personal information collected by us:"
+                android:textColor="@color/textBlack"
+                android:textSize="15sp"
+                android:textStyle="normal"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="6dp"
+                android:text="(a) We may collect the following categories of Personal Information from the Users (hereinafter collectively referred to as “User Information”):
+Name; Email address; Address (including country and ZIP/postal code); Gender; Age; Phone Number; Geographical location and Other details as the User may volunteer."
+                android:textColor="@color/textBlack"
+                android:textSize="13sp"
+                android:textStyle="normal"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="6dp"
+                android:text="(b) The term “User Information” shall also include any prescriptions uploaded in the website or mobile application or otherwise provided by Users."
+                android:textColor="@color/textBlack"
+                android:textSize="13sp"
+                android:textStyle="normal"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="6dp"
+                android:text="(c) We may keep records of telephone calls received and made for making inquiries, orders, or other purposes for the purpose of administration of Services."
+                android:textColor="@color/textBlack"
+                android:textSize="13sp"
+                android:textStyle="normal"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="6dp"
+                android:text="(d) We may also receive and/or hold information about the Internet Protocol (IP) address of each User's computer (or the proxy server a User used to access the World Wide Web), User's computer operating system and type of web browser the User is using as well as the name of User's ISP. The Website uses temporary cookies to store certain data (that is not Sensitive Personal Data or Information) that is used by us and its service providers for the technical administration of the Website, research and development, and for User administration."
+                android:textColor="@color/textBlack"
+                android:textSize="13sp"
+                android:textStyle="normal"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="6dp"
+                android:text="(e) We does not knowingly collect Personal Information from children. Use of the Site or the App is available only to persons who can form a legally binding contract under the Indian Contract Act, 1872. If You are under 18 years of age, then please do not use or access the Service(s) at any time or in any manner. If We learn that a person under 18 years of age has used or accessed the Platform or Service or any personally identifiable information has been collected on the Platform from persons under 18 years of age, then we will take the appropriate steps to delete this information. If You are a parent or guardian and discover that your child under 18 years of age has obtained an account on or otherwise accessed the Service, then You may alert us at medinovawellness@gmail.com and request that we delete that child’s personally identifiable information from our systems."
+                android:textColor="@color/textBlack"
+                android:textSize="13sp"
+                android:textStyle="normal"
+                />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="6dp"
+                android:text="2. Purposes of collection:"
+                android:textColor="@color/textBlack"
+                android:textSize="15sp"
+                android:textStyle="normal"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="6dp"
+                android:text="  We will retain User Information only to the extent it is necessary to provide Services to the Users."
+                android:textColor="@color/textBlack"
+                android:textSize="13sp"
+                android:textStyle="normal"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="6dp"
+                android:text="(a) Registration of the User."
+                android:textColor="@color/textBlack"
+                android:textSize="13sp"
+                android:textStyle="normal"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="6dp"
+                android:text="(b) Processing your requests, enquiries and complaints, customer services and related activities."
+                android:textColor="@color/textBlack"
+                android:textSize="13sp"
+                android:textStyle="normal"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="6dp"
+                android:text="(c) Improvement of Services, features and functionality of the Website and mobile application."
+                android:textColor="@color/textBlack"
+                android:textSize="13sp"
+                android:textStyle="normal"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="6dp"
+                android:text="(d) Research and development."
+                android:textColor="@color/textBlack"
+                android:textSize="13sp"
+                android:textStyle="normal"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="6dp"
+                android:text="(e) Further, with respect to Non-Personal Information automatically collected and stored in files, we shall use this information to understand and analyse trends, to administer our services, to learn about user behaviour on the apps and while using our services, to gather demographic information about the user base as a whole and to measure traffic patterns on our network and apps. As Non-Personal Information does not personally identify you, we may use and disclose Non-Personal Information at our discretion."
+                android:textColor="@color/textBlack"
+                android:textSize="13sp"
+                android:textStyle="normal"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="6dp"
+                android:text="3. Disclosure and transfer of your personal information:"
+                android:textColor="@color/textBlack"
+                android:textSize="15sp"
+                android:textStyle="normal"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="6dp"
+                android:text="We may need to disclose/ transfer User’s Personal Information to the following third parties for the purposes mentioned in this Privacy Policy and the Terms of Use: They have access to personal information needed to perform their functions but may not use it for other purposes."
+                android:textColor="@color/textBlack"
+                android:textSize="13sp"
+                android:textStyle="normal"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="6dp"
+                android:text="(a) Diagnostic centres/ medical laboratories or medical doctors or phlebotomists/ service providers partnered with us for the purpose of carrying out diagnostic services/ medical consultation under contract."
+                android:textColor="@color/textBlack"
+                android:textSize="13sp"
+                android:textStyle="normal"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="6dp"
+                android:text="(b) We may release account and other personal information when we believe in good faith that such release is appropriate to comply with applicable law including to: (i) conform to legal requirements or comply with legal process; (ii) protect rights or property or affiliated companies; (iii) prevent a crime or in interest of national security; or (iv) protect personal safety of our users or the public."
+                android:textColor="@color/textBlack"
+                android:textSize="13sp"
+                android:textStyle="normal"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="6dp"
+                android:text="(c)All company employees who have access to, and are associated with the processing of User Information, are obliged to respect its confidentiality."
+                android:textColor="@color/textBlack"
+                android:textSize="13sp"
+                android:textStyle="normal"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="6dp"
+                android:text="(d) Non-personally identifiable information may be disclosed to third party agencies to serve advertisements to the Users."
+                android:textColor="@color/textBlack"
+                android:textSize="13sp"
+                android:textStyle="normal"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="6dp"
+                android:text="(e) We may also disclose or transfer the User Information, to another third party as part of reorganization or a sale of the assets or company. Any third party to which we transfer or sells its assets will have the right to continue to use the Personal Information and/ or other information that a User provide to us.
+"
+                android:textColor="@color/textBlack"
+                android:textSize="13sp"
+                android:textStyle="normal"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="6dp"
+                android:text="4. Storage, Retention and security of the information:"
+                android:textColor="@color/textBlack"
+                android:textSize="15sp"
+                android:textStyle="normal"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="6dp"
+                android:text="(a) We have adopted reasonable security practices and procedures, to include strategic, operational, managerial, technical, and physical security controls to safeguard and protect your data and information. We have implemented such measures, as stated above, to protect against unauthorized access to and unlawful interception of Personal Information. Additionally, we have adopted measures to ensure that your personal information is accessible to our employees or partners employees strictly on the need to know basis."
+                android:textColor="@color/textBlack"
+                android:textSize="13sp"
+                android:textStyle="normal"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="6dp"
+                android:text="(b) Our website, applications, portals, and network equipment have industry standard security precautions in place to protect the loss, misuse and alteration of information which is in our environment. Whenever you change or access your account information, we facilitate the use of secure systems. The information in our custody and control is protected by adherence to reasonable security procedures in order to safeguard against unauthorized access. "
+                android:textColor="@color/textBlack"
+                android:textSize="13sp"
+                android:textStyle="normal"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="6dp"
+                android:text="(c) Your information or data will primarily be stored in electronic form. However, certain data can also be stored in physical form."
+                android:textColor="@color/textBlack"
+                android:textSize="13sp"
+                android:textStyle="normal"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="6dp"
+                android:text="(d) You hereby acknowledge that we are not responsible for any intercepted information sent via the internet, and you hereby release us from any and all claims arising out of or related to the use of intercepted information in any unauthorized manner."
+                android:textColor="@color/textBlack"
+                android:textSize="13sp"
+                android:textStyle="normal"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="6dp"
+                android:text="5. Links to third-party advertisements:"
+                android:textColor="@color/textBlack"
+                android:textSize="15sp"
+                android:textStyle="normal"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="6dp"
+                android:text="(a) The links to third-party advertisements, third party websites or any third-party electronic communication services (referred to as “Third Party Links”) may be provided on the Website which are operated by third parties and are not controlled by, or affiliated to, or associated with us unless expressly specified on the Website. If you access any such Third-Party Links, we request you review the website’s privacy policy. We are not responsible for the policies or practices of Third-Party Links."
+                android:textColor="@color/textBlack"
+                android:textSize="13sp"
+                android:textStyle="normal"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="6dp"
+                android:text="6. How Users may access and/ or modify their Personal Information."
+                android:textColor="@color/textBlack"
+                android:textSize="15sp"
+                android:textStyle="normal"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="6dp"
+                android:text="(a) All the information provided to us by a User, including Sensitive Personal Data or Information, is voluntary. User has the right to withdraw his/ her/ its consent at any time, in accordance with the terms of this Privacy Policy and the Terms of Use, but please note that withdrawal of consent will not be retroactive."
+                android:textColor="@color/textBlack"
+                android:textSize="13sp"
+                android:textStyle="normal"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="6dp"
+                android:text="(b)Users can access, modify, correct and delete the Personal Information provided by them which has been voluntarily given by the User and collected by us in accordance with this Privacy Policy and Terms of Use.
+In case the User does not provide his/ her information or consent for usage of Personal Information or subsequently withdraws his/ her consent for usage of the Personal Information so collected, we reserve the right to discontinue the services for which the said information was sought."
+                android:textColor="@color/textBlack"
+                android:textSize="13sp"
+                android:textStyle="normal"
+                />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="3dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:text="&#x25CF;"
+                    android:textSize="20sp"
+                    android:textColor="@color/textBlack"
+                    android:paddingRight="10dp"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:text="Additional notes to the user:"
+                    android:layout_marginBottom="5dp"
+                    android:textColor="@color/textBlack"
+                    android:textSize="15sp"
+                    android:textStyle="normal"
+                    />
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="6dp"
+                android:text="We does not exercise control over the sites displayed as search results or links from within its Services. These other sites may place their own cookies or other files on the Users' computer, collect data or solicit Personal Information from the Users, for which company is not responsible or liable. Accordingly, company does not make any representations concerning the privacy practices or policies of such third parties or terms of use of such websites, nor does we guarantee the accuracy, integrity, or quality of the information, data, text, software, sound, photographs, graphics, videos, messages or other materials available on such websites. We encourage the User to read the privacy policies of that website.
+We shall not be responsible in any manner for the authenticity of the Personal Information or Sensitive Personal Data or Information supplied by the User to us or any Seller. If a User provides any information that is untrue, inaccurate, not current or incomplete (or becomes untrue, inaccurate, not current or incomplete), or company has reasonable grounds to suspect that such information is untrue, inaccurate, not current or incomplete, company has the right to suspend or terminate such account at its sole discretion.
+"
+                android:textColor="@color/textBlack"
+                android:textSize="13sp"
+                android:textStyle="normal"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="6dp"
+                android:text="We shall not be responsible for any breach of security or for any actions of any third parties that receive Users' Personal Information or events that are beyond the reasonable control of us including, acts of government, computer hacking, unauthorized access to computer data and storage device, computer crashes, breach of security and encryption, etc."
+                android:textColor="@color/textBlack"
+                android:textSize="13sp"
+                android:textStyle="normal"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="6dp"
+                android:text="The User is responsible for maintaining the confidentiality of the User's account access information and password. The User shall be responsible for all uses of the User's account and password, whether or not authorized by the User. The User shall immediately notify us of any actual or suspected unauthorized use of the User's account or password."
+                android:textColor="@color/textBlack"
+                android:textSize="13sp"
+                android:textStyle="normal"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="6dp"
+                android:text="We will communicate with the Users through email and notices posted on the Website or through other means available through the Service, including text and other forms of messaging."
+                android:textColor="@color/textBlack"
+                android:textSize="13sp"
+                android:textStyle="normal"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="6dp"
+                android:text="If You wish to withdraw Your consent for processing Your personal information and Sensitive Personal Data or Information, cancel Your account or request that We no longer use Your personal information and Sensitive Personal Data or Information to deliver Our products or provide You services, please contact Us at details indicated in the contact section. Please note, however, that Your withdrawal of consent or cancellation of account may result in Us not being able to deliver you products or provide You with Our services, or terminate any existing relationship that We may have with You. "
+                android:textColor="@color/textBlack"
+                android:textSize="13sp"
+                android:textStyle="normal"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="6dp"
+                android:text="Retention of Information: Please note that uninstalling the App will not result in deletion of Your personal information."
+                android:textColor="@color/textBlack"
+                android:textSize="13sp"
+                android:textStyle="normal"
+                />
+
+
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center|start"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="6dp"
+                android:text="Changes in the privacy policy:"
+                android:textColor="@color/textBlack"
+                android:textSize="15sp"
+                android:textStyle="normal"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="3dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:text="&#x25CF;"
+                    android:textSize="20sp"
+                    android:textColor="@color/textBlack"
+                    android:paddingRight="10dp"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:text="We may revise this Privacy Policy from time to time by updating this page, and so we urge you to review it periodically to ensure that you agree with any such changes that we make. It is your responsibility to check the Policy regularly to ensure that you agree with it and your continued use of the Website will be deemed to be your acceptance of any changes that we make."
+                    android:layout_marginBottom="5dp"
+                    android:textColor="@color/textBlack"
+                    android:textSize="13sp"
+                    android:textStyle="normal"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="3dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:text="&#x25CF;"
+                    android:textSize="20sp"
+                    android:textColor="@color/textBlack"
+                    android:paddingRight="10dp"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:text="If You have any concern about privacy or grievances on the website or the App, please contact us with a thorough description and We will try to resolve the issue for You."
+                    android:layout_marginBottom="5dp"
+                    android:textColor="@color/textBlack"
+                    android:textSize="13sp"
+                    android:textStyle="normal"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="3dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:text="&#x25CF;"
+                    android:textSize="20sp"
+                    android:textColor="@color/textBlack"
+                    android:paddingRight="10dp"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:text="If you have any concerns or questions in relation to this Privacy Policy, You may address them to our grievance officer at:\n\nName: Dr.Mahesh Babu.M\nAddress: Medinova Healthcare , Ayur PO, Kollam,\nKerala-691533\nPhone number: 04752969600\nE-mail: drmaheshbabu13@gmail.com\n\nWe shall endeavour to resolve Your grievances within one month from the date of receipt of such grievance."
+                    android:layout_marginBottom="5dp"
+                    android:textColor="@color/textBlack"
+                    android:textSize="13sp"
+                    android:textStyle="normal"
+                    />
+            </LinearLayout>
+
+
+            <LinearLayout android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="10dp"
+                android:gravity="center">
+                <Button
+                    android:layout_width="wrap_content"
+                    android:id="@+id/closedialg"
+                    android:gravity="center"
+                    android:layout_marginRight="5dp"
+                    android:layout_height="40dp"
+                    android:textAllCaps="false"
+                    android:layout_marginVertical="4dp"
+                    android:text="@string/close"
+                    android:textSize="12sp"
+                    app:backgroundTint="@color/orange" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+
+
+
+
+</LinearLayout>

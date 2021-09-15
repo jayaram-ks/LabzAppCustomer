@@ -40,7 +40,7 @@ object ServiceBuilder {
             .readTimeout(60,TimeUnit.SECONDS)
             .writeTimeout(60,TimeUnit.SECONDS)
             .addInterceptor(headerInterceptor)
-            .addInterceptor(logger)
+            //.addInterceptor(logger)
 
     // Create Retrofit Builder
     private val builder = Retrofit.Builder().baseUrl(URL)

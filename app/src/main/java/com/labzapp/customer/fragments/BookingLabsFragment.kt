@@ -164,7 +164,7 @@ class BookingLabsFragment : DialogFragment() {
                 override fun onSelectionChanged() {
                     val nItems:Int? = ltracker?.selection?.size()
 
-                    Log.d("labs--Tracker---selcted",ltracker?.selection.toString())
+                    //Log.d("labs--Tracker---selcted",ltracker?.selection.toString())
 
                     for( (index, row) in lablist.withIndex()){
                         if(ltracker!!.isSelected(index.toLong())){

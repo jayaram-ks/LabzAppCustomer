@@ -39,11 +39,11 @@ class HomeActivity : AppCompatActivity() {
         FirebaseMessaging.getInstance().token.addOnCompleteListener {
             if(it.isComplete){
                 val fbToken = it.result.toString()
-                Log.d("token in Home is-----",fbToken)
+               // Log.d("token in Home is-----",fbToken)
                 updateFbToken(fbToken)
             }
             else{
-                Log.d("FB_API_ER","Firebase token fail")
+               // Log.d("FB_API_ER","Firebase token fail")
             }
         }
 
@@ -116,15 +116,15 @@ class HomeActivity : AppCompatActivity() {
             override fun onResponse(call: Call<FbIdUpdateResponse>, response: Response<FbIdUpdateResponse>) {
                 val resp = response.body()
                 if (resp?.code == 200) {
-                  Log.d("FBTOKEN",resp.message.toString())
+                 // Log.d("FBTOKEN",resp.message.toString())
                 } else {
                     if (resp != null) {
-                        Log.d("FBTOKEN_ER",resp.message.toString())
+                       // Log.d("FBTOKEN_ER",resp.message.toString())
                     }
                 }
             }
             override fun onFailure(call: Call<FbIdUpdateResponse>, t: Throwable) {
-                Log.d("FB_API_ER",t.message.toString())
+               // Log.d("FB_API_ER",t.message.toString())
             }
         })
     }

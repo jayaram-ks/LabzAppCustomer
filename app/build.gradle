@@ -11,17 +11,17 @@ android {
 
     defaultConfig {
         applicationId "com.labzapp.customer"
-        minSdkVersion 26
+        minSdkVersion 24
         targetSdkVersion 30
-        versionCode 1
-        versionName "1.1"
-
+        versionCode 4
+        versionName "1.0.4"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
         release {
             minifyEnabled false
+            debuggable false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }

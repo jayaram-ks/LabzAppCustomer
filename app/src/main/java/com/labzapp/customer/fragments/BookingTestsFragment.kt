@@ -158,7 +158,7 @@ class BookingTestsFragment : DialogFragment() {
                     val nItems:Int? = tracker?.selection?.size()
 
 
-Log.d("Tracker--------POST",tracker?.selection.toString())
+//Log.d("Tracker--------POST",tracker?.selection.toString())
 
                     for( (index, row) in testlist.withIndex()){
                         if(tracker!!.isSelected(index.toLong())){

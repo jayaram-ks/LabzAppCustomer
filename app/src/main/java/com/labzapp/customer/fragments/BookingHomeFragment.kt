@@ -395,14 +395,14 @@ ActivityCompat.OnRequestPermissionsResultCallback{
                         }
 
                     } else {
-                        Log.d("Dloc", "Current location is null. Using defaults.")
-                        Log.e("Dloc", "Exception: %s", task.exception)
+                       // Log.d("Dloc", "Current location is null. Using defaults.")
+                        //Log.e("Dloc", "Exception: %s", task.exception)
                         map?.animateCamera(CameraUpdateFactory.newLatLngZoom(DEF_LOCATION, ZOOM_LEVEL))
                     }
                 }
             }
         } catch (e: SecurityException) {
-            Log.e("Exception: %s", e.message, e)
+           // Log.e("Exception: %s", e.message, e)
         }
     }
 

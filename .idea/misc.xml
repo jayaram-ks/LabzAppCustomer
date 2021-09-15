@@ -15,16 +15,28 @@
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.22010869565217392" />
         <entry key="app/src/main/res/layout/fragment_about.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_booking_home.xml" value="0.16927083333333334" />
+        <entry key="app/src/main/res/layout/fragment_booking_pack_preview.xml" value="0.17299898682877407" />
+        <entry key="app/src/main/res/layout/fragment_booking_tests.xml" value="0.17299898682877407" />
         <entry key="app/src/main/res/layout/fragment_contact.xml" value="0.22010869565217392" />
         <entry key="app/src/main/res/layout/fragment_edit_my_profile.xml" value="0.21603260869565216" />
+        <entry key="app/src/main/res/layout/fragment_labs.xml" value="0.17299898682877407" />
         <entry key="app/src/main/res/layout/fragment_my_booking_single.xml" value="0.21603260869565216" />
+        <entry key="app/src/main/res/layout/fragment_pack_banner_dialog.xml" value="0.17299898682877407" />
         <entry key="app/src/main/res/layout/fragment_pack_dialog.xml" value="0.22010869565217392" />
+        <entry key="app/src/main/res/layout/fragment_patient_data.xml" value="0.17299898682877407" />
+        <entry key="app/src/main/res/layout/fragment_patient_data_pack.xml" value="0.17299898682877407" />
+        <entry key="app/src/main/res/layout/fragment_presc_file_type_dialog.xml" value="0.17299898682877407" />
         <entry key="app/src/main/res/layout/fragment_privacy_dialog.xml" value="0.23001056710109194" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.22010869565217392" />
+        <entry key="app/src/main/res/layout/fragment_report_webview.xml" value="0.17299898682877407" />
         <entry key="app/src/main/res/layout/fragment_terms.xml" value="0.22010869565217392" />
         <entry key="app/src/main/res/layout/fragment_terms_dialog.xml" value="0.14942528735632185" />
         <entry key="app/src/main/res/layout/fragment_test_dialog.xml" value="0.12236286919831224" />
+        <entry key="app/src/main/res/layout/lab_list_item.xml" value="0.17299898682877407" />
         <entry key="app/src/main/res/layout/mybooking_list_item.xml" value="0.21603260869565216" />
+        <entry key="app/src/main/res/layout/myreport_list_item.xml" value="0.17299898682877407" />
+        <entry key="app/src/main/res/layout/pack_banner_list_item.xml" value="0.17299898682877407" />
+        <entry key="app/src/main/res/layout/spinner_item.xml" value="0.17299898682877407" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2140625" />
       </map>
     </option>

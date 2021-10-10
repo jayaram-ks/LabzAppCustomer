@@ -7,6 +7,7 @@ import android.location.Geocoder
 import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -210,8 +211,8 @@ class EditMyProfileFragment : Fragment(), AdapterView.OnItemSelectedListener, Go
 
 
         if ((userName != "") and (userAge != "")  and (userGender != "")
-            and (userAddress != "") and (userPincode != "") and (userDistrict != "")) {
-
+            and (userAddress != "") and (userPincode != "") and (userDistrict != "") and (userLat != "") and (userLng != "")) {
+            binding.updateProfileBtn.text="Please Wait..."
             val authTokn: String? = "Bearer "+ SharedPrefManager.getInstance(requireContext()).authKey
             val apiTokn: String? = SharedPrefManager.getInstance(requireContext()).apiToken
 
@@ -229,17 +230,20 @@ class EditMyProfileFragment : Fragment(), AdapterView.OnItemSelectedListener, Go
                         trans.commit()
                     } else {
                         view?.let{err -> snackze(err,resp?.message.toString(),binding.myName.id) }
+                        binding.updateProfileBtn.text="Update Profile"
                         binding.updateProfileBtn.isClickable = true
                     }
                 }
                 override fun onFailure(call: Call<EditProfileResponse>, t: Throwable) {
                     view?.let{err -> snackze(err,t.message.toString(),binding.myName.id) }
+                    binding.updateProfileBtn.text="Update Profile"
+                    binding.updateProfileBtn.isClickable = true
                 }
             })
         }
         else
         {
-            view?.let{err -> snackze(err,"Please fill all Patient Details Fields",binding.myName.id) }
+            view?.let{err -> snackze(err,"Please fill all Patient Details Fields and Select Location",binding.myName.id) }
             binding.updateProfileBtn.isClickable = true
         }
     }
@@ -326,17 +330,28 @@ class EditMyProfileFragment : Fragment(), AdapterView.OnItemSelectedListener, Go
     private fun setCameraIdleListener(map: GoogleMap) {
         map.setOnCameraIdleListener(object : GoogleMap.OnCameraIdleListener {
             override fun onCameraIdle() {
-                val actualLatLng: LatLng = map.cameraPosition.target
-                val geocoder = Geocoder(requireActivity())
-                val list = geocoder.getFromLocation(actualLatLng!!.latitude, actualLatLng!!.longitude, 1)
-                binding.usrLat.text = actualLatLng!!.latitude.toString()
-                binding.usrLong.text = actualLatLng!!.longitude.toString()
-                var fullAddress = "Location address not Available"
-                if(list.size > 0)
-                {
-                    fullAddress = list[0].getAddressLine(0)
+
+                try {
+                    val actualLatLng: LatLng = map.cameraPosition.target
+                    val geocoder = Geocoder(requireActivity())
+                    val list = geocoder.getFromLocation(actualLatLng!!.latitude, actualLatLng!!.longitude, 1)
+                    binding.usrLat.text = actualLatLng!!.latitude.toString()
+                    binding.usrLong.text = actualLatLng!!.longitude.toString()
+                    var fullAddress = "Location address not Available"
+                    if(list.size > 0)
+                    {
+                        fullAddress = list[0].getAddressLine(0)
+                    }
+                    binding.locationAddress.text = fullAddress
+
+                } catch (e:Exception){
+                    binding.usrLat.text = ""
+                    binding.usrLong.text = ""
+                    binding.locationAddress.text = "LOCATION ERROR! Please scroll map."
                 }
-                binding.locationAddress.text = fullAddress
+
+
+
             }
 
         })

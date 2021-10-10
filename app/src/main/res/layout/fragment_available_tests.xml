@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:orientation="horizontal"
-        android:paddingBottom="5dp">
+        android:paddingBottom="1dp">
         <ImageView
             android:id="@+id/lablogo"
             android:padding="5dp"
@@ -60,17 +60,53 @@
             android:layout_height="match_parent"/>
     </LinearLayout>
 
-    <androidx.appcompat.widget.SearchView
-        android:id="@+id/test_search"
-        android:layout_marginHorizontal="8dp"
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:background="@color/white">
+        <TextView
+            android:id="@+id/test_num"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:paddingHorizontal="5dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="@color/white"
+            android:text="Select Tests"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            />
+
+        <Button
+            android:id="@+id/test_lab_submit"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_marginRight="8dp"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:visibility="gone"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            android:letterSpacing=".01"
+            android:text="Continue Booking"
+
+            />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/srch_txt"
+        android:padding="10dp"
+        android:textSize="14sp"
+        android:hint="Search Tests"
+        android:layout_marginHorizontal="0dp"
         android:layout_width="match_parent"
         android:layout_height="35dp"
-        android:layout_marginTop="4dp"
-       android:layout_marginBottom="5dp"
-        android:background="@drawable/round_button_white"
-        android:textCursorDrawable="@null"
-        app:iconifiedByDefault="false"
-        app:queryBackground="@null" />
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="2dp"
+        android:background="@color/white"
+        />
 
     <ProgressBar
         android:id="@+id/progress_bar"

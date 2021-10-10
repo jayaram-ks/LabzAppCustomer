@@ -330,17 +330,23 @@ class BookingPackHomeFragment : Fragment() , GoogleMap.OnMyLocationButtonClickLi
     private fun setCameraIdleListener(map: GoogleMap) {
         map.setOnCameraIdleListener(object : GoogleMap.OnCameraIdleListener {
             override fun onCameraIdle() {
-                val actualLatLng: LatLng = map.cameraPosition.target
-                val geocoder = Geocoder(requireActivity())
-                val list = geocoder.getFromLocation(actualLatLng!!.latitude, actualLatLng!!.longitude, 1)
-                binding.usrLat.text = actualLatLng!!.latitude.toString()
-                binding.usrLong.text = actualLatLng!!.longitude.toString()
-                var fullAddress = "Location address not Available"
-                if(list.size > 0)
-                {
-                    fullAddress = list[0].getAddressLine(0)
+                try{
+                    val actualLatLng: LatLng = map.cameraPosition.target
+                    val geocoder = Geocoder(requireActivity())
+                    val list = geocoder.getFromLocation(actualLatLng!!.latitude, actualLatLng!!.longitude, 1)
+                    binding.usrLat.text = actualLatLng!!.latitude.toString()
+                    binding.usrLong.text = actualLatLng!!.longitude.toString()
+                    var fullAddress = "Location address not Available"
+                    if(list.size > 0)
+                    {
+                        fullAddress = list[0].getAddressLine(0)
+                    }
+                    binding.locationAddress.text = fullAddress
+                } catch (e:Exception){
+                    binding.usrLat.text = ""
+                    binding.usrLong.text = ""
+                    binding.locationAddress.text = "LOCATION ERROR! Please scroll map."
                 }
-                binding.locationAddress.text = fullAddress
             }
 
         })

@@ -82,6 +82,7 @@ class BookingPackPreviewFragment : Fragment() {
             {
                 binding.continuePreviewBtn.setOnClickListener(null)
                 binding.continuePreviewBtn.visibility = View.GONE
+                binding.waitTxt.text = "Please Wait..."
                 fetchAndsubmitMyData()
 
             } else {   //Booking for Other Show form
@@ -125,7 +126,7 @@ class BookingPackPreviewFragment : Fragment() {
                                 override fun onResponse(call: Call<SubmitBookingResponse>, response: Response<SubmitBookingResponse>) {
                                     val resp = response.body()
                                     if (resp?.code == 200) {
-
+                                        binding.waitTxt.text = ""
                                         val bundle = Bundle()
                                         bundle.putString("param1", resp.message.toString())
                                         val fragmentbookFinish = BookFinishDialogFragment()
@@ -136,11 +137,13 @@ class BookingPackPreviewFragment : Fragment() {
 
                                     } else {
                                         view?.let{err -> snackze(err,resp?.message.toString(),binding.totalTestCharge.id) }
+                                        binding.waitTxt.text = ""
                                     }
                                 }
 
                                 override fun onFailure(call: Call<SubmitBookingResponse>, t: Throwable) {
                                     view?.let{err -> snackze(err,t.message.toString(),binding.totalTestCharge.id) }
+                                    binding.waitTxt.text = ""
                                 }
                             })
                         }
@@ -148,15 +151,18 @@ class BookingPackPreviewFragment : Fragment() {
                         {
 
                             view?.let{err -> snackze(err,"There was an error processing your request",binding.totalTestCharge.id) }
+                            binding.waitTxt.text = ""
                         }
                     }
 
                 } else {
                     view?.let{errz -> snackze(errz,resp?.message.toString(),binding.totalTestCharge.id) }
+                    binding.waitTxt.text = ""
                 }
             }
             override fun onFailure(call: Call<ProfileResponse>, t: Throwable) {
                 view?.let{snackze(it,t.message.toString(),binding.totalTestCharge.id) }
+                binding.waitTxt.text = ""
             }
         })
     }

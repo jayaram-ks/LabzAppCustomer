@@ -101,6 +101,7 @@ class HomeFragment : Fragment() {
         }
         //----REQUEST A CALL---
         binding.reqACall.setOnClickListener {
+            binding.reqACall.text = "Booking..."
             requestACall()
         }
         //----VIEW LABS----
@@ -338,15 +339,16 @@ class HomeFragment : Fragment() {
         val progBar: ProgressBar = binding.progressBar
         progBar.visibility = View.GONE
         binding.viewPager2.adapter = BannersAdapter(requireContext(),bannerlist)
+//Log.d("Bnner size",bannerlist.size.toString())
+        val bannercount = bannerlist.size-1
+        if (bannerlist.isNotEmpty()) {
+            lifecycleScope.launch {
+                while (true) {
+                    for (i in 0..bannercount) {
+                        delay(5000)
+                        // Log.d("BANNER",i.toString())
+                        binding.viewPager2.setCurrentItem(i, true)
 
-        lifecycleScope.launch {
-            while(true){
-                for(i in 0..bannerlist.size){
-                    delay(3000)
-                    if(i==0){
-                        binding.viewPager2.setCurrentItem(i,true)
-                    }else{
-                        binding.viewPager2.setCurrentItem(i,true)
                     }
                 }
             }
@@ -379,18 +381,21 @@ class HomeFragment : Fragment() {
         })
     }
 
-    private fun showPackBanners(packbannerlist: List<PackBannerData>)
-    {
+    private fun showPackBanners(packbannerlist: List<PackBannerData>) {
         if (!isAdded) return
         val progBar2: ProgressBar = binding.progressBar2
         progBar2.visibility = View.GONE
-        binding.viewPager3.adapter = PackBannerAdapter(requireContext(),packbannerlist)
-        val packsize = packbannerlist.size
-        lifecycleScope.launch {
-            while(true) {
-                for (p in 0..packsize) {
-                    delay(10000)
-                        binding.viewPager3.setCurrentItem(p,true)
+        binding.viewPager3.adapter = PackBannerAdapter(requireContext(), packbannerlist)
+        // Log.d("Pk--Bnner size",packbannerlist.size.toString())
+        val packcount = packbannerlist.size - 1
+        if (packbannerlist.isNotEmpty()){
+            lifecycleScope.launch {
+                while (true) {
+                    for (p in 0..packcount) {
+                        delay(7000)
+                        //Log.d("PK-BANNER",p.toString())
+                        binding.viewPager3.setCurrentItem(p, true)
+                    }
                 }
             }
         }
@@ -446,13 +451,16 @@ class HomeFragment : Fragment() {
                         }.show()
                     }
                     binding.reqACall.isClickable = false
+                    binding.reqACall.text = "Call Registered"
                 } else {
                     view?.let{snackze(it,resp?.message.toString(),binding.viewLabshome.id) }
+                    binding.reqACall.text = "Book on Call"
                 }
             }
 
             override fun onFailure(call: Call<MakeCallResponse>, t: Throwable) {
                 view?.let{snackze(it,t.message.toString(),binding.viewLabshome.id) }
+                binding.reqACall.text = "Book on Call"
             }
         })
     }
@@ -460,8 +468,8 @@ class HomeFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        fetchBanners()
-        getMyData()
+        //fetchBanners()
+        //getMyData()
     }
 
     companion object {

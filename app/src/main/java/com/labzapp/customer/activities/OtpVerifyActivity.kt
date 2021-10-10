@@ -54,6 +54,7 @@ class OtpVerifyActivity : AppCompatActivity() {
         val squareField = findViewById<PinField>(R.id.squareField1)
         val listener = object : PinField.OnTextCompleteListener{
             override fun onTextComplete(enteredText: String): Boolean {
+                binding.otpTxt.text = "Please wait.. Verifying OTP"
                 verifyOtp(custmobile,enteredText)
                 return@onTextComplete true
             }
@@ -83,11 +84,13 @@ class OtpVerifyActivity : AppCompatActivity() {
 
                 } else {
                     snackze(binding.root, resp?.message.toString(), binding.cancelOtp.id)
+                    binding.otpTxt.text = ""
                 }
             }
 
             override fun onFailure(call: Call<OtpResponse>, t: Throwable) {
                 snackze(binding.root, t.message.toString(), binding.cancelOtp.id)
+                binding.otpTxt.text = ""
             }
 
         })

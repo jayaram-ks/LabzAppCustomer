@@ -37,5 +37,6 @@
     <color name="transp_black">#19000000</color>
     <color name="blue_default">#0000FF</color>
     <color name="golden">#FFD700</color>
+    <color name="homeicon">#1ABC9C</color>
 
 </resources>

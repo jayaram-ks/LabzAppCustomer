@@ -55,9 +55,12 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         binding.getOtp.setOnClickListener {
+            binding.getOtp.isClickable = false
+            binding.getOtp.text = "Please Wait..."
             val mobile = binding.mobileNumber.editText?.text.toString()
             val fullname = binding.fullName.editText?.text.toString()
             val pincode = binding.pincode.editText?.text.toString()
+
             getOTP(mobile, fullname, pincode)
         }
 
@@ -90,11 +93,15 @@ class RegisterActivity : AppCompatActivity() {
 
                 } else {
                     snackze(binding.root, resp?.message.toString(), binding.fullName.id)
+                    binding.getOtp.text = "GET OTP"
+                    binding.getOtp.isClickable = true
                 }
             }
 
             override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
                 snackze(binding.root, t.message.toString(), binding.fullName.id)
+                binding.getOtp.text = "GET OTP"
+                binding.getOtp.isClickable = true
             }
         })
     }

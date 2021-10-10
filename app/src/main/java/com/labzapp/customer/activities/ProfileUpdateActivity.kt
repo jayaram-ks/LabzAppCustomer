@@ -199,6 +199,9 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
                 return@setOnClickListener
             }
 
+            binding.updateProfile.isClickable=false
+            binding.updateProfile.text="Please Wait..."
+
             val authTokn: String? = "Bearer "+SharedPrefManager.getInstance(this).authKey
             val apiTokn: String? = SharedPrefManager.getInstance(this).apiToken
 
@@ -216,11 +219,15 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
 
                     } else {
                         snackze(view,resp?.message.toString(), binding.custAge.id)
+                        binding.updateProfile.isClickable=true
+                        binding.updateProfile.text="Submit"
                     }
                 }
 
                 override fun onFailure(call: Call<SaveCustomerResponse>, t: Throwable) {
                     snackze(view,t.message.toString(), binding.custAge.id)
+                    binding.updateProfile.isClickable=true
+                    binding.updateProfile.text="Submit"
                 }
             })
 
@@ -390,17 +397,27 @@ class ProfileUpdateActivity : AppCompatActivity(), GoogleMap.OnMyLocationButtonC
     private fun setCameraIdleListener(map: GoogleMap) {
         map.setOnCameraIdleListener(object : GoogleMap.OnCameraIdleListener {
             override fun onCameraIdle() {
-                val actualLatLng: LatLng = map.cameraPosition.target
-                val geocoder = Geocoder(this@ProfileUpdateActivity)
-                val list = geocoder.getFromLocation(actualLatLng!!.latitude, actualLatLng!!.longitude, 1)
-                binding.usrLat.text = actualLatLng!!.latitude.toString()
-                binding.usrLong.text = actualLatLng!!.longitude.toString()
-                var fullAddress = "Location address not Available"
-                if(list.size > 0)
-                {
-                    fullAddress = list[0].getAddressLine(0)
+
+                try{
+                    val actualLatLng: LatLng = map.cameraPosition.target
+                    val geocoder = Geocoder(this@ProfileUpdateActivity)
+                    val list = geocoder.getFromLocation(actualLatLng!!.latitude, actualLatLng!!.longitude, 1)
+                    binding.usrLat.text = actualLatLng!!.latitude.toString()
+                    binding.usrLong.text = actualLatLng!!.longitude.toString()
+                    var fullAddress = "Location address not Available"
+                    if(list.size > 0)
+                    {
+                        fullAddress = list[0].getAddressLine(0)
+                    }
+                    binding.locationAddress.text = fullAddress
+
+                } catch (e:Exception){
+                    binding.usrLat.text = ""
+                    binding.usrLong.text = ""
+                    binding.locationAddress.text = "LOCATION ERROR! Please scroll map."
                 }
-                binding.locationAddress.text = fullAddress
+
+
             }
 
         })

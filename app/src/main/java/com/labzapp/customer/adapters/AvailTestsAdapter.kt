@@ -1,26 +1,28 @@
 package com.labzapp.customer.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
-import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.ViewGroup
-import android.widget.Filter
-import android.widget.Filterable
-import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.selection.ItemDetailsLookup
+import androidx.recyclerview.selection.SelectionTracker
 import androidx.recyclerview.widget.RecyclerView
 import com.labzapp.customer.R
 import com.labzapp.customer.databinding.AvailTestListItemBinding
-import com.labzapp.customer.fragments.TestDialogFragment
 import com.labzapp.customer.models.Laballtests
 import java.util.*
 import kotlin.collections.ArrayList
 
-class AvailTestsAdapter( val context: Context,private val tests: ArrayList<Laballtests>) : RecyclerView.Adapter<AvailTestsAdapter.TestsViewHolder>() ,Filterable{
+class AvailTestsAdapter( val context: Context,private val tests: ArrayList<Laballtests>) : RecyclerView.Adapter<AvailTestsAdapter.TestsViewHolder>() {
 
     var testFilterList = ArrayList<Laballtests>()
+    private var tracker: SelectionTracker<Long>? = null
 
     init {
         testFilterList = tests
+        setHasStableIds(true)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TestsViewHolder {
@@ -30,6 +32,10 @@ class AvailTestsAdapter( val context: Context,private val tests: ArrayList<Labal
 
     override fun getItemCount(): Int {
         return testFilterList.size
+    }
+
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
     }
 
     override fun onBindViewHolder(holder: TestsViewHolder, position: Int) {
@@ -43,7 +49,10 @@ class AvailTestsAdapter( val context: Context,private val tests: ArrayList<Labal
         var currentPosition: Int = 0
 
         init {
-            itemView.setOnClickListener {
+
+
+            // Removed for now
+            /*itemView.setOnClickListener {
                 currenTest?.let {
                     val bundle = Bundle()
                     bundle.putString("test_title", it.test_name.toString())
@@ -55,50 +64,52 @@ class AvailTestsAdapter( val context: Context,private val tests: ArrayList<Labal
                     dialgFragment.arguments = bundle
                     dialgFragment.show(fragmentManager,null)
                 }
-            }
+            } */
 
         }
 
+        @SuppressLint("SetTextI18n")
         fun setData(test: Laballtests?, pos: Int) {
             test?.let {
                 binding.tstTitle.text = it.test_name.toString()
                 binding.tstDetails.text = it.test_description.toString()
+                binding.tstRecommtxt.text =it.test_recommendation.toString() +"\n"+ it.test_recommendation2.toString()
                 binding.tstFooter.text = context.getString(R.string.rupee)+" "+it.lab_test_rate.toString()
               //  binding.labFooter.text = "District: " + districtz[it.district_id].toString() +", Pincode: "+ it.pincode.toString()
             }
             this.currenTest = test
             this.currentPosition = pos
-        }
-    }
 
-    override fun getFilter(): Filter {
-        return object : Filter() {
-            override fun performFiltering(constraint: CharSequence?): FilterResults {
-                val charSearch = constraint.toString()
-                if (charSearch.isEmpty()) {
-                    testFilterList = tests
-                } else {
-                    val resultList = ArrayList<Laballtests>()
-                    for (row in tests) {
-                       // Log.d("--jk----",row.test_name)
-                        if (row.test_name?.toLowerCase(Locale.ROOT)?.contains(charSearch.toLowerCase(Locale.ROOT)) == true) {
-                            resultList.add(row)
-                        }
-                    }
-                    testFilterList = resultList
+            if(tracker!!.isSelected(pos.toLong())) {
+                itemView.setBackgroundColor( ContextCompat.getColor(context,R.color.green))
+            } else {
+                itemView.setBackgroundColor( ContextCompat.getColor(context,R.color.white))
+            }
+        }
+
+        fun getItemDetails(): ItemDetailsLookup.ItemDetails<Long> =
+            object: ItemDetailsLookup.ItemDetails<Long>() {
+                override fun getPosition(): Int = absoluteAdapterPosition
+                override fun getSelectionKey(): Long? = itemId
+
+                override fun inSelectionHotspot(e: MotionEvent): Boolean {
+                    return true
                 }
-                val filterResults = FilterResults()
-                filterResults.values = testFilterList
-                return filterResults
             }
 
-            @Suppress("UNCHECKED_CAST")
-            override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-                testFilterList = results?.values as ArrayList<Laballtests>
-                notifyDataSetChanged()
-            }
-
-        }
     }
 
+    fun setTracker(tracker: SelectionTracker<Long>?) {
+        this.tracker = tracker
+    }
+
+
+
+}
+
+class MyLookupLabTest(private val rv: RecyclerView) : ItemDetailsLookup<Long>() {
+    override fun getItemDetails(event: MotionEvent): ItemDetails<Long> {
+        val view = rv.findChildViewUnder(event.x, event.y)
+        return (view?.let { rv.getChildViewHolder(it) } as AvailTestsAdapter.TestsViewHolder).getItemDetails()
+    }
 }

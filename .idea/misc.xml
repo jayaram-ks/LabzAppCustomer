@@ -6,19 +6,34 @@
         <entry key="app/src/main/res/drawable/bulletimage.xml" value="0.35625" />
         <entry key="app/src/main/res/drawable/ic_book.xml" value="0.35625" />
         <entry key="app/src/main/res/drawable/ic_google_maps.xml" value="0.371875" />
+        <entry key="app/src/main/res/drawable/ic_lab_2.xml" value="0.27291666666666664" />
         <entry key="app/src/main/res/drawable/ic_online_support.xml" value="0.35625" />
         <entry key="app/src/main/res/drawable/ic_online_support_595b40b85ba036ed117da75a.xml" value="0.35625" />
+        <entry key="app/src/main/res/drawable/ic_presc_upload.xml" value="0.371875" />
+        <entry key="app/src/main/res/drawable/ic_telephone.xml" value="0.27291666666666664" />
         <entry key="app/src/main/res/drawable/ic_terms_cond.xml" value="0.35625" />
+        <entry key="app/src/main/res/drawable/round_button_15dp.xml" value="0.27291666666666664" />
         <entry key="app/src/main/res/layout/activity_booking.xml" value="0.21603260869565216" />
         <entry key="app/src/main/res/layout/activity_no_network.xml" value="0.21603260869565216" />
         <entry key="app/src/main/res/layout/activity_otp_verify.xml" value="0.21603260869565216" />
+        <entry key="app/src/main/res/layout/activity_profile_update.xml" value="0.213768115942029" />
         <entry key="app/src/main/res/layout/activity_register.xml" value="0.22010869565217392" />
+        <entry key="app/src/main/res/layout/all_tests_list_item.xml" value="0.17299898682877407" />
+        <entry key="app/src/main/res/layout/avail_pack_list_item.xml" value="0.1956521739130435" />
+        <entry key="app/src/main/res/layout/avail_test_list_item.xml" value="0.19610507246376813" />
+        <entry key="app/src/main/res/layout/book_testrate_list_item.xml" value="0.1956521739130435" />
+        <entry key="app/src/main/res/layout/booking_lab_list_item.xml" value="0.22282608695652173" />
         <entry key="app/src/main/res/layout/fragment_about.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/fragment_booking_home.xml" value="0.16927083333333334" />
+        <entry key="app/src/main/res/layout/fragment_available_tests.xml" value="0.19610507246376813" />
+        <entry key="app/src/main/res/layout/fragment_book_from_lab.xml" value="0.35572916666666665" />
+        <entry key="app/src/main/res/layout/fragment_booking_home.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_booking_labs.xml" value="0.22735507246376813" />
         <entry key="app/src/main/res/layout/fragment_booking_pack_preview.xml" value="0.17299898682877407" />
+        <entry key="app/src/main/res/layout/fragment_booking_preview.xml" value="0.17299898682877407" />
         <entry key="app/src/main/res/layout/fragment_booking_tests.xml" value="0.17299898682877407" />
         <entry key="app/src/main/res/layout/fragment_contact.xml" value="0.22010869565217392" />
         <entry key="app/src/main/res/layout/fragment_edit_my_profile.xml" value="0.21603260869565216" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.33" />
         <entry key="app/src/main/res/layout/fragment_labs.xml" value="0.17299898682877407" />
         <entry key="app/src/main/res/layout/fragment_my_booking_single.xml" value="0.21603260869565216" />
         <entry key="app/src/main/res/layout/fragment_pack_banner_dialog.xml" value="0.17299898682877407" />
@@ -29,6 +44,7 @@
         <entry key="app/src/main/res/layout/fragment_privacy_dialog.xml" value="0.23001056710109194" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.22010869565217392" />
         <entry key="app/src/main/res/layout/fragment_report_webview.xml" value="0.17299898682877407" />
+        <entry key="app/src/main/res/layout/fragment_self_dialog.xml" value="0.19384057971014493" />
         <entry key="app/src/main/res/layout/fragment_terms.xml" value="0.22010869565217392" />
         <entry key="app/src/main/res/layout/fragment_terms_dialog.xml" value="0.14942528735632185" />
         <entry key="app/src/main/res/layout/fragment_test_dialog.xml" value="0.12236286919831224" />

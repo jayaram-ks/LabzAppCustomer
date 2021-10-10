@@ -7,13 +7,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.labzapp.customer.R
 import com.labzapp.customer.databinding.ActivityBookingBinding
+import com.labzapp.customer.fragments.BookFromLabFragment
 import com.labzapp.customer.fragments.BookingHomeFragment
 import com.labzapp.customer.fragments.BookingPackHomeFragment
-import com.labzapp.customer.fragments.PackBannerDialogFragment
 import com.labzapp.customer.storage.SharedPrefManager
 import com.labzapp.customer.utilities.network.ConnectionType
 import com.labzapp.customer.utilities.network.NetworkMonitorUtil
-import com.labzapp.customer.utilities.toastz
 
 class BookingActivity : AppCompatActivity() {
     private lateinit var binding: ActivityBookingBinding
@@ -27,6 +26,11 @@ class BookingActivity : AppCompatActivity() {
         var packageID:String? = null
         packOrTest = intent?.getStringExtra("pack_or_test")
         packageID = intent?.getStringExtra("pack_id")
+
+        //booking From labs page
+        val isBookFromLab:String? = intent?.getStringExtra("isBookFromLab")
+        val tstIDstring: String? = intent?.getStringExtra("testidsFromLab")
+        val tstlabString: String? = intent?.getStringExtra("labDataString")
 
         networkMonitor.result = { isAvailable, type ->
             runOnUiThread {
@@ -63,9 +67,27 @@ class BookingActivity : AppCompatActivity() {
            }
 
 
-        }else{  //Tests booking
-            val homeFragment = BookingHomeFragment()
-            setCurrentFragment(homeFragment)
+        }else{
+
+            if(isBookFromLab == "yes"){ //Testbook from labslist
+                val bundle = Bundle()
+                bundle.putString("param1", tstIDstring)
+                bundle.putString("param2", tstlabString)
+
+                val bfFragment = BookFromLabFragment()
+                bfFragment.arguments = bundle
+                val transPrev = supportFragmentManager.beginTransaction()
+                transPrev.replace(R.id.booking_container,bfFragment)
+                transPrev.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                transPrev.commit()
+
+            }
+            else{  // Normal Tests  booking
+                val homeFragment = BookingHomeFragment()
+                setCurrentFragment(homeFragment)
+
+            }
+
         }
 
     }

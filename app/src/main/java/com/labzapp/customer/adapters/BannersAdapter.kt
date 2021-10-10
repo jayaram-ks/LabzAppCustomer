@@ -3,10 +3,8 @@ package com.labzapp.customer.adapters
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
 import com.labzapp.customer.databinding.BannerListItemBinding
-import com.labzapp.customer.fragments.HomeFragment
 import com.labzapp.customer.models.BannerData
 import com.squareup.picasso.Picasso
 
@@ -54,10 +52,14 @@ class BannersAdapter(val context: Context, private val banners: List<BannerData>
 
         fun setData(banner: BannerData?, pos: Int) {
             banner?.let {
-                Picasso.with(context).load(banner.thumbnail).fit().centerCrop().into(binding.ivImage)
-
-                binding.tvAbout.text = banner.description.toString()
-                binding.tvTitle.text = banner.title.toString()
+                //Picasso.with(context).load(banner.thumbnail).fit().centerCrop().into(binding.ivImage)
+                Picasso.with(context).load(banner.thumbnail).fit().into(binding.ivImage)
+                if(banner.description != null){
+                    binding.tvAbout.text = banner.description.toString()
+                }
+                if(banner.title != null){
+                    binding.tvTitle.text = banner.title.toString()
+                }
             }
 
             this.currentBanner = banner

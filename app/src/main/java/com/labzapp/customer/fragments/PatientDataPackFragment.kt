@@ -88,6 +88,7 @@ class PatientDataPackFragment : DialogFragment(), AdapterView.OnItemSelectedList
         binding.radio2.setOnClickListener { view -> onRadioButtonClicked(view) }
         binding.submitOthrBookingBtn.setOnClickListener {
             binding.submitOthrBookingBtn.isClickable = false
+            binding.submitOthrBookingBtn.text = "Please Wait..."
             fetchAndsubmitMyData()
         }
     }
@@ -160,11 +161,14 @@ class PatientDataPackFragment : DialogFragment(), AdapterView.OnItemSelectedList
 
                         view?.let{err -> snackze(err,resp?.message.toString(),binding.patAddress.id) }
                         binding.submitOthrBookingBtn.isClickable = true
+                        binding.submitOthrBookingBtn.text = "Submit Booking"
                     }
                 }
 
                 override fun onFailure(call: Call<SubmitBookingResponse>, t: Throwable) {
                     view?.let{err -> snackze(err,t.message.toString(),binding.patAddress.id) }
+                    binding.submitOthrBookingBtn.isClickable = true
+                    binding.submitOthrBookingBtn.text = "Submit Booking"
                 }
             })
         }
@@ -172,6 +176,7 @@ class PatientDataPackFragment : DialogFragment(), AdapterView.OnItemSelectedList
         {
             view?.let{err -> snackze(err,"Please fill all Patient Details Fields",binding.patAddress.id) }
             binding.submitOthrBookingBtn.isClickable = true
+            binding.submitOthrBookingBtn.text = "Submit Booking"
         }
     }
 

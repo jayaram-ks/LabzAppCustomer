@@ -1,5 +1,6 @@
 package com.labzapp.customer.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -45,10 +46,12 @@ class BookLabsAdapter( val context: Context,private val labs: ArrayList<Labswith
         init {
 
         }
+        @SuppressLint("SetTextI18n")
         fun setData(lab: Labswithtest?, pos: Int) {
             lab?.let {
                 binding.bookLabTitle.text = it.name
                 binding.bookLabAddress.text = it.address
+                binding.totalTestChg.text = "Total Test/s Charge: "+context.getString(R.string.rupee)+ it.test_amount.toFloat().toString()
                 binding.labId.text = it.lab_id.toString()
                 if(it.thumbnail != null) {
                     Picasso.with(context).load(it.thumbnail).fit().centerCrop()

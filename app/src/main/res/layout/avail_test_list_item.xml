@@ -1,19 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<com.google.android.material.card.MaterialCardView
-    android:layout_height="wrap_content"
+<LinearLayout android:orientation="vertical"
     android:layout_width="match_parent"
-    app:cardCornerRadius="10dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:strokeColor="@color/green_border"
-    app:strokeWidth="1dp"
-    app:cardBackgroundColor="@color/white"
-    android:layout_marginVertical="4dp"
-    xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <LinearLayout android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="178dp">
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="4dp"
+        android:background="@color/transp_black"
+        />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -30,18 +25,44 @@
             android:textStyle="bold"
             />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
         <TextView
             android:id="@+id/tst_details"
             android:gravity="top"
-            android:padding="8dp"
+            android:paddingHorizontal="8dp"
+            android:paddingTop="5dp"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:maxLines="5"
+            android:lineHeight="13sp"
             android:ellipsize="end"
             android:letterSpacing=".01"
-            android:layout_weight="1"
             android:textColor="@color/black"
             android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tst_recommtxt"
+            android:gravity="top"
+            android:textStyle="italic"
+            android:paddingHorizontal="8dp"
+            android:paddingTop="3dp"
+            android:paddingBottom="2dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="3"
+            android:ellipsize="end"
+            android:lineHeight="13sp"
+            android:letterSpacing=".01"
+            android:textColor="@color/black"
+            android:textSize="12sp" />
+
+        </LinearLayout>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -58,5 +79,10 @@
             android:textStyle="bold"
             />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:background="@color/transp_black"
+        />
+
     </LinearLayout>
-</com.google.android.material.card.MaterialCardView>

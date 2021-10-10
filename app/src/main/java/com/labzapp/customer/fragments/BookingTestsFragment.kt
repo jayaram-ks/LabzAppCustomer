@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.SCROLL_INDICATOR_RIGHT
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import androidx.core.os.bundleOf
@@ -111,9 +112,23 @@ class BookingTestsFragment : DialogFragment() {
                         showTests(it)
                         val testsToSrch = it
                         testmodel = it
-                        binding.srchTxt.addTextChangedListener{
+                        binding.srchTxt.addTextChangedListener{ it2 ->
                             val positn = performFiltering(binding.srchTxt.text,testsToSrch)
-                            binding.alltestsRecycler.scrollToPosition(positn)
+                            val maxpos = it.size - 1
+
+                             if(positn - 4 >= 0 ){
+                                 if(positn > maxpos - 5 ){
+                                     binding.alltestsRecycler.scrollToPosition(positn)
+                                 }
+                                 else{
+                                     binding.alltestsRecycler.scrollToPosition(positn - 4)
+                                 }
+                             }
+                             else
+                             {
+                                 binding.alltestsRecycler.scrollToPosition(positn)
+                             }
+
                         }
                     }
                 } else {
@@ -208,8 +223,7 @@ class BookingTestsFragment : DialogFragment() {
         if (charSearch.isEmpty()) {
         } else {
             for( (index, row) in tests.withIndex()){
-                // Log.d("--jk----",row.test_name)
-                if (row.test_name?.toLowerCase(Locale.ROOT)?.contains(charSearch.toLowerCase(Locale.ROOT)) == true) {
+                if (row.test_name?.lowercase(Locale.ROOT)?.contains(charSearch.lowercase(Locale.ROOT)) == true) {
                     requiredIndex = index
                 }
             }
